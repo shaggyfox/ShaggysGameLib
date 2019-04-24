@@ -1,0 +1,35 @@
+<canvas id="canvas" width=512, height= 300></canvas>
+<div id="loadingDiv">Loading....</div>
+<script type='text/javascript'>
+  var img = new Image(512, 300);
+  img.src = "image.png";
+  canvas.getContext("2d").drawImage(img, 0, 0);
+  function webgl_support () {
+    var ret = null;
+    try { ret = canvas.getContext("webgl"); }
+    catch (x) { ret = null; }
+    if (ret == null) {
+      try { ret = canvas.getContext("experimental-webgl"); experimental = true; }
+      catch (x) { ret = null; }
+    }
+    return ret? true : false;
+   }
+  var Module = {
+    onRuntimeInitialized: function() {
+        var e = document.getElementById('loadingDiv');
+        e.style.visibility = 'hidden';
+         },
+    canvas: (function() {
+      var canvas = document.getElementById('canvas');
+      return canvas;
+    })()
+  };
+if (!webgl_support()) {
+  Module.arguments = ['noaccel'];
+}
+  //var script = document.createElement('script');
+//script.src = "test.js";
+//document.body.appendChild(script);
+</script>
+
+{{{ SCRIPT }}}
