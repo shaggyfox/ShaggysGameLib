@@ -15,6 +15,7 @@
 #define CTRL_KEY_X 64
 #define CTRL_KEY_Y 128
 extern int glob_keys;
+extern struct game_ctx* game_load(void);
 
 #define KEY_IS_PRESSED(key) ((key) & glob_keys)
 
@@ -27,7 +28,8 @@ struct game_ctx {
   void (*game_init)(void **data);
   void (*game_update)(void *data, float delta);
   void (*game_draw)(void *data);
-  void (*game_on_key)(int key, void *data);
+  void (*game_on_key_down)(int key, void *data);
+  void (*game_on_key_up)(int key, void *data);
 };
 
 extern struct game_ctx *glob_game_ctx;

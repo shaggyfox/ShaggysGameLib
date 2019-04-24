@@ -34,8 +34,8 @@ void run_loop(void* data)
         if (event.key.repeat) {
           break;
         }
-        if (glob_game_ctx->game_on_key) {
-          glob_game_ctx->game_on_key(event.key.keysym.sym, data);
+        if (glob_game_ctx->game_on_key_down) {
+          glob_game_ctx->game_on_key_down(event.key.keysym.sym, data);
         }
         switch(event.key.keysym.sym) {
           case SDLK_UP:
@@ -53,10 +53,10 @@ void run_loop(void* data)
         }
         break;
       case SDL_KEYUP:
+        if (glob_game_ctx->game_on_key_up) {
+          glob_game_ctx->game_on_key_up(event.key.keysym.sym, data);
+        }
         switch(event.key.keysym.sym) {
-          case 'q':
-            engine_quit();
-            break;
           case SDLK_UP:
             glob_keys &= ~CTRL_KEY_UP;
             break;
@@ -92,6 +92,7 @@ int main(int argc, char *argv[])
       use_acceleration = 0;
     }
   }
+  glob_game_ctx = game_load();
   /* XXX call game_init first */
   SDL_Init(SDL_INIT_VIDEO|SDL_INIT_AUDIO);
   init_audio();
