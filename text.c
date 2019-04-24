@@ -53,6 +53,25 @@ void text_print(int in_x, int y, char *data)
   }
 }
 
+/* FIXME XXX */
+int text_width(char *data) {
+  int len = strlen(data);
+  if (len) {
+    len = (len-1) * 8 + 10
+  }
+  return len;
+}
+
+int text_height(char *data) {
+  ret = 10;
+  for (int i = 0; data[i]; ++i) {
+    if (data[i] == '\n') {
+      ret += 10;
+    }
+  }
+  return ret;
+}
+
 #include <stdarg.h>
 void text_printf(int x, int y, char *fmt, ...) {
   static char big_buffer[1024];
