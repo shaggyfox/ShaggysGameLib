@@ -1,0 +1,1121 @@
+{ "frames": [
+   {
+    "filename": "kongfont 0.aseprite",
+    "frame": { "x": 0, "y": 0, "w": 10, "h": 11 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 10, "h": 11 },
+    "sourceSize": { "w": 10, "h": 11 },
+    "duration": 100
+   },
+   {
+    "filename": "kongfont 1.aseprite",
+    "frame": { "x": 10, "y": 0, "w": 10, "h": 11 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 10, "h": 11 },
+    "sourceSize": { "w": 10, "h": 11 },
+    "duration": 100
+   },
+   {
+    "filename": "kongfont 2.aseprite",
+    "frame": { "x": 20, "y": 0, "w": 10, "h": 11 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 10, "h": 11 },
+    "sourceSize": { "w": 10, "h": 11 },
+    "duration": 100
+   },
+   {
+    "filename": "kongfont 3.aseprite",
+    "frame": { "x": 30, "y": 0, "w": 10, "h": 11 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 10, "h": 11 },
+    "sourceSize": { "w": 10, "h": 11 },
+    "duration": 100
+   },
+   {
+    "filename": "kongfont 4.aseprite",
+    "frame": { "x": 40, "y": 0, "w": 10, "h": 11 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 10, "h": 11 },
+    "sourceSize": { "w": 10, "h": 11 },
+    "duration": 100
+   },
+   {
+    "filename": "kongfont 5.aseprite",
+    "frame": { "x": 50, "y": 0, "w": 10, "h": 11 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 10, "h": 11 },
+    "sourceSize": { "w": 10, "h": 11 },
+    "duration": 100
+   },
+   {
+    "filename": "kongfont 6.aseprite",
+    "frame": { "x": 60, "y": 0, "w": 10, "h": 11 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 10, "h": 11 },
+    "sourceSize": { "w": 10, "h": 11 },
+    "duration": 100
+   },
+   {
+    "filename": "kongfont 7.aseprite",
+    "frame": { "x": 70, "y": 0, "w": 10, "h": 11 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 10, "h": 11 },
+    "sourceSize": { "w": 10, "h": 11 },
+    "duration": 100
+   },
+   {
+    "filename": "kongfont 8.aseprite",
+    "frame": { "x": 80, "y": 0, "w": 10, "h": 11 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 10, "h": 11 },
+    "sourceSize": { "w": 10, "h": 11 },
+    "duration": 100
+   },
+   {
+    "filename": "kongfont 9.aseprite",
+    "frame": { "x": 90, "y": 0, "w": 10, "h": 11 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 10, "h": 11 },
+    "sourceSize": { "w": 10, "h": 11 },
+    "duration": 100
+   },
+   {
+    "filename": "kongfont 10.aseprite",
+    "frame": { "x": 100, "y": 0, "w": 10, "h": 11 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 10, "h": 11 },
+    "sourceSize": { "w": 10, "h": 11 },
+    "duration": 100
+   },
+   {
+    "filename": "kongfont 11.aseprite",
+    "frame": { "x": 110, "y": 0, "w": 10, "h": 11 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 10, "h": 11 },
+    "sourceSize": { "w": 10, "h": 11 },
+    "duration": 100
+   },
+   {
+    "filename": "kongfont 12.aseprite",
+    "frame": { "x": 0, "y": 11, "w": 10, "h": 11 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 10, "h": 11 },
+    "sourceSize": { "w": 10, "h": 11 },
+    "duration": 100
+   },
+   {
+    "filename": "kongfont 13.aseprite",
+    "frame": { "x": 10, "y": 11, "w": 10, "h": 11 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 10, "h": 11 },
+    "sourceSize": { "w": 10, "h": 11 },
+    "duration": 100
+   },
+   {
+    "filename": "kongfont 14.aseprite",
+    "frame": { "x": 20, "y": 11, "w": 10, "h": 11 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 10, "h": 11 },
+    "sourceSize": { "w": 10, "h": 11 },
+    "duration": 100
+   },
+   {
+    "filename": "kongfont 15.aseprite",
+    "frame": { "x": 30, "y": 11, "w": 10, "h": 11 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 10, "h": 11 },
+    "sourceSize": { "w": 10, "h": 11 },
+    "duration": 100
+   },
+   {
+    "filename": "kongfont 16.aseprite",
+    "frame": { "x": 40, "y": 11, "w": 10, "h": 11 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 10, "h": 11 },
+    "sourceSize": { "w": 10, "h": 11 },
+    "duration": 100
+   },
+   {
+    "filename": "kongfont 17.aseprite",
+    "frame": { "x": 50, "y": 11, "w": 10, "h": 11 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 10, "h": 11 },
+    "sourceSize": { "w": 10, "h": 11 },
+    "duration": 100
+   },
+   {
+    "filename": "kongfont 18.aseprite",
+    "frame": { "x": 60, "y": 11, "w": 10, "h": 11 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 10, "h": 11 },
+    "sourceSize": { "w": 10, "h": 11 },
+    "duration": 100
+   },
+   {
+    "filename": "kongfont 19.aseprite",
+    "frame": { "x": 70, "y": 11, "w": 10, "h": 11 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 10, "h": 11 },
+    "sourceSize": { "w": 10, "h": 11 },
+    "duration": 100
+   },
+   {
+    "filename": "kongfont 20.aseprite",
+    "frame": { "x": 80, "y": 11, "w": 10, "h": 11 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 10, "h": 11 },
+    "sourceSize": { "w": 10, "h": 11 },
+    "duration": 100
+   },
+   {
+    "filename": "kongfont 21.aseprite",
+    "frame": { "x": 90, "y": 11, "w": 10, "h": 11 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 10, "h": 11 },
+    "sourceSize": { "w": 10, "h": 11 },
+    "duration": 100
+   },
+   {
+    "filename": "kongfont 22.aseprite",
+    "frame": { "x": 100, "y": 11, "w": 10, "h": 11 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 10, "h": 11 },
+    "sourceSize": { "w": 10, "h": 11 },
+    "duration": 100
+   },
+   {
+    "filename": "kongfont 23.aseprite",
+    "frame": { "x": 110, "y": 11, "w": 10, "h": 11 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 10, "h": 11 },
+    "sourceSize": { "w": 10, "h": 11 },
+    "duration": 100
+   },
+   {
+    "filename": "kongfont 24.aseprite",
+    "frame": { "x": 0, "y": 22, "w": 10, "h": 11 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 10, "h": 11 },
+    "sourceSize": { "w": 10, "h": 11 },
+    "duration": 100
+   },
+   {
+    "filename": "kongfont 25.aseprite",
+    "frame": { "x": 10, "y": 22, "w": 10, "h": 11 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 10, "h": 11 },
+    "sourceSize": { "w": 10, "h": 11 },
+    "duration": 100
+   },
+   {
+    "filename": "kongfont 26.aseprite",
+    "frame": { "x": 20, "y": 22, "w": 10, "h": 11 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 10, "h": 11 },
+    "sourceSize": { "w": 10, "h": 11 },
+    "duration": 100
+   },
+   {
+    "filename": "kongfont 27.aseprite",
+    "frame": { "x": 30, "y": 22, "w": 10, "h": 11 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 10, "h": 11 },
+    "sourceSize": { "w": 10, "h": 11 },
+    "duration": 100
+   },
+   {
+    "filename": "kongfont 28.aseprite",
+    "frame": { "x": 40, "y": 22, "w": 10, "h": 11 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 10, "h": 11 },
+    "sourceSize": { "w": 10, "h": 11 },
+    "duration": 100
+   },
+   {
+    "filename": "kongfont 29.aseprite",
+    "frame": { "x": 50, "y": 22, "w": 10, "h": 11 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 10, "h": 11 },
+    "sourceSize": { "w": 10, "h": 11 },
+    "duration": 100
+   },
+   {
+    "filename": "kongfont 30.aseprite",
+    "frame": { "x": 60, "y": 22, "w": 10, "h": 11 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 10, "h": 11 },
+    "sourceSize": { "w": 10, "h": 11 },
+    "duration": 100
+   },
+   {
+    "filename": "kongfont 31.aseprite",
+    "frame": { "x": 70, "y": 22, "w": 10, "h": 11 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 10, "h": 11 },
+    "sourceSize": { "w": 10, "h": 11 },
+    "duration": 100
+   },
+   {
+    "filename": "kongfont 32.aseprite",
+    "frame": { "x": 80, "y": 22, "w": 10, "h": 11 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 10, "h": 11 },
+    "sourceSize": { "w": 10, "h": 11 },
+    "duration": 100
+   },
+   {
+    "filename": "kongfont 33.aseprite",
+    "frame": { "x": 90, "y": 22, "w": 10, "h": 11 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 10, "h": 11 },
+    "sourceSize": { "w": 10, "h": 11 },
+    "duration": 100
+   },
+   {
+    "filename": "kongfont 34.aseprite",
+    "frame": { "x": 100, "y": 22, "w": 10, "h": 11 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 10, "h": 11 },
+    "sourceSize": { "w": 10, "h": 11 },
+    "duration": 100
+   },
+   {
+    "filename": "kongfont 35.aseprite",
+    "frame": { "x": 110, "y": 22, "w": 10, "h": 11 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 10, "h": 11 },
+    "sourceSize": { "w": 10, "h": 11 },
+    "duration": 100
+   },
+   {
+    "filename": "kongfont 36.aseprite",
+    "frame": { "x": 0, "y": 33, "w": 10, "h": 11 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 10, "h": 11 },
+    "sourceSize": { "w": 10, "h": 11 },
+    "duration": 100
+   },
+   {
+    "filename": "kongfont 37.aseprite",
+    "frame": { "x": 10, "y": 33, "w": 10, "h": 11 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 10, "h": 11 },
+    "sourceSize": { "w": 10, "h": 11 },
+    "duration": 100
+   },
+   {
+    "filename": "kongfont 38.aseprite",
+    "frame": { "x": 20, "y": 33, "w": 10, "h": 11 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 10, "h": 11 },
+    "sourceSize": { "w": 10, "h": 11 },
+    "duration": 100
+   },
+   {
+    "filename": "kongfont 39.aseprite",
+    "frame": { "x": 30, "y": 33, "w": 10, "h": 11 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 10, "h": 11 },
+    "sourceSize": { "w": 10, "h": 11 },
+    "duration": 100
+   },
+   {
+    "filename": "kongfont 40.aseprite",
+    "frame": { "x": 40, "y": 33, "w": 10, "h": 11 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 10, "h": 11 },
+    "sourceSize": { "w": 10, "h": 11 },
+    "duration": 100
+   },
+   {
+    "filename": "kongfont 41.aseprite",
+    "frame": { "x": 50, "y": 33, "w": 10, "h": 11 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 10, "h": 11 },
+    "sourceSize": { "w": 10, "h": 11 },
+    "duration": 100
+   },
+   {
+    "filename": "kongfont 42.aseprite",
+    "frame": { "x": 60, "y": 33, "w": 10, "h": 11 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 10, "h": 11 },
+    "sourceSize": { "w": 10, "h": 11 },
+    "duration": 100
+   },
+   {
+    "filename": "kongfont 43.aseprite",
+    "frame": { "x": 70, "y": 33, "w": 10, "h": 11 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 10, "h": 11 },
+    "sourceSize": { "w": 10, "h": 11 },
+    "duration": 100
+   },
+   {
+    "filename": "kongfont 44.aseprite",
+    "frame": { "x": 80, "y": 33, "w": 10, "h": 11 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 10, "h": 11 },
+    "sourceSize": { "w": 10, "h": 11 },
+    "duration": 100
+   },
+   {
+    "filename": "kongfont 45.aseprite",
+    "frame": { "x": 90, "y": 33, "w": 10, "h": 11 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 10, "h": 11 },
+    "sourceSize": { "w": 10, "h": 11 },
+    "duration": 100
+   },
+   {
+    "filename": "kongfont 46.aseprite",
+    "frame": { "x": 100, "y": 33, "w": 10, "h": 11 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 10, "h": 11 },
+    "sourceSize": { "w": 10, "h": 11 },
+    "duration": 100
+   },
+   {
+    "filename": "kongfont 47.aseprite",
+    "frame": { "x": 110, "y": 33, "w": 10, "h": 11 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 10, "h": 11 },
+    "sourceSize": { "w": 10, "h": 11 },
+    "duration": 100
+   },
+   {
+    "filename": "kongfont 48.aseprite",
+    "frame": { "x": 0, "y": 44, "w": 10, "h": 11 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 10, "h": 11 },
+    "sourceSize": { "w": 10, "h": 11 },
+    "duration": 100
+   },
+   {
+    "filename": "kongfont 49.aseprite",
+    "frame": { "x": 10, "y": 44, "w": 10, "h": 11 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 10, "h": 11 },
+    "sourceSize": { "w": 10, "h": 11 },
+    "duration": 100
+   },
+   {
+    "filename": "kongfont 50.aseprite",
+    "frame": { "x": 20, "y": 44, "w": 10, "h": 11 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 10, "h": 11 },
+    "sourceSize": { "w": 10, "h": 11 },
+    "duration": 100
+   },
+   {
+    "filename": "kongfont 51.aseprite",
+    "frame": { "x": 30, "y": 44, "w": 10, "h": 11 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 10, "h": 11 },
+    "sourceSize": { "w": 10, "h": 11 },
+    "duration": 100
+   },
+   {
+    "filename": "kongfont 52.aseprite",
+    "frame": { "x": 40, "y": 44, "w": 10, "h": 11 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 10, "h": 11 },
+    "sourceSize": { "w": 10, "h": 11 },
+    "duration": 100
+   },
+   {
+    "filename": "kongfont 53.aseprite",
+    "frame": { "x": 50, "y": 44, "w": 10, "h": 11 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 10, "h": 11 },
+    "sourceSize": { "w": 10, "h": 11 },
+    "duration": 100
+   },
+   {
+    "filename": "kongfont 54.aseprite",
+    "frame": { "x": 60, "y": 44, "w": 10, "h": 11 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 10, "h": 11 },
+    "sourceSize": { "w": 10, "h": 11 },
+    "duration": 100
+   },
+   {
+    "filename": "kongfont 55.aseprite",
+    "frame": { "x": 70, "y": 44, "w": 10, "h": 11 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 10, "h": 11 },
+    "sourceSize": { "w": 10, "h": 11 },
+    "duration": 100
+   },
+   {
+    "filename": "kongfont 56.aseprite",
+    "frame": { "x": 80, "y": 44, "w": 10, "h": 11 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 10, "h": 11 },
+    "sourceSize": { "w": 10, "h": 11 },
+    "duration": 100
+   },
+   {
+    "filename": "kongfont 57.aseprite",
+    "frame": { "x": 90, "y": 44, "w": 10, "h": 11 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 10, "h": 11 },
+    "sourceSize": { "w": 10, "h": 11 },
+    "duration": 100
+   },
+   {
+    "filename": "kongfont 58.aseprite",
+    "frame": { "x": 100, "y": 44, "w": 10, "h": 11 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 10, "h": 11 },
+    "sourceSize": { "w": 10, "h": 11 },
+    "duration": 100
+   },
+   {
+    "filename": "kongfont 59.aseprite",
+    "frame": { "x": 110, "y": 44, "w": 10, "h": 11 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 10, "h": 11 },
+    "sourceSize": { "w": 10, "h": 11 },
+    "duration": 100
+   },
+   {
+    "filename": "kongfont 60.aseprite",
+    "frame": { "x": 0, "y": 55, "w": 10, "h": 11 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 10, "h": 11 },
+    "sourceSize": { "w": 10, "h": 11 },
+    "duration": 100
+   },
+   {
+    "filename": "kongfont 61.aseprite",
+    "frame": { "x": 10, "y": 55, "w": 10, "h": 11 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 10, "h": 11 },
+    "sourceSize": { "w": 10, "h": 11 },
+    "duration": 100
+   },
+   {
+    "filename": "kongfont 62.aseprite",
+    "frame": { "x": 20, "y": 55, "w": 10, "h": 11 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 10, "h": 11 },
+    "sourceSize": { "w": 10, "h": 11 },
+    "duration": 100
+   },
+   {
+    "filename": "kongfont 63.aseprite",
+    "frame": { "x": 30, "y": 55, "w": 10, "h": 11 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 10, "h": 11 },
+    "sourceSize": { "w": 10, "h": 11 },
+    "duration": 100
+   },
+   {
+    "filename": "kongfont 64.aseprite",
+    "frame": { "x": 40, "y": 55, "w": 10, "h": 11 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 10, "h": 11 },
+    "sourceSize": { "w": 10, "h": 11 },
+    "duration": 100
+   },
+   {
+    "filename": "kongfont 65.aseprite",
+    "frame": { "x": 50, "y": 55, "w": 10, "h": 11 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 10, "h": 11 },
+    "sourceSize": { "w": 10, "h": 11 },
+    "duration": 100
+   },
+   {
+    "filename": "kongfont 66.aseprite",
+    "frame": { "x": 60, "y": 55, "w": 10, "h": 11 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 10, "h": 11 },
+    "sourceSize": { "w": 10, "h": 11 },
+    "duration": 100
+   },
+   {
+    "filename": "kongfont 67.aseprite",
+    "frame": { "x": 70, "y": 55, "w": 10, "h": 11 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 10, "h": 11 },
+    "sourceSize": { "w": 10, "h": 11 },
+    "duration": 100
+   },
+   {
+    "filename": "kongfont 68.aseprite",
+    "frame": { "x": 80, "y": 55, "w": 10, "h": 11 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 10, "h": 11 },
+    "sourceSize": { "w": 10, "h": 11 },
+    "duration": 100
+   },
+   {
+    "filename": "kongfont 69.aseprite",
+    "frame": { "x": 90, "y": 55, "w": 10, "h": 11 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 10, "h": 11 },
+    "sourceSize": { "w": 10, "h": 11 },
+    "duration": 100
+   },
+   {
+    "filename": "kongfont 70.aseprite",
+    "frame": { "x": 100, "y": 55, "w": 10, "h": 11 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 10, "h": 11 },
+    "sourceSize": { "w": 10, "h": 11 },
+    "duration": 100
+   },
+   {
+    "filename": "kongfont 71.aseprite",
+    "frame": { "x": 110, "y": 55, "w": 10, "h": 11 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 10, "h": 11 },
+    "sourceSize": { "w": 10, "h": 11 },
+    "duration": 100
+   },
+   {
+    "filename": "kongfont 72.aseprite",
+    "frame": { "x": 0, "y": 66, "w": 10, "h": 11 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 10, "h": 11 },
+    "sourceSize": { "w": 10, "h": 11 },
+    "duration": 100
+   },
+   {
+    "filename": "kongfont 73.aseprite",
+    "frame": { "x": 10, "y": 66, "w": 10, "h": 11 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 10, "h": 11 },
+    "sourceSize": { "w": 10, "h": 11 },
+    "duration": 100
+   },
+   {
+    "filename": "kongfont 74.aseprite",
+    "frame": { "x": 20, "y": 66, "w": 10, "h": 11 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 10, "h": 11 },
+    "sourceSize": { "w": 10, "h": 11 },
+    "duration": 100
+   },
+   {
+    "filename": "kongfont 75.aseprite",
+    "frame": { "x": 30, "y": 66, "w": 10, "h": 11 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 10, "h": 11 },
+    "sourceSize": { "w": 10, "h": 11 },
+    "duration": 100
+   },
+   {
+    "filename": "kongfont 76.aseprite",
+    "frame": { "x": 40, "y": 66, "w": 10, "h": 11 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 10, "h": 11 },
+    "sourceSize": { "w": 10, "h": 11 },
+    "duration": 100
+   },
+   {
+    "filename": "kongfont 77.aseprite",
+    "frame": { "x": 50, "y": 66, "w": 10, "h": 11 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 10, "h": 11 },
+    "sourceSize": { "w": 10, "h": 11 },
+    "duration": 100
+   },
+   {
+    "filename": "kongfont 78.aseprite",
+    "frame": { "x": 60, "y": 66, "w": 10, "h": 11 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 10, "h": 11 },
+    "sourceSize": { "w": 10, "h": 11 },
+    "duration": 100
+   },
+   {
+    "filename": "kongfont 79.aseprite",
+    "frame": { "x": 70, "y": 66, "w": 10, "h": 11 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 10, "h": 11 },
+    "sourceSize": { "w": 10, "h": 11 },
+    "duration": 100
+   },
+   {
+    "filename": "kongfont 80.aseprite",
+    "frame": { "x": 80, "y": 66, "w": 10, "h": 11 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 10, "h": 11 },
+    "sourceSize": { "w": 10, "h": 11 },
+    "duration": 100
+   },
+   {
+    "filename": "kongfont 81.aseprite",
+    "frame": { "x": 90, "y": 66, "w": 10, "h": 11 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 10, "h": 11 },
+    "sourceSize": { "w": 10, "h": 11 },
+    "duration": 100
+   },
+   {
+    "filename": "kongfont 82.aseprite",
+    "frame": { "x": 100, "y": 66, "w": 10, "h": 11 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 10, "h": 11 },
+    "sourceSize": { "w": 10, "h": 11 },
+    "duration": 100
+   },
+   {
+    "filename": "kongfont 83.aseprite",
+    "frame": { "x": 110, "y": 66, "w": 10, "h": 11 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 10, "h": 11 },
+    "sourceSize": { "w": 10, "h": 11 },
+    "duration": 100
+   },
+   {
+    "filename": "kongfont 84.aseprite",
+    "frame": { "x": 0, "y": 77, "w": 10, "h": 11 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 10, "h": 11 },
+    "sourceSize": { "w": 10, "h": 11 },
+    "duration": 100
+   },
+   {
+    "filename": "kongfont 85.aseprite",
+    "frame": { "x": 10, "y": 77, "w": 10, "h": 11 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 10, "h": 11 },
+    "sourceSize": { "w": 10, "h": 11 },
+    "duration": 100
+   },
+   {
+    "filename": "kongfont 86.aseprite",
+    "frame": { "x": 20, "y": 77, "w": 10, "h": 11 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 10, "h": 11 },
+    "sourceSize": { "w": 10, "h": 11 },
+    "duration": 100
+   },
+   {
+    "filename": "kongfont 87.aseprite",
+    "frame": { "x": 30, "y": 77, "w": 10, "h": 11 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 10, "h": 11 },
+    "sourceSize": { "w": 10, "h": 11 },
+    "duration": 100
+   },
+   {
+    "filename": "kongfont 88.aseprite",
+    "frame": { "x": 40, "y": 77, "w": 10, "h": 11 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 10, "h": 11 },
+    "sourceSize": { "w": 10, "h": 11 },
+    "duration": 100
+   },
+   {
+    "filename": "kongfont 89.aseprite",
+    "frame": { "x": 50, "y": 77, "w": 10, "h": 11 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 10, "h": 11 },
+    "sourceSize": { "w": 10, "h": 11 },
+    "duration": 100
+   },
+   {
+    "filename": "kongfont 90.aseprite",
+    "frame": { "x": 60, "y": 77, "w": 10, "h": 11 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 10, "h": 11 },
+    "sourceSize": { "w": 10, "h": 11 },
+    "duration": 100
+   },
+   {
+    "filename": "kongfont 91.aseprite",
+    "frame": { "x": 70, "y": 77, "w": 10, "h": 11 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 10, "h": 11 },
+    "sourceSize": { "w": 10, "h": 11 },
+    "duration": 100
+   },
+   {
+    "filename": "kongfont 92.aseprite",
+    "frame": { "x": 80, "y": 77, "w": 10, "h": 11 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 10, "h": 11 },
+    "sourceSize": { "w": 10, "h": 11 },
+    "duration": 100
+   },
+   {
+    "filename": "kongfont 93.aseprite",
+    "frame": { "x": 90, "y": 77, "w": 10, "h": 11 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 10, "h": 11 },
+    "sourceSize": { "w": 10, "h": 11 },
+    "duration": 100
+   },
+   {
+    "filename": "kongfont 94.aseprite",
+    "frame": { "x": 100, "y": 77, "w": 10, "h": 11 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 10, "h": 11 },
+    "sourceSize": { "w": 10, "h": 11 },
+    "duration": 100
+   },
+   {
+    "filename": "kongfont 95.aseprite",
+    "frame": { "x": 110, "y": 77, "w": 10, "h": 11 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 10, "h": 11 },
+    "sourceSize": { "w": 10, "h": 11 },
+    "duration": 100
+   },
+   {
+    "filename": "kongfont 96.aseprite",
+    "frame": { "x": 0, "y": 88, "w": 10, "h": 11 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 10, "h": 11 },
+    "sourceSize": { "w": 10, "h": 11 },
+    "duration": 100
+   },
+   {
+    "filename": "kongfont 97.aseprite",
+    "frame": { "x": 10, "y": 88, "w": 10, "h": 11 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 10, "h": 11 },
+    "sourceSize": { "w": 10, "h": 11 },
+    "duration": 100
+   },
+   {
+    "filename": "kongfont 98.aseprite",
+    "frame": { "x": 20, "y": 88, "w": 10, "h": 11 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 10, "h": 11 },
+    "sourceSize": { "w": 10, "h": 11 },
+    "duration": 100
+   },
+   {
+    "filename": "kongfont 99.aseprite",
+    "frame": { "x": 30, "y": 88, "w": 10, "h": 11 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 10, "h": 11 },
+    "sourceSize": { "w": 10, "h": 11 },
+    "duration": 100
+   },
+   {
+    "filename": "kongfont 100.aseprite",
+    "frame": { "x": 40, "y": 88, "w": 10, "h": 11 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 10, "h": 11 },
+    "sourceSize": { "w": 10, "h": 11 },
+    "duration": 100
+   },
+   {
+    "filename": "kongfont 101.aseprite",
+    "frame": { "x": 50, "y": 88, "w": 10, "h": 11 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 10, "h": 11 },
+    "sourceSize": { "w": 10, "h": 11 },
+    "duration": 100
+   },
+   {
+    "filename": "kongfont 102.aseprite",
+    "frame": { "x": 60, "y": 88, "w": 10, "h": 11 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 10, "h": 11 },
+    "sourceSize": { "w": 10, "h": 11 },
+    "duration": 100
+   },
+   {
+    "filename": "kongfont 103.aseprite",
+    "frame": { "x": 70, "y": 88, "w": 10, "h": 11 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 10, "h": 11 },
+    "sourceSize": { "w": 10, "h": 11 },
+    "duration": 100
+   },
+   {
+    "filename": "kongfont 104.aseprite",
+    "frame": { "x": 80, "y": 88, "w": 10, "h": 11 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 10, "h": 11 },
+    "sourceSize": { "w": 10, "h": 11 },
+    "duration": 100
+   },
+   {
+    "filename": "kongfont 105.aseprite",
+    "frame": { "x": 90, "y": 88, "w": 10, "h": 11 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 10, "h": 11 },
+    "sourceSize": { "w": 10, "h": 11 },
+    "duration": 100
+   },
+   {
+    "filename": "kongfont 106.aseprite",
+    "frame": { "x": 100, "y": 88, "w": 10, "h": 11 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 10, "h": 11 },
+    "sourceSize": { "w": 10, "h": 11 },
+    "duration": 100
+   },
+   {
+    "filename": "kongfont 107.aseprite",
+    "frame": { "x": 110, "y": 88, "w": 10, "h": 11 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 10, "h": 11 },
+    "sourceSize": { "w": 10, "h": 11 },
+    "duration": 100
+   },
+   {
+    "filename": "kongfont 108.aseprite",
+    "frame": { "x": 0, "y": 99, "w": 10, "h": 11 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 10, "h": 11 },
+    "sourceSize": { "w": 10, "h": 11 },
+    "duration": 100
+   },
+   {
+    "filename": "kongfont 109.aseprite",
+    "frame": { "x": 10, "y": 99, "w": 10, "h": 11 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 10, "h": 11 },
+    "sourceSize": { "w": 10, "h": 11 },
+    "duration": 100
+   },
+   {
+    "filename": "kongfont 110.aseprite",
+    "frame": { "x": 20, "y": 99, "w": 10, "h": 11 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 10, "h": 11 },
+    "sourceSize": { "w": 10, "h": 11 },
+    "duration": 100
+   },
+   {
+    "filename": "kongfont 111.aseprite",
+    "frame": { "x": 30, "y": 99, "w": 10, "h": 11 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 10, "h": 11 },
+    "sourceSize": { "w": 10, "h": 11 },
+    "duration": 100
+   }
+ ],
+ "meta": {
+  "app": "http://www.aseprite.org/",
+  "version": "1.2.4",
+  "image": "kongfont.png",
+  "format": "RGBA8888",
+  "size": { "w": 128, "h": 128 },
+  "scale": "1",
+  "frameTags": [
+   { "name": "!", "from": 0, "to": 0, "direction": "forward" },
+   { "name": "\"", "from": 1, "to": 1, "direction": "forward" },
+   { "name": "#", "from": 2, "to": 2, "direction": "forward" },
+   { "name": "$", "from": 3, "to": 3, "direction": "forward" },
+   { "name": "%", "from": 4, "to": 4, "direction": "forward" },
+   { "name": "&", "from": 5, "to": 5, "direction": "forward" },
+   { "name": "'", "from": 6, "to": 6, "direction": "forward" },
+   { "name": "(", "from": 7, "to": 7, "direction": "forward" },
+   { "name": ")", "from": 8, "to": 8, "direction": "forward" },
+   { "name": "*", "from": 9, "to": 9, "direction": "forward" },
+   { "name": "+", "from": 10, "to": 10, "direction": "forward" },
+   { "name": ",", "from": 11, "to": 11, "direction": "forward" },
+   { "name": "-", "from": 12, "to": 12, "direction": "forward" },
+   { "name": ".", "from": 13, "to": 13, "direction": "forward" },
+   { "name": "/", "from": 14, "to": 14, "direction": "forward" },
+   { "name": "0", "from": 15, "to": 15, "direction": "forward" },
+   { "name": "1", "from": 16, "to": 16, "direction": "forward" },
+   { "name": "2", "from": 17, "to": 17, "direction": "forward" },
+   { "name": "3", "from": 18, "to": 18, "direction": "forward" },
+   { "name": "4", "from": 19, "to": 19, "direction": "forward" },
+   { "name": "5", "from": 20, "to": 20, "direction": "forward" },
+   { "name": "6", "from": 21, "to": 21, "direction": "forward" },
+   { "name": "7", "from": 22, "to": 22, "direction": "forward" },
+   { "name": "8", "from": 23, "to": 23, "direction": "forward" },
+   { "name": "9", "from": 24, "to": 24, "direction": "forward" },
+   { "name": ":", "from": 25, "to": 25, "direction": "forward" },
+   { "name": ";", "from": 26, "to": 26, "direction": "forward" },
+   { "name": "<", "from": 27, "to": 27, "direction": "forward" },
+   { "name": "=", "from": 28, "to": 28, "direction": "forward" },
+   { "name": ">", "from": 29, "to": 29, "direction": "forward" },
+   { "name": "?", "from": 30, "to": 30, "direction": "forward" },
+   { "name": "@", "from": 31, "to": 31, "direction": "forward" },
+   { "name": "A", "from": 32, "to": 32, "direction": "forward" },
+   { "name": "B", "from": 33, "to": 33, "direction": "forward" },
+   { "name": "C", "from": 34, "to": 34, "direction": "forward" },
+   { "name": "D", "from": 35, "to": 35, "direction": "forward" },
+   { "name": "E", "from": 36, "to": 36, "direction": "forward" },
+   { "name": "F", "from": 37, "to": 37, "direction": "forward" },
+   { "name": "G", "from": 38, "to": 38, "direction": "forward" },
+   { "name": "H", "from": 39, "to": 39, "direction": "forward" },
+   { "name": "I", "from": 40, "to": 40, "direction": "forward" },
+   { "name": "J", "from": 41, "to": 41, "direction": "forward" },
+   { "name": "K", "from": 42, "to": 42, "direction": "forward" },
+   { "name": "L", "from": 43, "to": 43, "direction": "forward" },
+   { "name": "M", "from": 44, "to": 44, "direction": "forward" },
+   { "name": "N", "from": 45, "to": 45, "direction": "forward" },
+   { "name": "O", "from": 46, "to": 46, "direction": "forward" },
+   { "name": "P", "from": 47, "to": 47, "direction": "forward" },
+   { "name": "Q", "from": 48, "to": 48, "direction": "forward" },
+   { "name": "R", "from": 49, "to": 49, "direction": "forward" },
+   { "name": "S", "from": 50, "to": 50, "direction": "forward" },
+   { "name": "T", "from": 51, "to": 51, "direction": "forward" },
+   { "name": "U", "from": 52, "to": 52, "direction": "forward" },
+   { "name": "V", "from": 53, "to": 53, "direction": "forward" },
+   { "name": "W", "from": 54, "to": 54, "direction": "forward" },
+   { "name": "X", "from": 55, "to": 55, "direction": "forward" },
+   { "name": "Y", "from": 56, "to": 56, "direction": "forward" },
+   { "name": "Z", "from": 57, "to": 57, "direction": "forward" },
+   { "name": "[", "from": 58, "to": 58, "direction": "forward" },
+   { "name": "\\", "from": 59, "to": 59, "direction": "forward" },
+   { "name": "]", "from": 60, "to": 60, "direction": "forward" },
+   { "name": "^", "from": 61, "to": 61, "direction": "forward" },
+   { "name": "_", "from": 62, "to": 62, "direction": "forward" },
+   { "name": "`", "from": 63, "to": 63, "direction": "forward" },
+   { "name": "a", "from": 64, "to": 64, "direction": "forward" },
+   { "name": "b", "from": 65, "to": 65, "direction": "forward" },
+   { "name": "c", "from": 66, "to": 66, "direction": "forward" },
+   { "name": "d", "from": 67, "to": 67, "direction": "forward" },
+   { "name": "e", "from": 68, "to": 68, "direction": "forward" },
+   { "name": "f", "from": 69, "to": 69, "direction": "forward" },
+   { "name": "g", "from": 70, "to": 70, "direction": "forward" },
+   { "name": "h", "from": 71, "to": 71, "direction": "forward" },
+   { "name": "i", "from": 72, "to": 72, "direction": "forward" },
+   { "name": "j", "from": 73, "to": 73, "direction": "forward" },
+   { "name": "k", "from": 74, "to": 74, "direction": "forward" },
+   { "name": "l", "from": 75, "to": 75, "direction": "forward" },
+   { "name": "m", "from": 76, "to": 76, "direction": "forward" },
+   { "name": "n", "from": 77, "to": 77, "direction": "forward" },
+   { "name": "o", "from": 78, "to": 78, "direction": "forward" },
+   { "name": "p", "from": 79, "to": 79, "direction": "forward" },
+   { "name": "q", "from": 80, "to": 80, "direction": "forward" },
+   { "name": "r", "from": 81, "to": 81, "direction": "forward" },
+   { "name": "s", "from": 82, "to": 82, "direction": "forward" },
+   { "name": "t", "from": 83, "to": 83, "direction": "forward" },
+   { "name": "u", "from": 84, "to": 84, "direction": "forward" },
+   { "name": "v", "from": 85, "to": 85, "direction": "forward" },
+   { "name": "w", "from": 86, "to": 86, "direction": "forward" },
+   { "name": "x", "from": 87, "to": 87, "direction": "forward" },
+   { "name": "y", "from": 88, "to": 88, "direction": "forward" },
+   { "name": "z", "from": 89, "to": 89, "direction": "forward" },
+   { "name": "{", "from": 90, "to": 90, "direction": "forward" },
+   { "name": "|", "from": 91, "to": 91, "direction": "forward" },
+   { "name": "}", "from": 92, "to": 92, "direction": "forward" },
+   { "name": "~", "from": 93, "to": 93, "direction": "forward" },
+   { "name": " ", "from": 111, "to": 111, "direction": "forward" }
+  ],
+  "layers": [
+   { "name": "Sprite Sheet", "opacity": 255, "blendMode": "normal" }
+  ],
+  "slices": [
+  ]
+ }
+}
