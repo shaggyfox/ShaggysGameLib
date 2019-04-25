@@ -53,23 +53,28 @@ void text_print(int in_x, int y, char *data)
   }
 }
 
-/* FIXME XXX */
-int text_width(char *data) {
-  int len = strlen(data);
-  if (len) {
-    len = (len-1) * 8 + 10
-  }
-  return len;
-}
-
-int text_height(char *data) {
-  ret = 10;
+void text_dimensions(char *data, SDL_Rect *rect) {
+  int c = 0;
+  int w = 0;
+  int h = 10;
   for (int i = 0; data[i]; ++i) {
+    c += 1;
     if (data[i] == '\n') {
-      ret += 10;
+      if (c > w) {
+        w = c;
+      }
+      c = 0;
+      h += 10;
     }
   }
-  return ret;
+  if (c > w) {
+    w = c;
+  }
+  if (w > 0) {
+    w = w - 1 * 8 + 10;
+  }
+  rect->w = w;
+  rect->h = h;
 }
 
 #include <stdarg.h>
