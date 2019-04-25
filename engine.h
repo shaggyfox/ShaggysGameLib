@@ -30,13 +30,17 @@ struct game_ctx {
   void (*game_draw)(void *data);
   void (*game_on_key_down)(int key, void *data);
   void (*game_on_key_up)(int key, void *data);
+  void (*game_text_input)(char *text, void* data);
+  void (*game_on_quit)(void *data);
+  void (*game_on_mouse_down)(int x, int y, int button, void *data);
+  void (*game_on_mouse_up)(int x, int y, int button, void *data);
 };
 
 extern struct game_ctx *glob_game_ctx;
 
-#define screen_clear(r, g, b) \
-  SDL_SetRenderDrawColor(glob_renderer, r, g, b, 255); \
-  SDL_RenderClear(glob_renderer);
-
+#define screen_clear() SDL_RenderClear(glob_renderer);
+#define draw_line(x1, y1, x2, y2) SDL_RenderDrawLine(glob_renderer, x1, y1, x2, y2)
+#define draw_point(x, y) SDL_RenderDrawPoint(glob_renderer, x, y)
+#define draw_color(r, g, b, a) SDL_SetRenderDrawColor(glob_renderer, r, g, b, a)
 void engine_quit(void);
 

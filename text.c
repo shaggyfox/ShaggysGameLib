@@ -48,7 +48,7 @@ void text_print(int in_x, int y, char *data)
       y += 10;
       continue;
     }
-    frame_draw(text_map[c&127], x, y, 0);
+    frame_draw(text_map[c&127], x, y);
     x += 8; /* XXX */
   }
 }

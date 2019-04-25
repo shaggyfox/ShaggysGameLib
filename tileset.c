@@ -101,7 +101,7 @@ static SDL_Rect *animation_ctx_get_SDL_Rect(struct animation_ctx *ctx)
   return &ctx->animation_ctx_animation->animation_frames[ctx->animation_ctx_pos].frame_src;
 }
 
-void animation_ctx_draw(struct animation_ctx *ctx, int x, int y, int flags)
+void animation_ctx_draw_ex(struct animation_ctx *ctx, int x, int y, double rotation, int flags)
 {
   SDL_Rect *src = animation_ctx_get_SDL_Rect(ctx);
   SDL_Rect dst;
@@ -109,24 +109,31 @@ void animation_ctx_draw(struct animation_ctx *ctx, int x, int y, int flags)
   dst.y = y;
   dst.w = src->w;
   dst.h = src->h;
-  SDL_RenderCopyEx(glob_renderer, ctx->animation_ctx_animation->animation_texture, src, &dst, 0, NULL, flags);
+  SDL_RenderCopyEx(glob_renderer, ctx->animation_ctx_animation->animation_texture, src, &dst, rotation, NULL, flags);
 }
 
+void animation_ctx_draw(struct animation_ctx *ctx, int x, int y)
+{
+  animation_ctx_draw_ex(ctx, x, y, 0, 0);
+}
 
 struct frame* animation_ctx_get_frame(struct animation_ctx *ctx)
 {
   return &ctx->animation_ctx_animation->animation_frames[ctx->animation_ctx_pos];
 }
 
-void frame_draw(struct frame *frame, int x, int y, int flags)
+void frame_draw_ex(struct frame *frame, int x, int y, double rotation, int flags)
 {
   SDL_Rect *src = &frame->frame_src;
   SDL_Rect dst = {.x = x, .y = y, .w = src->w, .h = src->h};
-  SDL_RenderCopyEx(glob_renderer, frame->frame_tileset->tileset_texture, src, &dst, 0, NULL, flags);
+  SDL_RenderCopyEx(glob_renderer, frame->frame_tileset->tileset_texture, src, &dst, rotation, NULL, flags);
 }
 
-/* FIXME XXX collision is only supported when both tiles have the same
- * collision_map/tileset */
+void frame_draw(struct frame *frame, int x, int y) {
+  frame_draw_ex(frame, x, y, 0, 0);
+}
+
+/* XXX rotation is not supported here */
 int frame_check_collision(int a_x, int a_y, struct frame* a_frame,
                           int b_x, int b_y, struct frame* b_frame)
 {
@@ -145,8 +152,7 @@ int frame_check_collision(int a_x, int a_y, struct frame* a_frame,
   return 0;
 }
 
-/* FIXME XXX collision is only supported when both tiles have the same
- * collision_map/tileset */
+/* XXX rotation is not supported here */
 int animation_ctx_check_collision(int a_x, int a_y, struct animation_ctx *a_ctx,
                                   int b_x, int b_y, struct animation_ctx *b_ctx)
 {
@@ -225,7 +231,8 @@ struct tileset *tileset_load(char *json_data, size_t json_data_len, char *image_
     } else {
       my_animations[i].animation_type = ANIMATION_TYPE_FORWARD;
     }
-    my_animations[i].animation_name = strdup(json_find_string(frame_tags_array[i], "name"));
+    /* this is save because we never free jv */
+    my_animations[i].animation_name = json_find_string(frame_tags_array[i], "name");
     my_animations[i].animation_begin = json_find_int(frame_tags_array[i], "from");
     my_animations[i].animation_end = json_find_int(frame_tags_array[i], "to");
     my_animations[i].animation_frames = &my_frames[my_animations[i].animation_begin];

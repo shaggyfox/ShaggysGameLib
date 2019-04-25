@@ -80,11 +80,13 @@ void animation_ctx_update(struct animation_ctx *ctx, float delta);
 //SDL_Rect *animation_ctx_get_SDL_Rect(struct animation_ctx *ctx);
 /* draw animation at x, y */
 /* XXX PLZ REMOVE ME */
-void animation_ctx_draw(struct animation_ctx *ctx, int x, int y, int flags);
+void animation_ctx_draw(struct animation_ctx *ctx, int x, int y);
+void animation_ctx_draw_ex(struct animation_ctx *ctx, int x, int y, double rotation, int flags);
 
 struct frame *animation_ctx_get_frame(struct animation_ctx *ctx);
 struct frame *tileset_get_frame(struct tileset *tileset, char *name);
-void frame_draw(struct frame *frame, int x, int y, int flags);
+void frame_draw(struct frame *frame, int x, int y);
+void frame_draw_ex(struct frame *frame, int x, int y, double rotation, int flags);
 
 SDL_Texture* load_texture(char *data, size_t len, int *w, int *h, struct collision_map **);
 #endif

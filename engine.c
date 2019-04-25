@@ -27,9 +27,17 @@ void run_loop(void* data)
   static unsigned int last_update = 0;
   SDL_Event event;
   /* Events */
-  /* XXX implement on key eg as game_callback */
+  /* XXX add mouse input */
   while (SDL_PollEvent(&event)) {
     switch(event.type) {
+      case SDL_QUIT:
+        /* XXX */
+        if (glob_game_ctx->game_on_quit) {
+          glob_game_ctx->game_on_quit(data);
+        } else {
+          engine_quit();
+        }
+        break;
       case SDL_KEYDOWN:
         if (event.key.repeat) {
           break;
@@ -69,6 +77,27 @@ void run_loop(void* data)
           case SDLK_RIGHT:
             glob_keys &= ~CTRL_KEY_RIGHT;
             break;
+        }
+        break;
+      case SDL_TEXTINPUT:
+        if (glob_game_ctx->game_text_input) {
+          glob_game_ctx->game_text_input((char*)event.text.text, data);
+        }
+        break;
+      case SDL_MOUSEBUTTONUP:
+        if (glob_game_ctx->game_on_mouse_up) {
+          glob_game_ctx->game_on_mouse_up(event.button.button,
+                                             event.button.x,
+                                             event.button.y,
+                                             data);
+        }
+        break;
+      case SDL_MOUSEBUTTONDOWN:
+        if (glob_game_ctx->game_on_mouse_down) {
+          glob_game_ctx->game_on_mouse_down(event.button.button,
+                                             event.button.x,
+                                             event.button.y,
+                                             data);
         }
         break;
       default:

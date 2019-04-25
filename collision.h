@@ -15,7 +15,6 @@ int collision_map_check_collision(struct collision_map *map_a, struct collision_
     SDL_Rect *a, SDL_Rect *b, SDL_Rect *a_src, SDL_Rect *b_src);
 int SDL_Rect_check_collision(SDL_Rect *a, SDL_Rect *b);
 void SDL_Rect_and(SDL_Rect *in_a, SDL_Rect *in_b, SDL_Rect *ret);
-void SDL_Rect_rand(SDL_Rect *ret);
 
 /* DBG */
 void collision_map_print(struct collision_map *map, SDL_Rect *rect);

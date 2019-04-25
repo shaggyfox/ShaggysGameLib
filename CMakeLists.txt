@@ -1,6 +1,5 @@
 cmake_minimum_required(VERSION 3.12.4)
 find_package(PkgConfig)
-find_file(MK_DATA mk_data.pl HINTS ${CMAKE_CURRENT_SOURCE_DIR})
 project (ShaggysGameLib)
 
 if (CMAKE_C_COMPILER MATCHES "/em.*")
@@ -13,8 +12,8 @@ if (CMAKE_C_COMPILER MATCHES "/em.*")
     "SHELL:-s USE_SDL_IMAGE=2"
     "SHELL:-s USE_SDL=2"
     "SHELL:-s SDL2_IMAGE_FORMATS='[\"png\"]'"
-    "SHELL:--pre-js ${CMAKE_SOURCE_DIR}/emscripten/preload.js"
-    "SHELL:--shell-file ${CMAKE_SOURCE_DIR}/emscripten/template.html")
+    "SHELL:--pre-js ${CMAKE_CURRENT_SOURCE_DIR}/emscripten/preload.js"
+    "SHELL:--shell-file ${CMAKE_CURRENT_SOURCE_DIR}/emscripten/template.html")
 else()
   pkg_check_modules(SDL2 sdl2 REQUIRED)
   pkg_check_modules(SDL2_IMAGE SDL2_image REQUIRED)
@@ -27,11 +26,15 @@ else()
 endif()
 set( CMAKE_EXPORT_COMPILE_COMMANDS ON )
 
+add_custom_command(OUTPUT ${CMAKE_BINARY_DIR}/mk_data.pl
+  COMMAND cp ${CMAKE_CURRENT_SOURCE_DIR}/mk_data.pl ${CMAKE_BINARY_DIR}
+  DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/mk_data.pl)
+
 function(generate_data source dest name)
   add_custom_command(
     OUTPUT  ${dest}
-    COMMAND perl ${MK_DATA} ${source} ${CMAKE_CURRENT_BINARY_DIR}/${dest} ${name}
-    DEPENDS ${MK_DATA} ${source})
+    COMMAND perl ${CMAKE_BINARY_DIR}/mk_data.pl ${source} ${CMAKE_CURRENT_BINARY_DIR}/${dest} ${name}
+    DEPENDS ${CMAKE_BINARY_DIR}/mk_data.pl ${source})
 endfunction(generate_data)
 
 # default font

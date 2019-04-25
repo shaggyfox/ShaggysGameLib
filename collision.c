@@ -93,13 +93,3 @@ void SDL_Rect_and(SDL_Rect *in_a, SDL_Rect *in_b, SDL_Rect *ret)
     ret->h = b->h;
   }
 }
-
-
-void SDL_Rect_rand(SDL_Rect *ret)
-{
-  ret->x = random() % 32 + 1;
-  ret->y = random() % 32 + 1;
-  ret->w = random() % 32 + 1;
-  ret->h = random() % 32 + 1;
-}
-
