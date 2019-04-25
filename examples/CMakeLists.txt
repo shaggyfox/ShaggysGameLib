@@ -9,7 +9,7 @@ endif()
 #generate_data(${CMAKE_CURRENT_SOURCE_DIR}/bin_blob generated_header.h name_of_variable)
 
 #add_executable(my_game my_game.c ${CMAKE_CURRENT_BINARY_DIR}/generated_header.h)
-#target_link_libraries(my_game engine m)
+#target_link_libraries(my_game engine)
 #target_compile_options(my_game PUBLIC ${ENGINE_CFLAGS})
 
 
