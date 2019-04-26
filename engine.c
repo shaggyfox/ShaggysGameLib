@@ -20,6 +20,9 @@ void engine_quit(void) {
 #ifdef __EMSCRIPTEN__
   emscripten_cancel_main_loop();
 #endif
+  SDL_DestroyRenderer(glob_renderer);
+  SDL_DestroyWindow(glob_window);
+  SDL_Quit();
 }
 
 void run_loop(void* data)
@@ -126,8 +129,9 @@ int main(int argc, char *argv[])
   SDL_Init(SDL_INIT_VIDEO|SDL_INIT_AUDIO);
   init_audio();
   /* ... and then create window based on init 'output' */
-  glob_window = SDL_CreateWindow("squirrel", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED,
-     SCREEN_WIDTH * 2, SCREEN_HEIGHT *2, 0);
+  glob_window = SDL_CreateWindow(glob_game_ctx->game_name ? glob_game_ctx->game_name : "game",
+      SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED,
+      SCREEN_WIDTH * 2, SCREEN_HEIGHT *2, 0);
 
   if (use_acceleration) {
     glob_renderer = SDL_CreateRenderer(glob_window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
@@ -150,6 +154,5 @@ int main(int argc, char *argv[])
     run_loop(data);
   }
 #endif
-
   return 0;
 }
