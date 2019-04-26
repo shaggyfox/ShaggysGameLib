@@ -34,6 +34,7 @@ struct game_ctx {
   void (*game_on_quit)(void *data);
   void (*game_on_mouse_down)(int x, int y, int button, void *data);
   void (*game_on_mouse_up)(int x, int y, int button, void *data);
+  void (*game_on_mouse_motion)(int x, int y, void *data);
 };
 
 extern struct game_ctx *glob_game_ctx;

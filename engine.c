@@ -103,6 +103,13 @@ void run_loop(void* data)
                                              data);
         }
         break;
+      case SDL_MOUSEMOTION:
+        if (glob_game_ctx->game_on_mouse_motion) {
+          glob_game_ctx->game_on_mouse_motion(event.motion.x,
+                                              event.motion.y,
+                                              data);
+        }
+        break;
       default:
         break;
     }
