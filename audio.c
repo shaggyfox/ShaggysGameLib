@@ -56,14 +56,33 @@ static int audio_buffer_get(Uint8 *dst, int dst_len)
   return 0;
 }
 
+static int glob_sfx_volume = SDL_MIX_MAXVOLUME / 2;
+static int glob_xm_volume = SDL_MIX_MAXVOLUME / 2;
+
+void audio_volume_xm(int volume)
+{
+  glob_xm_volume = volume;
+}
+
+void audio_volume_sfx(int volume)
+{
+  glob_sfx_volume = volume;
+}
+
 void MyAudioCallback(void*  userdata,
                        Uint8* stream,
                        int    len)
 {
+  static Uint8 *mix_buffer = NULL;
+  static int mix_buffer_len = 0;
+  if (len > mix_buffer_len) {
+    mix_buffer_len = len;
+    mix_buffer = realloc(mix_buffer, mix_buffer_len);
+  }
+  memset(stream, 0, len);
   if (glob_xm_replay) {
-    audio_buffer_get(stream, len);
-  } else {
-    memset(stream, 0, len);
+    audio_buffer_get(mix_buffer, len);
+    SDL_MixAudioFormat(stream, mix_buffer, glob_audio_spec.format, len, glob_xm_volume);
   }
   for (int i = 0; i < MAX_AUDIO_CHANNELS; ++i) {
     struct sfx_channel_s *channel = &glob_sfx_channels[i];
@@ -74,11 +93,11 @@ void MyAudioCallback(void*  userdata,
     }
     int left = sfx->len - channel->pos;
     if (left < len) {
-      SDL_MixAudioFormat(stream, &sfx->buffer[channel->pos], glob_audio_spec.format, left, SDL_MIX_MAXVOLUME/2);
+      SDL_MixAudioFormat(stream, &sfx->buffer[channel->pos], glob_audio_spec.format, left, glob_sfx_volume);
       /* audio end */
       channel->on = 0;
     } else {
-      SDL_MixAudioFormat(stream, &sfx->buffer[channel->pos], glob_audio_spec.format, len, SDL_MIX_MAXVOLUME/2);
+      SDL_MixAudioFormat(stream, &sfx->buffer[channel->pos], glob_audio_spec.format, len, glob_sfx_volume);
       channel->pos += len;
     }
   }
