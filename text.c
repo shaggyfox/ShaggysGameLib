@@ -71,7 +71,7 @@ void text_dimensions(char *data, SDL_Rect *rect) {
     w = c;
   }
   if (w > 0) {
-    w = w - 1 * 8 + 10;
+    w = (w - 1) * 8 + 10;
   }
   rect->w = w;
   rect->h = h;
