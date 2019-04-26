@@ -24,7 +24,7 @@ static int glob_xm_replay_id=-1;
 
 static SDL_AudioSpec glob_audio_spec;
 
-int audio_buffer_get(Uint8 *dst, size_t dst_len)
+static int audio_buffer_get(Uint8 *dst, int dst_len)
 {
   static int *music_buffer = NULL;
   static int music_buffer_len = 0;
@@ -41,8 +41,7 @@ int audio_buffer_get(Uint8 *dst, size_t dst_len)
         *(dst++) = current_sample & 0xFF; --dst_len;
         *(dst++) = (current_sample >> 8) & 0xFF; --dst_len;
       }
-    }
-    if (dst_len) {
+    } else {
       /* music buffer empty. Generate new audio */
       music_buffer_len = replay_get_audio(glob_xm_replay, music_buffer) * 2;
       music_buffer_pos = music_buffer;
@@ -51,7 +50,7 @@ int audio_buffer_get(Uint8 *dst, size_t dst_len)
   if (music_buffer_len) {
     /* if we left some samples in music_buffer move them to
      * the buffer start position */
-    memmove(music_buffer, music_buffer_pos, music_buffer_len);
+    memmove(music_buffer, music_buffer_pos, music_buffer_len * sizeof(int));
   }
 
   return 0;
