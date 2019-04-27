@@ -88,6 +88,7 @@ struct frame *tileset_get_frame(struct tileset *tileset, char *name);
 struct frame *tileset_get_frame_by_id(struct tileset *tileset, int id);
 void frame_draw(struct frame *frame, int x, int y);
 void frame_draw_ex(struct frame *frame, int x, int y, double rotation, int flags);
+void tileset_color_mod(struct tileset *tileset, int r, int g, int b, int a);
 
 SDL_Texture* load_texture(char *data, size_t len, int *w, int *h, struct collision_map **);
 #endif

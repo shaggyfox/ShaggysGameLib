@@ -130,6 +130,12 @@ struct frame* animation_ctx_get_frame(struct animation_ctx *ctx)
   return &ctx->animation_ctx_animation->animation_frames[ctx->animation_ctx_pos];
 }
 
+void tileset_color_mod(struct tileset *tileset, int r, int g, int b, int a)
+{
+  SDL_SetTextureColorMod(tileset->tileset_texture, r, g, b);
+  SDL_SetTextureAlphaMod(tileset->tileset_texture, a);
+}
+
 void frame_draw_ex(struct frame *frame, int x, int y, double rotation, int flags)
 {
   SDL_Rect *src = &frame->frame_src;
