@@ -1,0 +1,135 @@
+{ "frames": [
+   {
+    "filename": "tinyfont 0.aseprite",
+    "frame": { "x": 0, "y": 0, "w": 6, "h": 6 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 6, "h": 6 },
+    "sourceSize": { "w": 6, "h": 6 },
+    "duration": 100
+   },
+   {
+    "filename": "tinyfont 1.aseprite",
+    "frame": { "x": 6, "y": 0, "w": 6, "h": 6 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 6, "h": 6 },
+    "sourceSize": { "w": 6, "h": 6 },
+    "duration": 100
+   },
+   {
+    "filename": "tinyfont 2.aseprite",
+    "frame": { "x": 12, "y": 0, "w": 6, "h": 6 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 6, "h": 6 },
+    "sourceSize": { "w": 6, "h": 6 },
+    "duration": 100
+   },
+   {
+    "filename": "tinyfont 3.aseprite",
+    "frame": { "x": 18, "y": 0, "w": 6, "h": 6 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 6, "h": 6 },
+    "sourceSize": { "w": 6, "h": 6 },
+    "duration": 100
+   },
+   {
+    "filename": "tinyfont 4.aseprite",
+    "frame": { "x": 24, "y": 0, "w": 6, "h": 6 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 6, "h": 6 },
+    "sourceSize": { "w": 6, "h": 6 },
+    "duration": 100
+   },
+   {
+    "filename": "tinyfont 5.aseprite",
+    "frame": { "x": 0, "y": 6, "w": 6, "h": 6 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 6, "h": 6 },
+    "sourceSize": { "w": 6, "h": 6 },
+    "duration": 100
+   },
+   {
+    "filename": "tinyfont 6.aseprite",
+    "frame": { "x": 6, "y": 6, "w": 6, "h": 6 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 6, "h": 6 },
+    "sourceSize": { "w": 6, "h": 6 },
+    "duration": 100
+   },
+   {
+    "filename": "tinyfont 7.aseprite",
+    "frame": { "x": 12, "y": 6, "w": 6, "h": 6 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 6, "h": 6 },
+    "sourceSize": { "w": 6, "h": 6 },
+    "duration": 100
+   },
+   {
+    "filename": "tinyfont 8.aseprite",
+    "frame": { "x": 18, "y": 6, "w": 6, "h": 6 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 6, "h": 6 },
+    "sourceSize": { "w": 6, "h": 6 },
+    "duration": 100
+   },
+   {
+    "filename": "tinyfont 9.aseprite",
+    "frame": { "x": 24, "y": 6, "w": 6, "h": 6 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 6, "h": 6 },
+    "sourceSize": { "w": 6, "h": 6 },
+    "duration": 100
+   },
+   {
+    "filename": "tinyfont 10.aseprite",
+    "frame": { "x": 0, "y": 12, "w": 6, "h": 6 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 6, "h": 6 },
+    "sourceSize": { "w": 6, "h": 6 },
+    "duration": 100
+   },
+   {
+    "filename": "tinyfont 11.aseprite",
+    "frame": { "x": 6, "y": 12, "w": 6, "h": 6 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 6, "h": 6 },
+    "sourceSize": { "w": 6, "h": 6 },
+    "duration": 100
+   }
+ ],
+ "meta": {
+  "app": "http://www.aseprite.org/",
+  "version": "1.2.4",
+  "image": "/home/basti/ShaggysGameLib/tinyfont.png",
+  "format": "RGBA8888",
+  "size": { "w": 32, "h": 32 },
+  "scale": "1",
+  "frameTags": [
+   { "name": "1", "from": 0, "to": 0, "direction": "forward" },
+   { "name": "2", "from": 1, "to": 1, "direction": "forward" },
+   { "name": "3", "from": 2, "to": 2, "direction": "forward" },
+   { "name": "4", "from": 3, "to": 3, "direction": "forward" },
+   { "name": "5", "from": 4, "to": 4, "direction": "forward" },
+   { "name": "6", "from": 5, "to": 5, "direction": "forward" },
+   { "name": "7", "from": 6, "to": 6, "direction": "forward" },
+   { "name": "8", "from": 7, "to": 7, "direction": "forward" },
+   { "name": "9", "from": 8, "to": 8, "direction": "forward" },
+   { "name": "0", "from": 9, "to": 9, "direction": "forward" },
+   { "name": "+", "from": 10, "to": 10, "direction": "forward" },
+   { "name": "-", "from": 11, "to": 11, "direction": "forward" }
+  ],
+  "slices": [
+  ]
+ }
+}
