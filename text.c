@@ -3,21 +3,76 @@
 #include "kongfont_json.h"
 #include "kongfont_png.h"
 
+#include "tinyfont_json.h"
+#include "tinyfont_png.h"
+
 static int text_initialized = 0;
 static struct tileset *text_tileset = NULL;
+static struct tileset *tiny_tileset = NULL;
 static struct frame *text_map[128];
-static void text_initialize(void)
+static struct frame *tiny_map[128];
+static int font_x_spacing = 8;
+static int font_y_spacing = 10;
+
+static struct frame **current_map;
+static struct tileset *current_tileset;
+
+static struct tileset* text_initialize_int(struct frame **map,
+                            char* json,
+                            size_t json_size,
+                            char *data,
+                            size_t data_size)
 {
-  text_tileset = tileset_load((char*)default_font_json, sizeof(default_font_json),
-                              (char*)default_font_data, sizeof(default_font_data));
+  struct tileset *ret = tileset_load(json, json_size, data, data_size);
   for (unsigned char i = 0; i < 128; ++i) {
     char str[2] = {0,0};
     str[0] = i;
-    struct frame *f = tileset_get_frame(text_tileset, str);
+    struct frame *f = tileset_get_frame(ret, str);
     if (!f) {
-      f = tileset_get_frame(text_tileset, "?");
+      /* XXX */
+      f = tileset_get_frame(ret, "?");
+      if (!f) {
+        f = tileset_get_frame(ret, "-");
+      }
     }
-    text_map[i] = f;
+    map[i] = f;
+  }
+  return ret;
+}
+void text_initialize(void)
+{
+  text_tileset = text_initialize_int(text_map,
+      default_font_json, sizeof(default_font_json),
+      default_font_data, sizeof(default_font_data));
+  tiny_tileset = text_initialize_int(tiny_map,
+      tiny_font_json, sizeof(tiny_font_json),
+      tiny_font_data, sizeof(tiny_font_data));
+  current_tileset = text_tileset;
+  current_map = text_map;
+  text_initialized = 1;
+}
+
+void text_use_font(int font)
+{
+  if (!text_initialized) {
+    text_initialize();
+    text_initialized = 1;
+  }
+  switch(font) {
+    case FONT_DEFAULT:
+      current_tileset = text_tileset;
+      current_map = text_map;
+      font_x_spacing = 8;
+      font_y_spacing = 10;
+      break;
+    case FONT_TINY:
+      current_tileset = tiny_tileset;
+      current_map = tiny_map;
+      font_x_spacing = 6;
+      font_y_spacing = 8;
+      break;
+    default:
+      break;
   }
 }
 
@@ -27,8 +82,8 @@ void text_color(int r, int g, int b, int a)
     text_initialize();
     text_initialized = 1;
   }
-  SDL_SetTextureColorMod(text_tileset->tileset_texture, r, g, b);
-  SDL_SetTextureAlphaMod(text_tileset->tileset_texture, a);
+  SDL_SetTextureColorMod(current_tileset->tileset_texture, r, g, b);
+  SDL_SetTextureAlphaMod(current_tileset->tileset_texture, a);
 }
 
 void text_print(int in_x, int y, char *data)
@@ -45,18 +100,18 @@ void text_print(int in_x, int y, char *data)
     }
     if (c == '\n') {
       x = in_x;
-      y += 10;
+      y += font_y_spacing;
       continue;
     }
-    frame_draw(text_map[c&127], x, y);
-    x += 8; /* XXX */
+    frame_draw(current_map[c&127], x, y);
+    x += font_x_spacing;
   }
 }
 
 void text_dimensions(char *data, SDL_Rect *rect) {
   int c = 0;
   int w = 0;
-  int h = 10;
+  int h = font_y_spacing;
   for (int i = 0; data[i]; ++i) {
     c += 1;
     if (data[i] == '\n') {
@@ -64,14 +119,14 @@ void text_dimensions(char *data, SDL_Rect *rect) {
         w = c;
       }
       c = 0;
-      h += 10;
+      h += font_y_spacing;
     }
   }
   if (c > w) {
     w = c;
   }
   if (w > 0) {
-    w = (w - 1) * 8 + 10;
+    w = w * font_x_spacing;
   }
   rect->w = w;
   rect->h = h;

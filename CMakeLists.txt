@@ -37,9 +37,12 @@ function(generate_data source dest name)
     DEPENDS ${CMAKE_BINARY_DIR}/mk_data.pl ${source})
 endfunction(generate_data)
 
-# default font
+# default fonts
 generate_data(${CMAKE_CURRENT_SOURCE_DIR}/kongfont.json kongfont_json.h default_font_json)
 generate_data(${CMAKE_CURRENT_SOURCE_DIR}/kongfont.png kongfont_png.h default_font_data)
+
+generate_data(${CMAKE_CURRENT_SOURCE_DIR}/tinyfont.json tinyfont_json.h tiny_font_json)
+generate_data(${CMAKE_CURRENT_SOURCE_DIR}/tinyfont.png tinyfont_png.h tiny_font_data)
 
 set(engine_src
   engine.c engine.h
@@ -54,6 +57,8 @@ set(engine_src
   text.c text.h
   ${CMAKE_CURRENT_BINARY_DIR}/kongfont_json.h
   ${CMAKE_CURRENT_BINARY_DIR}/kongfont_png.h
+  ${CMAKE_CURRENT_BINARY_DIR}/tinyfont_json.h
+  ${CMAKE_CURRENT_BINARY_DIR}/tinyfont_png.h
   )
 
 
@@ -63,3 +68,8 @@ target_include_directories(engine PUBLIC ${ENGINE_INCLUDE_DIRS} ${CMAKE_CURRENT_
 target_compile_options(engine PUBLIC ${ENGINE_CFLAGS} PRIVATE -Werror)
 target_link_libraries(engine PUBLIC ${ENGINE_LIBRARIES})
 target_link_options(engine PUBLIC ${ENGINE_CFLAGS})
+
+generate_data(${CMAKE_CURRENT_SOURCE_DIR}/test.xm xm.h xm)
+add_executable(test test.c ${CMAKE_CURRENT_BINARY_DIR}/xm.h)
+
+target_link_libraries(test engine)
