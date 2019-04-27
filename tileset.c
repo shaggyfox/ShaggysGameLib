@@ -37,6 +37,14 @@ struct frame *tileset_get_frame(struct tileset *tileset, char *name)
   return NULL;
 }
 
+struct frame *tileset_get_frame_by_id(struct tileset *tileset, int id)
+{
+  if (id >= 0 && id < tileset->tileset_frame_count) {
+    return &tileset->tileset_frames[id];
+  }
+  return NULL;
+}
+
 void animation_ctx_init(struct animation_ctx *ctx, struct animation *animation)
 {
   ctx->animation_ctx_animation = animation;

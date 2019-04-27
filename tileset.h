@@ -85,6 +85,7 @@ void animation_ctx_draw_ex(struct animation_ctx *ctx, int x, int y, double rotat
 
 struct frame *animation_ctx_get_frame(struct animation_ctx *ctx);
 struct frame *tileset_get_frame(struct tileset *tileset, char *name);
+struct frame *tileset_get_frame_by_id(struct tileset *tileset, int id);
 void frame_draw(struct frame *frame, int x, int y);
 void frame_draw_ex(struct frame *frame, int x, int y, double rotation, int flags);
 
