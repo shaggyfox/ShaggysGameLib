@@ -20,9 +20,6 @@ void engine_quit(void) {
 #ifdef __EMSCRIPTEN__
   emscripten_cancel_main_loop();
 #endif
-  SDL_DestroyRenderer(glob_renderer);
-  SDL_DestroyWindow(glob_window);
-  SDL_Quit();
 }
 
 void run_loop(void* data)
@@ -161,5 +158,8 @@ int main(int argc, char *argv[])
     run_loop(data);
   }
 #endif
+  SDL_DestroyRenderer(glob_renderer);
+  SDL_DestroyWindow(glob_window);
+  SDL_Quit();
   return 0;
 }
