@@ -55,6 +55,7 @@ set(engine_src
   map.c map.h
   audio.c audio.h
   text.c text.h
+  heatmap.c
   ${CMAKE_CURRENT_BINARY_DIR}/kongfont_json.h
   ${CMAKE_CURRENT_BINARY_DIR}/kongfont_png.h
   ${CMAKE_CURRENT_BINARY_DIR}/tinyfont_json.h
