@@ -1,11 +1,8 @@
-typedef struct heatmap_s {
-  int *data;
-  int length;
-  int width;
-} heatmap;
-
+#include "heatmap.h"
 #include <stdio.h>
-void printmap(heatmap *map)
+#include <stdlib.h>
+
+void heatmap_debug_printmap(heatmap *map)
 {
   for(int i=0;i<map->length;++i){
     if (i != 0 && i % map->width == 0) {
@@ -15,26 +12,110 @@ void printmap(heatmap *map)
   }
   printf("\n");
 }
-#include <stdlib.h>
-heatmap *new_map(int w, int h, int val) {
+
+/* Create new map with w/h dimensions and high_val as highest value */
+heatmap *heatmap_new(int w, int h, int high_val) {
   heatmap *ret = malloc(sizeof(*ret));
   ret->data = malloc(w * h * sizeof(int));
   for(int i = 0; i < w * h; ++i) {
-    ret->data[i] = val;
+    ret->data[i] = high_val;
   }
+  ret->avoid = calloc(1, w * h * sizeof(unsigned char));
   ret->length = w * h;
   ret->width = w;
+  ret->height = h;
+  ret->high_val = high_val;
   return ret;
 }
 
-void set_map(heatmap *map, int x, int y, int val)
+void heatmap_reset(heatmap *map)
+{
+  for (int i = 0; i < map->length; ++i) {
+    map->data[i] = map->high_val;
+  }
+}
+
+void heatmap_reset_avoid(heatmap *map)
+{
+  for (int i = 0; i < map->length; ++i) {
+    map->avoid[i] = 0;
+  }
+}
+
+/* multiplicate heatmap with val */
+void heatmap_mul(heatmap *map, float val)
+{
+  for (int i = 0; i < map->length; ++i) {
+    if (map->avoid[i]) continue;
+    map->data[i] *= val;
+  }
+}
+
+void heatmap_set_avoid(heatmap *map, int x, int y, int val)
+{
+  map->avoid[y * map->width +x] = val;
+}
+
+void heatmap_set(heatmap *map, int x, int y, int val)
 {
   map->data[y * map->width + x] = val;
 }
 
-
-void update(heatmap *map)
+int heatmap_get(heatmap *map, int x, int y)
 {
+  if (x < 0 || y < 0 || x >= map->width || y >= map->height) {
+    return map->high_val;
+  }
+  return map->data[y * map->width + x];
+}
+
+int heatmap_get_direction(heatmap *map, int x, int y, int *alt_dir)
+{
+  int smalest = map->high_val;
+  int tmp;
+  int ret = HEATMAP_DIR_NONE;
+  int current_dir = 1;
+  int alt = HEATMAP_DIR_NONE;
+  /* upper_left, up, upper_right */
+  for (int i = -1; i <= 1; ++i) {
+    if ((tmp = heatmap_get(map, x + i, y - 1)) < smalest) {
+      smalest = tmp;
+      alt = ret;
+      ret = current_dir;
+    }
+    ++ current_dir;
+  }
+  if ((tmp = heatmap_get(map, x + 1, y)) < smalest) {
+    smalest = tmp;
+    alt = ret;
+    ret = current_dir;
+  }
+  ++ current_dir;
+  /* down right, down, down left */
+  for (int i = 1; i >= -1; --i) {
+    if ((tmp = heatmap_get(map, x + i, y + 1)) < smalest) {
+      smalest = tmp;
+      alt = ret;
+      ret = current_dir;
+    }
+    ++ current_dir;
+  }
+  if ((tmp = heatmap_get(map, x - 1, y)) < smalest) {
+    alt = ret;
+    ret = current_dir;
+  }
+
+  if (alt_dir) {
+    *alt_dir = alt;
+  }
+
+  return ret;
+}
+
+/* returns 0 when finisched */
+int heatmap_update(heatmap *map, int max_iterations, int *iterations_ret)
+{
+  int avoid = 0;
   int pos = 0;
   int *c;
   int left;
@@ -42,7 +123,9 @@ void update(heatmap *map)
   int right;
   int smalest;
   int updates = 0;
+  int iterations = 0;
 
+#define AVOID (map->avoid[pos])
 #define VAL_A (map->data[pos - map->width])
 #define VAL_B (map->data[pos])
 #define VAL_C (map->data[pos + map->width])
@@ -77,22 +160,6 @@ void update(heatmap *map)
   mid = 255; \
   right = 255;
 
-#define MOVE_RIGHT \
-  c = GET_B; \
-  left = mid; \
-  mid = right; \
-  ++ pos; \
-
-#define MOVE_LEFT\
-  c = GET_B; \
-  right = mid; \
-  mid = left; \
-  -- pos; \
-
-#define UPDATE\
-  smalest = SMALEST3(left, mid, right); \
-  DOIT;
-
 #define START_DL \
   left = 255; \
   mid = 255; \
@@ -103,9 +170,31 @@ void update(heatmap *map)
   mid = 255; \
   right = 255;
 
+#define MOVE_RIGHT \
+  c = GET_B; \
+  left = mid; \
+  mid = right; \
+  avoid = AVOID; \
+  ++ pos; \
+
+#define MOVE_LEFT\
+  c = GET_B; \
+  right = mid; \
+  mid = left; \
+  avoid = AVOID; \
+  -- pos; \
+
+#define UPDATE\
+  if (!avoid) { \
+    smalest = SMALEST3(left, mid, right); \
+    DOIT; \
+  }
+
+
   do {
     updates = 0;
     pos = 0;
+
     /* ================== first line =================*/
     START_UL;
     MOVE_RIGHT;
@@ -158,8 +247,8 @@ void update(heatmap *map)
       break;
     }
     updates = 0;
-    /* now backwards */
-    
+
+    /* ============= now backwards =============== */
     /* lowest line */
     pos = map->length -1;
     START_DR;
@@ -174,9 +263,7 @@ void update(heatmap *map)
     MOVE_LEFT;
     left = 255;
     UPDATE;
-    
     while (pos > map->width ) {
-      printf("pos:%d\n", pos);
       int end_of_line = pos - map->width +1;
       START_R;
       MOVE_LEFT;
@@ -188,7 +275,6 @@ void update(heatmap *map)
         UPDATE;
       }
       MOVE_LEFT;
-      left = 255;
       UPDATE;
     }
 
@@ -205,14 +291,25 @@ void update(heatmap *map)
     MOVE_LEFT;
     left = 255;
     UPDATE;
-  } while(updates);
-
-  printf("->%d\n", pos);
+    ++ iterations;
+  } while(updates && iterations != max_iterations);
+  if (iterations_ret) {
+    *iterations_ret = iterations;
+  }
+  return !updates;
 }
 
 int main() {
-  heatmap *map = new_map(10,10,99);
-  set_map(map, 9, 9, 0);
-  update(map);
-  printmap(map);
+  heatmap *map = heatmap_new(10,10,99);
+  heatmap_set(map, 9, 9, 0);
+  heatmap_set(map, 0, 0, 0);
+  for(int i = 3; i <=6;++i) {
+    heatmap_set_avoid(map, i, 3, 1);
+    heatmap_set_avoid(map, i, 6, 1);
+    heatmap_set_avoid(map, 3, i, 1);
+    heatmap_set_avoid(map, 6, i, 1);
+  }
+  printf("iterations: %d\n", heatmap_update(map, 0, NULL));
+  heatmap_debug_printmap(map);
+  printf("%d\n", heatmap_get_direction(map, 0,1, NULL));
 }
