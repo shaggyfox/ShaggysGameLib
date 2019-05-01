@@ -303,12 +303,13 @@ int main() {
   heatmap *map = heatmap_new(10,10,99);
   heatmap_set(map, 9, 9, 0);
   heatmap_set(map, 0, 0, 0);
-  for(int i = 3; i <=6;++i) {
-    heatmap_set_avoid(map, i, 3, 1);
-    heatmap_set_avoid(map, i, 6, 1);
-    heatmap_set_avoid(map, 3, i, 1);
-    heatmap_set_avoid(map, 6, i, 1);
+  for(int i = 2; i <=7;++i) {
+    heatmap_set_avoid(map, i, 2, 1);
+    heatmap_set_avoid(map, i, 7, 1);
+    heatmap_set_avoid(map, 2, i, 1);
+    heatmap_set_avoid(map, 7, i, 1);
   }
+  heatmap_set_avoid(map, 2, 5, 0);
   printf("iterations: %d\n", heatmap_update(map, 0, NULL));
   heatmap_debug_printmap(map);
   printf("%d\n", heatmap_get_direction(map, 0,1, NULL));
