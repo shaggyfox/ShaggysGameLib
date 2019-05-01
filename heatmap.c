@@ -100,7 +100,7 @@ int heatmap_get_direction(heatmap *map, int x, int y, int *alt_dir)
     }
     ++ current_dir;
   }
-  if ((tmp = heatmap_get(map, x - 1, y)) < smalest) {
+  if ((heatmap_get(map, x - 1, y)) < smalest) {
     alt = ret;
     ret = current_dir;
   }
