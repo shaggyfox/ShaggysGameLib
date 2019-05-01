@@ -141,34 +141,34 @@ int heatmap_update(heatmap *map, int max_iterations, int *iterations_ret)
                if (mid > *c) {mid = *c;} \
              }
 #define START_UL \
-  left = 255; \
-  mid = 255;  \
+  left = map->high_val; \
+  mid = map->high_val;  \
   right = GET_BC;
 
 #define START_UR \
   left = GET_BC; \
-  mid = 255; \
-  right = 255;
+  mid = map->high_val; \
+  right = map->high_val;
 
 #define START_L \
-  left = 255; \
-  mid = 255; \
+  left = map->high_val; \
+  mid = map->high_val; \
   right = GET_ABC;
 
 #define START_R \
   left = GET_ABC; \
-  mid = 255; \
-  right = 255;
+  mid = map->high_val; \
+  right = map->high_val;
 
 #define START_DL \
-  left = 255; \
-  mid = 255; \
+  left = map->high_val; \
+  mid = map->high_val; \
   right = GET_AB;
 
 #define START_DR \
   left = GET_AB; \
-  mid = 255; \
-  right = 255;
+  mid = map->high_val; \
+  right = map->high_val;
 
 #define MOVE_RIGHT \
   c = GET_B; \
@@ -206,7 +206,7 @@ int heatmap_update(heatmap *map, int max_iterations, int *iterations_ret)
       UPDATE;
     }
     MOVE_RIGHT;
-    right = 255;
+    right = map->high_val;
     UPDATE;
 
     /* ================ lines up to one before the end =============== */
@@ -225,7 +225,7 @@ int heatmap_update(heatmap *map, int max_iterations, int *iterations_ret)
       }
       /* last one of line */
       MOVE_RIGHT;
-      right = 255;
+      right = map->high_val;
       UPDATE;
     }
 
@@ -240,7 +240,7 @@ int heatmap_update(heatmap *map, int max_iterations, int *iterations_ret)
       UPDATE;
     }
     MOVE_RIGHT;
-    right = 255;
+    right = map->high_val;
     UPDATE;
 
     if (!updates) {
@@ -261,7 +261,7 @@ int heatmap_update(heatmap *map, int max_iterations, int *iterations_ret)
       UPDATE;
     }
     MOVE_LEFT;
-    left = 255;
+    left = map->high_val;
     UPDATE;
     while (pos > map->width ) {
       int end_of_line = pos - map->width +1;
@@ -289,7 +289,7 @@ int heatmap_update(heatmap *map, int max_iterations, int *iterations_ret)
       UPDATE;
     }
     MOVE_LEFT;
-    left = 255;
+    left = map->high_val;
     UPDATE;
     ++ iterations;
   } while(updates && iterations != max_iterations);
