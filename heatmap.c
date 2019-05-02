@@ -2,15 +2,25 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-void heatmap_debug_printmap(heatmap *map)
+static void heatmap_super_debug_printmap(heatmap *map, int *data)
 {
   for(int i=0;i<map->length;++i){
     if (i != 0 && i % map->width == 0) {
       printf("\n");
     }
-    printf("%02i ", map->data[i]);
+    printf("%02i ", data[i]);
   }
   printf("\n");
+}
+
+void heatmap_debug_printmap(heatmap *map)
+{
+  heatmap_super_debug_printmap(map, map->data);
+}
+
+void heatmap_debug_printescapemap(heatmap *map)
+{
+  heatmap_super_debug_printmap(map, map->escape);
 }
 
 /* Create new map with w/h dimensions and high_val as highest value */
@@ -61,15 +71,26 @@ void heatmap_set(heatmap *map, int x, int y, int val)
   map->data[y * map->width + x] = val;
 }
 
-int heatmap_get(heatmap *map, int x, int y)
+static int heatmap_super_get(heatmap *map, int *data, int x, int y)
 {
   if (x < 0 || y < 0 || x >= map->width || y >= map->height) {
     return map->high_val;
   }
-  return map->data[y * map->width + x];
+  return data[y * map->width + x];
 }
 
-int heatmap_get_direction(heatmap *map, int x, int y, int *alt_dir)
+int heatmap_get(heatmap *map, int x, int y)
+{
+  return heatmap_super_get(map, map->data, x, y);
+}
+
+int heatmap_get_escape(heatmap *map, int x, int y)
+{
+  return heatmap_super_get(map, map->escape, x, y);
+}
+/* XXX make direction addable and return sum of all (lowest) directions with
+ * same value */
+static int heatmap_get_direction_super(heatmap *map, int *data, int x, int y, int *alt_dir)
 {
   int smalest = map->high_val;
   int tmp;
@@ -78,14 +99,14 @@ int heatmap_get_direction(heatmap *map, int x, int y, int *alt_dir)
   int alt = HEATMAP_DIR_NONE;
   /* upper_left, up, upper_right */
   for (int i = -1; i <= 1; ++i) {
-    if ((tmp = heatmap_get(map, x + i, y - 1)) < smalest) {
+    if ((tmp = heatmap_super_get(map, data, x + i, y - 1)) <= smalest) {
       smalest = tmp;
       alt = ret;
       ret = current_dir;
     }
     ++ current_dir;
   }
-  if ((tmp = heatmap_get(map, x + 1, y)) < smalest) {
+  if ((tmp = heatmap_super_get(map, data, x + 1, y)) <= smalest) {
     smalest = tmp;
     alt = ret;
     ret = current_dir;
@@ -93,14 +114,14 @@ int heatmap_get_direction(heatmap *map, int x, int y, int *alt_dir)
   ++ current_dir;
   /* down right, down, down left */
   for (int i = 1; i >= -1; --i) {
-    if ((tmp = heatmap_get(map, x + i, y + 1)) < smalest) {
+    if ((tmp = heatmap_super_get(map, data, x + i, y + 1)) <= smalest) {
       smalest = tmp;
       alt = ret;
       ret = current_dir;
     }
     ++ current_dir;
   }
-  if ((heatmap_get(map, x - 1, y)) < smalest) {
+  if ((heatmap_super_get(map, data, x - 1, y)) <= smalest) {
     alt = ret;
     ret = current_dir;
   }
@@ -112,8 +133,18 @@ int heatmap_get_direction(heatmap *map, int x, int y, int *alt_dir)
   return ret;
 }
 
+int heatmap_get_direction(heatmap *map, int x, int y, int *alt_dir)
+{
+  return heatmap_get_direction_super(map, map->data, x, y, alt_dir);
+}
+
+int heatmap_get_direction_escape(heatmap *map, int x, int y, int *alt_dir)
+{
+  return heatmap_get_direction_super(map, map->escape, x, y, alt_dir);
+}
+
 /* returns 0 when finisched */
-int heatmap_update(heatmap *map, int max_iterations, int *iterations_ret)
+static int heatmap_update_super(heatmap *map, int *data, int max_iterations, int *iterations_ret)
 {
   int avoid = 0;
   int pos = 0;
@@ -124,11 +155,14 @@ int heatmap_update(heatmap *map, int max_iterations, int *iterations_ret)
   int smalest;
   int updates = 0;
   int iterations = 0;
+  if (!data) {
+    data = map->data;
+  }
 
 #define AVOID (map->avoid[pos])
-#define VAL_A (map->data[pos - map->width])
-#define VAL_B (map->data[pos])
-#define VAL_C (map->data[pos + map->width])
+#define VAL_A (data[pos - map->width])
+#define VAL_B (data[pos])
+#define VAL_C (data[pos + map->width])
 #define SMALEST3(a,b,c) (a) < (b) ? (a) < (c) ? (a) : (c) : (b) < (c) ? (b) : (c);
 #define SMALEST2(a,b) (a) < (b) ? (a) : (b)
 #define GET_ABC SMALEST3(VAL_A, VAL_B, VAL_C)
@@ -299,6 +333,31 @@ int heatmap_update(heatmap *map, int max_iterations, int *iterations_ret)
   return !updates;
 }
 
+void heatmap_reset_escape(heatmap *map, float val)
+{
+  if (!map->escape) {
+    map->escape = malloc(map->length * sizeof(int));
+  }
+  for (int i = 0; i < map->length; ++i) {
+    if (map->avoid[i]) {
+      map->escape[i] = map->high_val;
+      continue;
+    }
+    map->escape[i] = map->data[i] * val;
+  }
+}
+
+int heatmap_update_escape(heatmap *map, int max_iterations, int *iterations_ret)
+{
+  return heatmap_update_super(map, map->escape, max_iterations, iterations_ret);
+}
+
+int heatmap_update(heatmap *map, int max_iterations, int *iterations_ret)
+{
+  return heatmap_update_super(map, NULL, max_iterations, iterations_ret);
+}
+
+
 int main() {
   heatmap *map = heatmap_new(10,10,99);
   heatmap_set(map, 9, 9, 0);
@@ -311,6 +370,13 @@ int main() {
   }
   heatmap_set_avoid(map, 2, 5, 0);
   printf("iterations: %d\n", heatmap_update(map, 0, NULL));
+  heatmap_reset_escape(map, -1.2);
+  heatmap_debug_printescapemap(map);
+  printf("iterations(escape) %d\n", heatmap_update_escape(map, 0, NULL));
+  printf("map:\n");
   heatmap_debug_printmap(map);
+  printf("escape:\n");
+  heatmap_debug_printescapemap(map);
   printf("%d\n", heatmap_get_direction(map, 0,1, NULL));
+  printf("%d\n", heatmap_get_direction_escape(map, 0,1, NULL));
 }
