@@ -25,7 +25,7 @@ void heatmap_debug_printescapemap(heatmap *map)
 
 /* Create new map with w/h dimensions and high_val as highest value */
 heatmap *heatmap_new(int w, int h, int high_val) {
-  heatmap *ret = malloc(sizeof(*ret));
+  heatmap *ret = calloc(1, sizeof(*ret));
   ret->data = malloc(w * h * sizeof(int));
   for(int i = 0; i < w * h; ++i) {
     ret->data[i] = high_val;
@@ -382,4 +382,5 @@ int main() {
   printf("%d\n", v); 
   v = heatmap_get_direction_escape(map, 0,1, NULL);
   printf("%d\n", v);
+  return 0;
 }
