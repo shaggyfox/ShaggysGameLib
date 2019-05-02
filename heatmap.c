@@ -164,7 +164,6 @@ static int heatmap_update_super(heatmap *map, int *data, int max_iterations, int
 #define VAL_B (data[pos])
 #define VAL_C (data[pos + map->width])
 #define SMALEST3(a,b,c) (a) < (b) ? (a) < (c) ? (a) : (c) : (b) < (c) ? (b) : (c);
-#define SMALEST2(a,b) (a) < (b) ? (a) : (b)
 #define GET_ABC SMALEST3(VAL_A, VAL_B, VAL_C)
 #define GET_AB  VAL_A < VAL_B ? VAL_A : VAL_B
 #define GET_BC  VAL_B < VAL_C ? VAL_B : VAL_C
