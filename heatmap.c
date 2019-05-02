@@ -353,7 +353,7 @@ int heatmap_update_escape(heatmap *map, int max_iterations, int *iterations_ret)
 
 int heatmap_update(heatmap *map, int max_iterations, int *iterations_ret)
 {
-  return heatmap_update_super(map, NULL, max_iterations, iterations_ret);
+  return heatmap_update_super(map, map->data, max_iterations, iterations_ret);
 }
 
 
@@ -368,14 +368,18 @@ int main() {
     heatmap_set_avoid(map, 7, i, 1);
   }
   heatmap_set_avoid(map, 2, 5, 0);
-  printf("iterations: %d\n", heatmap_update(map, 0, NULL));
+  int v = heatmap_update(map, 0, NULL);
+  printf("iterations: %d\n", v);
   heatmap_reset_escape(map, -1.2);
   heatmap_debug_printescapemap(map);
-  printf("iterations(escape) %d\n", heatmap_update_escape(map, 0, NULL));
+  v = heatmap_update_escape(map, 0, NULL);
+  printf("iterations(escape) %d\n", v);
   printf("map:\n");
   heatmap_debug_printmap(map);
   printf("escape:\n");
   heatmap_debug_printescapemap(map);
-  printf("%d\n", heatmap_get_direction(map, 0,1, NULL));
-  printf("%d\n", heatmap_get_direction_escape(map, 0,1, NULL));
+  v = heatmap_get_direction(map, 0,1, NULL);
+  printf("%d\n", v); 
+  v = heatmap_get_direction_escape(map, 0,1, NULL);
+  printf("%d\n", v);
 }
