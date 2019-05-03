@@ -71,6 +71,8 @@ target_link_libraries(engine PUBLIC ${ENGINE_LIBRARIES})
 target_link_options(engine PUBLIC ${ENGINE_CFLAGS})
 
 generate_data(${CMAKE_CURRENT_SOURCE_DIR}/test.xm xm.h xm)
-add_executable(test test.c ${CMAKE_CURRENT_BINARY_DIR}/xm.h)
+add_executable(example test.c ${CMAKE_CURRENT_BINARY_DIR}/xm.h)
+target_link_libraries(example engine)
 
-target_link_libraries(test engine)
+add_executable(maptest maptest.c)
+target_link_libraries(maptest engine)
