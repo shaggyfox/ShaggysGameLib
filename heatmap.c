@@ -88,59 +88,62 @@ int heatmap_get_escape(heatmap *map, int x, int y)
 {
   return heatmap_super_get(map, map->escape, x, y);
 }
-/* XXX make direction addable and return sum of all (lowest) directions with
- * same value */
-static int heatmap_get_direction_super(heatmap *map, int *data, int x, int y, int *alt_dir)
+
+/* return directions(s) leading to the destination */
+static int heatmap_get_direction_super(heatmap *map, int *data, int x, int y)
 {
   int smalest = map->high_val;
   int tmp;
   int ret = HEATMAP_DIR_NONE;
   int current_dir = 1;
-  int alt = HEATMAP_DIR_NONE;
   /* upper_left, up, upper_right */
   for (int i = -1; i <= 1; ++i) {
     if ((tmp = heatmap_super_get(map, data, x + i, y - 1)) <= smalest) {
-      smalest = tmp;
-      alt = ret;
-      ret = current_dir;
+      if (tmp < smalest) {
+        ret = 0;
+        smalest = tmp;
+      }
+      ret |= current_dir;
     }
-    ++ current_dir;
+    current_dir *= 2;
   }
   if ((tmp = heatmap_super_get(map, data, x + 1, y)) <= smalest) {
-    smalest = tmp;
-    alt = ret;
-    ret = current_dir;
+    if (tmp < smalest) {
+      ret = 0;
+      smalest = tmp;
+    }
+    ret |= current_dir;
   }
-  ++ current_dir;
+  current_dir *= 2;
   /* down right, down, down left */
   for (int i = 1; i >= -1; --i) {
     if ((tmp = heatmap_super_get(map, data, x + i, y + 1)) <= smalest) {
-      smalest = tmp;
-      alt = ret;
-      ret = current_dir;
+      if (tmp < smalest) {
+        smalest = tmp;
+        ret = 0;
+      }
+      ret |= current_dir;
     }
-    ++ current_dir;
+    current_dir *= 2;
   }
-  if ((heatmap_super_get(map, data, x - 1, y)) <= smalest) {
-    alt = ret;
-    ret = current_dir;
-  }
-
-  if (alt_dir) {
-    *alt_dir = alt;
+  if ((tmp = heatmap_super_get(map, data, x - 1, y)) <= smalest) {
+    if (tmp < smalest) {
+      ret = 0;
+    }
+    ret |= current_dir;
   }
 
   return ret;
 }
 
-int heatmap_get_direction(heatmap *map, int x, int y, int *alt_dir)
+int heatmap_get_direction(heatmap *map, int x, int y)
 {
-  return heatmap_get_direction_super(map, map->data, x, y, alt_dir);
+  return heatmap_get_direction_super(map, map->data, x, y);
 }
 
-int heatmap_get_direction_escape(heatmap *map, int x, int y, int *alt_dir)
+int heatmap_get_direction_escape(heatmap *map, int x, int y)
 {
-  return heatmap_get_direction_super(map, map->escape, x, y, alt_dir);
+  return heatmap_get_direction_super(map, map->escape, x, y);
 }
 
 /* returns 0 when finisched */

@@ -21,17 +21,17 @@ void heatmap_reset_avoid(heatmap *map);
 void heatmap_reset_escape(heatmap *map, float val);
 int heatmap_get(heatmap *map, int x, int y);
 int heatmap_get_escape(heatmap *map, int x, int y);
-int heatmap_get_direction(heatmap *map, int x, int y, int *alt_dir);
-int heatmap_get_direction_escape(heatmap *map, int x, int y, int *alt_dir);
+int heatmap_get_direction(heatmap *map, int x, int y);
+int heatmap_get_direction_escape(heatmap *map, int x, int y);
 int heatmap_update_escape(heatmap *map, int max_iterations, int *iterations_ret);
 
 #define HEATMAP_DIR_NONE 0
 #define HEATMAP_DIR_UL 1
 #define HEATMAP_DIR_U  2
-#define HEATMAP_DIR_UR 3
-#define HEATMAP_DIR_R 4
-#define HEATMAP_DIR_DR 5
-#define HEATMAP_DIR_D 6
-#define HEATMAP_DIR_DL 7
-#define HEATMAP_DIR_L 8
+#define HEATMAP_DIR_UR 4
+#define HEATMAP_DIR_R 8
+#define HEATMAP_DIR_DR 16
+#define HEATMAP_DIR_D 32
+#define HEATMAP_DIR_DL 64
+#define HEATMAP_DIR_L 128
 
