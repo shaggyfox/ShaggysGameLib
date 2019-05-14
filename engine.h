@@ -1,3 +1,4 @@
+#include <stdio.h> /* XXX to be removed */
 #include <math.h>
 #include <SDL.h>
 #include <SDL_image.h>

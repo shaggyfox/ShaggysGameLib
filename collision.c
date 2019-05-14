@@ -1,3 +1,4 @@
+#include <math.h>
 #include "collision.h"
 
 struct collision_map *collision_map_from_surface(SDL_Surface *surface)
@@ -18,6 +19,7 @@ int collision_map_get(struct collision_map *map, int x, int y)
   return map->data[map->w * y + x];
 }
 
+#include <stdio.h>
 void collision_map_print(struct collision_map *map, SDL_Rect *rect)
 {
   for (int y = rect->y; y < rect->y + rect->h; ++y) {

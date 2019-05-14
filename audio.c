@@ -1,3 +1,4 @@
+#include <string.h>
 #include "engine.h"
 #include "contrib/ibxm.h"
 

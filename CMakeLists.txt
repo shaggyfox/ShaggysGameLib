@@ -1,8 +1,20 @@
-cmake_minimum_required(VERSION 3.12.4)
-find_package(PkgConfig)
+cmake_minimum_required(VERSION 3.10.2)
 project (ShaggysGameLib)
 
-if (CMAKE_C_COMPILER MATCHES "/em.*")
+if (WIN32)
+  option(PNG_BUILD_ZLIB "Custom zlib Location, else find_package is used" ON)
+  set(ZLIB_INCLUDE_DIR "${CMAKE_SOURCE_DIR}/contrib/zlib-1.2.11"
+                       "${CMAKE_BINARY_DIR}/contrib/zlib-1.2.11")
+  add_subdirectory(contrib/zlib-1.2.11 EXCLUDE_FROM_ALL)
+  add_subdirectory(contrib/libpng-1.6.37 EXCLUDE_FROM_ALL)
+  add_subdirectory(contrib/SDL2-2.0.9 EXCLUDE_FROM_ALL)
+  add_subdirectory(contrib/SDL2_image-2.0.4 EXCLUDE_FROM_ALL)
+  SET(ENGINE_INCLUDE_DIRS ${CMAKE_SOURCE_DIR}/contrib/zlib-1.2.11 
+                      ${CMAKE_SOURCE_DIR}/contrib/libpng-1.6.37
+                      ${CMAKE_BINARY_DIR}/contrib/libpng-1.6.37
+		      ${CMAKE_SOURCE_DIR}/contrib/SDL2_image-2.0.4)
+  SET(ENGINE_LIBRARIES png_static zlibstatic SDL2-static SDL2_image)
+elseif (CMAKE_C_COMPILER MATCHES "/em.*")
   # SET(CMAKE_C_CFLAGS -s USE_SDL=2 -s USE_SDL_IMAGE=2)
   set(CMAKE_EXECUTABLE_SUFFIX ".html")
   SET(ENGINE_CFLAGS
@@ -15,11 +27,11 @@ if (CMAKE_C_COMPILER MATCHES "/em.*")
     "SHELL:--pre-js ${CMAKE_CURRENT_SOURCE_DIR}/emscripten/preload.js"
     "SHELL:--shell-file ${CMAKE_CURRENT_SOURCE_DIR}/emscripten/template.html")
 else()
+  find_package(PkgConfig)
   pkg_check_modules(SDL2 sdl2 REQUIRED)
   pkg_check_modules(SDL2_IMAGE SDL2_image REQUIRED)
   SET(ENGINE_CFLAGS ${SDL2_CFLAGS} ${SDL2_IMAGE_CFLAGS}
     -O2 -Wall -std=c99)
-  SET(ENGINE_INCLUDES ${SDL2_INCLUDE_DIRS} ${SDL2_IMAGE_INCLUDE_DIRS})
   SET(ENGINE_LIBRARIES ${SDL2_LIBRARIES} ${SDL2_IMAGE_LIBRARIES} -Wl,-s m)
   SET(ENGINE_LIB_DIRS ${SDL2_LIBRARY_DIRS} ${SDL2_IMAGE_LIBRARY_DIRS})
   SET(ENGINE_INCLUDE_DIRS ${SDL2_INCLUDE_DIRS} ${SDL2_IMAGE_INCLUDE_DIRS})
@@ -64,15 +76,19 @@ set(engine_src
 
 
 add_library(engine STATIC ${engine_src})
-target_link_directories(engine PUBLIC ${ENGINE_LIB_DIRS})
+
+#target_link_directories(engine PUBLIC ${ENGINE_LIB_DIRS})
+link_directories(${ENGINE_LIB_DIRS})
+
 target_include_directories(engine PUBLIC ${ENGINE_INCLUDE_DIRS} ${CMAKE_CURRENT_BINARY_DIR} ${CMAKE_CURRENT_SOURCE_DIR})
 target_compile_options(engine PUBLIC ${ENGINE_CFLAGS} PRIVATE -Werror)
-target_link_libraries(engine PUBLIC ${ENGINE_LIBRARIES})
-target_link_options(engine PUBLIC ${ENGINE_CFLAGS})
+target_link_libraries(engine PUBLIC ${ENGINE_LIBRARIES} ${ENGINE_CFLAGS})
+#target_link_options(engine PUBLIC ${ENGINE_CFLAGS})
+#link_options(${ENGINE_CFLAGS})
 
 generate_data(${CMAKE_CURRENT_SOURCE_DIR}/test.xm xm.h xm)
-add_executable(example test.c ${CMAKE_CURRENT_BINARY_DIR}/xm.h)
-target_link_libraries(example engine)
+add_executable(engine_example test.c ${CMAKE_CURRENT_BINARY_DIR}/xm.h)
+target_link_libraries(engine_example engine)
 
 add_executable(maptest maptest.c)
 target_link_libraries(maptest engine)
