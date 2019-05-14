@@ -1,4 +1,5 @@
 #include "engine.h"
+#include <string.h>
 
 #ifdef __EMSCRIPTEN__
   #include <emscripten.h>
