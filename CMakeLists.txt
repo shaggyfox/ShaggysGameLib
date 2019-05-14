@@ -3,16 +3,16 @@ project (ShaggysGameLib)
 
 if (WIN32)
   option(PNG_BUILD_ZLIB "Custom zlib Location, else find_package is used" ON)
-  set(ZLIB_INCLUDE_DIR "${CMAKE_SOURCE_DIR}/contrib/zlib-1.2.11"
-                       "${CMAKE_BINARY_DIR}/contrib/zlib-1.2.11")
+  set(ZLIB_INCLUDE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/contrib/zlib-1.2.11"
+	  "${CMAKE_CURRENT_BINARY_DIR}/contrib/zlib-1.2.11")
   add_subdirectory(contrib/zlib-1.2.11 EXCLUDE_FROM_ALL)
   add_subdirectory(contrib/libpng-1.6.37 EXCLUDE_FROM_ALL)
   add_subdirectory(contrib/SDL2-2.0.9 EXCLUDE_FROM_ALL)
   add_subdirectory(contrib/SDL2_image-2.0.4 EXCLUDE_FROM_ALL)
   SET(ENGINE_INCLUDE_DIRS ${CMAKE_SOURCE_DIR}/contrib/zlib-1.2.11 
-                      ${CMAKE_SOURCE_DIR}/contrib/libpng-1.6.37
-                      ${CMAKE_BINARY_DIR}/contrib/libpng-1.6.37
-		      ${CMAKE_SOURCE_DIR}/contrib/SDL2_image-2.0.4)
+	  ${CMAKE_CURRENT_SOURCE_DIR}/contrib/libpng-1.6.37
+	  ${CMAKE_CURRENT_BINARY_DIR}/contrib/libpng-1.6.37
+	  ${CMAKE_CURRENT_SOURCE_DIR}/contrib/SDL2_image-2.0.4)
   SET(ENGINE_LIBRARIES png_static zlibstatic SDL2-static SDL2_image)
 elseif (CMAKE_C_COMPILER MATCHES "/em.*")
   # SET(CMAKE_C_CFLAGS -s USE_SDL=2 -s USE_SDL_IMAGE=2)

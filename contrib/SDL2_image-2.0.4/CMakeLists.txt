@@ -20,7 +20,7 @@ add_library(SDL2_image STATIC IMG.c
 	nanosvgrast.h)
 target_link_libraries(SDL2_image SDL2-static png_static zlibstatic)
 target_include_directories(SDL2_image PRIVATE 
-	${CMAKE_SOURCE_DIR}/contrib/libpng-1.6.37
-	${CMAKE_BINARY_DIR}/contrib/libpng-1.6.37)
+	${CMAKE_CURRENT_SOURCE_DIR}/../libpng-1.6.37
+	${CMAKE_CURRENT_BINARY_DIR}/../libpng-1.6.37)
 target_compile_options(SDL2_image PRIVATE -DLOAD_PNG=1)
 
