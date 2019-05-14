@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.10.2)
+cmake_minimum_required(VERSION 3.12.4)
 project (ShaggysGameLib)
 
 if (WIN32)
@@ -77,9 +77,7 @@ set(engine_src
 
 add_library(engine STATIC ${engine_src})
 
-#target_link_directories(engine PUBLIC ${ENGINE_LIB_DIRS})
-link_directories(${ENGINE_LIB_DIRS})
-
+target_link_directories(engine PUBLIC ${ENGINE_LIB_DIRS})
 target_include_directories(engine PUBLIC ${ENGINE_INCLUDE_DIRS} ${CMAKE_CURRENT_BINARY_DIR} ${CMAKE_CURRENT_SOURCE_DIR})
 target_compile_options(engine PUBLIC ${ENGINE_CFLAGS} PRIVATE -Werror)
 target_link_libraries(engine PUBLIC ${ENGINE_LIBRARIES} ${ENGINE_CFLAGS})
