@@ -9,7 +9,7 @@ static void init(void **data)
   draw_color(0,0,0,255);
   text_color(150,150,150,255);
   audio_play_xm(audio_load_xm(xm,sizeof(xm)));
-  audio_volume_xm(SDL_MIX_MAXVOLUME/1);
+  audio_volume_xm(SDL_MIX_MAXVOLUME/1.0);
 }
 
 static void update(void *data, float delta)
