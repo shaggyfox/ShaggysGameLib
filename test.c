@@ -44,6 +44,8 @@ struct game_ctx *game_load(void)
     .game_draw = draw,
     .game_on_key_up = key_up,
     .game_on_mouse_motion = motion,
+    .game_on_mouse_up = NULL,
+    .game_on_mouse_down = NULL,
   };
   return &ctx;
 }
