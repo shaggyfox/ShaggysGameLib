@@ -31,7 +31,7 @@ static int audio_buffer_get(Uint8 *dst, int dst_len)
   static int music_buffer_len = 0;
 
   if (!music_buffer) {
-    music_buffer = calloc(1, calculate_mix_buf_len(DEFAULT_AUDIO_FREQ));
+    music_buffer = calloc(1, calculate_mix_buf_len(DEFAULT_AUDIO_FREQ) * sizeof(int));
   }
   int *music_buffer_pos = music_buffer;
   while (dst_len) {
