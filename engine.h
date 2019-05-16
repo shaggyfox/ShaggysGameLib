@@ -54,8 +54,9 @@ int engine_main(int argc, char **argv);
 
 void engine_quit(void);
 #ifdef _WIN32
+#include <windows.h>
 #define ENGINE_MAIN(game_ctx) \
- int WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR     lpCmdLine, int       nShowCmd) { \
+ int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR     lpCmdLine, int       nShowCmd) { \
     glob_game_ctx = game_ctx; \
     return engine_main(0, NULL); \
   }
