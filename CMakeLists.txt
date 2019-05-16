@@ -1,6 +1,8 @@
 cmake_minimum_required(VERSION 3.12.4)
 project (ShaggysGameLib)
 
+add_subdirectory(contrib/lua-5.3.5/src)
+
 if (WIN32)
   option(PNG_BUILD_ZLIB "Custom zlib Location, else find_package is used" ON)
   option(WASAPI              "Use the Windows WASAPI audio driver" OFF)
@@ -10,7 +12,7 @@ if (WIN32)
   add_subdirectory(contrib/libpng-1.6.37 EXCLUDE_FROM_ALL)
   add_subdirectory(contrib/SDL2-2.0.9 EXCLUDE_FROM_ALL)
   add_subdirectory(contrib/SDL2_image-2.0.4 EXCLUDE_FROM_ALL)
-  SET(ENGINE_INCLUDE_DIRS ${CMAKE_SOURCE_DIR}/contrib/zlib-1.2.11 
+  SET(ENGINE_INCLUDE_DIRS ${CMAKE_SOURCE_DIR}/contrib/zlib-1.2.11
 	  ${CMAKE_CURRENT_SOURCE_DIR}/contrib/libpng-1.6.37
 	  ${CMAKE_CURRENT_BINARY_DIR}/contrib/libpng-1.6.37
 	  ${CMAKE_CURRENT_SOURCE_DIR}/contrib/SDL2_image-2.0.4)
@@ -78,11 +80,11 @@ set(engine_src
 
 add_library(engine STATIC ${engine_src})
 
-target_link_directories(engine PUBLIC ${ENGINE_LIB_DIRS})
+target_link_directories(engine PUBLIC ${ENGINE_LIB_DIRS} ${CMAKE_CURRENT_SOURCE_DIR}/contrib/lua-5.3.5/src)
 target_include_directories(engine PUBLIC ${ENGINE_INCLUDE_DIRS} ${CMAKE_CURRENT_BINARY_DIR} ${CMAKE_CURRENT_SOURCE_DIR})
 target_compile_options(engine PUBLIC ${ENGINE_CFLAGS} PRIVATE -Werror)
-target_link_libraries(engine PUBLIC ${ENGINE_LIBRARIES} ${ENGINE_CFLAGS})
-#target_link_options(engine PUBLIC ${ENGINE_CFLAGS})
+target_link_libraries(engine PUBLIC ${ENGINE_LIBRARIES} lua m)
+target_link_options(engine PUBLIC ${ENGINE_CFLAGS})
 #link_options(${ENGINE_CFLAGS})
 
 generate_data(${CMAKE_CURRENT_SOURCE_DIR}/test.xm xm.h xm)
