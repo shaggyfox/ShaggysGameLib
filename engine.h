@@ -50,5 +50,21 @@ extern struct game_ctx *glob_game_ctx;
 #define draw_fill_rect(rect) SDL_RenderFillRect(glob_renderer, rect)
 #define draw_fill_rect4(x,y,w,h) SDL_RenderFillRect(glob_renderer, &(SDL_Rect){x, y, w ,h})
 
+int engine_main(int argc, char **argv);
+
 void engine_quit(void);
+#ifdef _WIN32
+#define ENGINE_MAIN(game_ctx) \
+ int WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR     lpCmdLine, int       nShowCmd) { \
+    glob_game_ctx = game_ctx; \
+    return engine_main(0, NULL); \
+  }
+#else
+#define ENGINE_MAIN(game_ctx) \
+ int main(int argc, char **argv) { \
+    glob_game_ctx = game_ctx; \
+    return engine_main(argc, argv); \
+  }
+
+#endif
 

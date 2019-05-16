@@ -120,21 +120,16 @@ void run_loop(void* data)
 
   SDL_RenderPresent(glob_renderer);
 }
-#ifdef _WIN32
-int WinMain()
-#else
-int main(int argc, char *argv[])
-#endif
+
+int engine_main(int argc, char *argv[])
 {
   int use_acceleration = 1;
-#if !_WIN32
   for (int i = 1; i < argc; ++i) {
     if (!strcmp(argv[i], "noaccel")) {
       use_acceleration = 0;
     }
   }
-#endif
-  glob_game_ctx = game_load();
+  //glob_game_ctx = game_load();
   /* XXX call game_init first */
   SDL_Init(SDL_INIT_VIDEO|SDL_INIT_AUDIO);
   init_audio();

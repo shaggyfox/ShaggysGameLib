@@ -66,13 +66,11 @@ void maptest_draw(void *data)
   draw_map();
 }
 
-struct game_ctx *game_load(void)
-{
-  static struct game_ctx ret = {
-    .game_init = maptest_init,
-    .game_update = maptest_update,
-    .game_draw = maptest_draw,
-    .game_on_key_up = on_key_up,
-  };
-  return &ret;
-}
+static struct game_ctx ret = {
+  .game_init = maptest_init,
+  .game_update = maptest_update,
+  .game_draw = maptest_draw,
+  .game_on_key_up = on_key_up,
+};
+
+ENGINE_MAIN(&ret)

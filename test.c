@@ -36,8 +36,6 @@ static void key_up(int key, void *data)
   engine_quit();
 }
 
-struct game_ctx *game_load(void)
-{
   static struct game_ctx ctx = {
     .game_init = init,
     .game_update = update,
@@ -47,5 +45,5 @@ struct game_ctx *game_load(void)
     .game_on_mouse_up = NULL,
     .game_on_mouse_down = NULL,
   };
-  return &ctx;
-}
+
+ENGINE_MAIN(&ctx);
