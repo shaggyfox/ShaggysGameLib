@@ -3,6 +3,7 @@ project (ShaggysGameLib)
 
 if (WIN32)
   option(PNG_BUILD_ZLIB "Custom zlib Location, else find_package is used" ON)
+  option(WASAPI              "Use the Windows WASAPI audio driver" OFF)
   set(ZLIB_INCLUDE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/contrib/zlib-1.2.11"
 	  "${CMAKE_CURRENT_BINARY_DIR}/contrib/zlib-1.2.11")
   add_subdirectory(contrib/zlib-1.2.11 EXCLUDE_FROM_ALL)
