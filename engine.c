@@ -9,6 +9,7 @@ int glob_keys = 0;
 
 int SCREEN_WIDTH = 512; //576;
 int SCREEN_HEIGHT = 300; //324;
+int SCREEN_SCALE = 2;
 
 struct game_ctx *glob_game_ctx = NULL;
 struct SDL_Renderer *glob_renderer = NULL;
@@ -129,14 +130,24 @@ int engine_main(int argc, char *argv[])
       use_acceleration = 0;
     }
   }
-  //glob_game_ctx = game_load();
-  /* XXX call game_init first */
+  if (!glob_game_ctx->screen_width || !glob_game_ctx->screen_height) {
+    glob_game_ctx->screen_width = SCREEN_WIDTH;
+    glob_game_ctx->screen_height = SCREEN_HEIGHT;
+  } else {
+    SCREEN_WIDTH = glob_game_ctx->screen_width;
+    SCREEN_HEIGHT = glob_game_ctx->screen_height;
+  }
+  if (!glob_game_ctx->screen_scale) {
+    glob_game_ctx->screen_scale = SCREEN_SCALE;
+  } else {
+    SCREEN_SCALE = glob_game_ctx->screen_scale;
+  }
   SDL_Init(SDL_INIT_VIDEO|SDL_INIT_AUDIO);
   init_audio();
   /* ... and then create window based on init 'output' */
   glob_window = SDL_CreateWindow(glob_game_ctx->game_name ? glob_game_ctx->game_name : "game",
       SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED,
-      SCREEN_WIDTH * 2, SCREEN_HEIGHT *2, 0);
+      SCREEN_WIDTH * SCREEN_SCALE, SCREEN_HEIGHT * SCREEN_SCALE, 0);
 
   if (use_acceleration) {
     glob_renderer = SDL_CreateRenderer(glob_window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);

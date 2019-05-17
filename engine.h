@@ -26,6 +26,9 @@ extern int SCREEN_HEIGHT;
 extern SDL_Renderer *glob_renderer;
 
 struct game_ctx {
+  int screen_width;
+  int screen_height;
+  int screen_scale;
   char *game_name;
   void (*game_init)(void **data);
   void (*game_update)(void *data, float delta);

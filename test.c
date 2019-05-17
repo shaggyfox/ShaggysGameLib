@@ -36,14 +36,17 @@ static void key_up(int key, void *data)
   engine_quit();
 }
 
-  static struct game_ctx ctx = {
-    .game_init = init,
-    .game_update = update,
-    .game_draw = draw,
-    .game_on_key_up = key_up,
-    .game_on_mouse_motion = motion,
-    .game_on_mouse_up = NULL,
-    .game_on_mouse_down = NULL,
-  };
+static struct game_ctx ctx = {
+  .screen_width = 320,
+  .screen_height = 240,
+  .screen_scale = 3,
+  .game_init = init,
+  .game_update = update,
+  .game_draw = draw,
+  .game_on_key_up = key_up,
+  .game_on_mouse_motion = motion,
+  .game_on_mouse_up = NULL,
+  .game_on_mouse_down = NULL,
+};
 
 ENGINE_MAIN(&ctx);
