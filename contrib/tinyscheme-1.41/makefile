@@ -18,7 +18,8 @@
 #AR= echo
 
 # Unix, generally
-CC = gcc -fpic -pedantic
+CFLAGS = -DSTANDALONE=0 -DUSE_INTERFACE=1 -O0 -ggdb
+CC = cc -fpic -pedantic
 DEBUG=-g -Wall -Wno-char-subscripts -O
 Osuf=o
 SOsuf=so
@@ -30,7 +31,7 @@ RM= -rm -f
 AR= ar crs
 
 # Linux
-LD = gcc
+LD = cc
 LDFLAGS = -shared
 DEBUG=-g -Wno-char-subscripts -O
 SYS_LIBS= -ldl -lm

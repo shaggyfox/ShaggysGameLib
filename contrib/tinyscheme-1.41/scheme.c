@@ -634,10 +634,15 @@ static pointer _get_cell(scheme *sc, pointer a, pointer b) {
     gc(sc,a, b);
     if (sc->fcells < min_to_be_recovered
         || sc->free_cell == sc->NIL) {
+      car(sc->sink) = sc->NIL;
+      gc(sc, a, b);
+      if (sc->fcells < min_to_be_recovered) {
+
       /* if only a few recovered, get more to avoid fruitless gc's */
       if (!alloc_cellseg(sc,1) && sc->free_cell == sc->NIL) {
         sc->no_memory=1;
         return sc->sink;
+      }
       }
     }
   }
@@ -1310,7 +1315,7 @@ static void gc(scheme *sc, pointer a, pointer b) {
 
   if (sc->gc_verbose) {
     char msg[80];
-    snprintf(msg,80,"done: %ld cells were recovered.\n", sc->fcells);
+    snprintf(msg, 80, "done: %ld cells were recovered.\n", sc->fcells);
     putstr(sc,msg);
   }
 }
