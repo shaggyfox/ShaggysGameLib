@@ -152,6 +152,7 @@ enum scheme_opcodes {
   OP_MAXDEFINED
 };
 
+#define scheme_flush_sink(sc) (((sc)->sink->_object._cons._car) = sc->NIL)
 
 #define cons(sc,a,b) _cons(sc,a,b,0)
 #define immutable_cons(sc,a,b) _cons(sc,a,b,1)
