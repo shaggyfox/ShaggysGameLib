@@ -198,6 +198,41 @@ int is_environment(pointer p);
 int is_immutable(pointer p);
 void setimmutable(pointer p);
 
+
+/* ADJ is enough slack to align cells in a TYPE_BITS-bit boundary */
+#define ADJ 32
+#define TYPE_BITS 5
+#define T_MASKTYPE      31    /* 0000000000011111 */
+#define T_SYNTAX      4096    /* 0001000000000000 */
+#define T_IMMUTABLE   8192    /* 0010000000000000 */
+#define T_ATOM       16384    /* 0100000000000000 */   /* only for gc */
+#define CLRATOM      49151    /* 1011111111111111 */   /* only for gc */
+#define MARK         32768    /* 1000000000000000 */
+#define UNMARK       32767    /* 0111111111111111 */
+
+
+enum scheme_types {
+  T_STRING=1,
+  T_NUMBER=2,
+  T_SYMBOL=3,
+  T_PROC=4,
+  T_PAIR=5,
+  T_CLOSURE=6,
+  T_CONTINUATION=7,
+  T_FOREIGN=8,
+  T_CHARACTER=9,
+  T_PORT=10,
+  T_VECTOR=11,
+  T_MACRO=12,
+  T_PROMISE=13,
+  T_ENVIRONMENT=14,
+  T_LAST_SYSTEM_TYPE=14
+};
+/* macros for cell operations */
+#define typeflag(p)      ((p)->_flag)
+#define type(p)          (typeflag(p)&T_MASKTYPE)
+
+
 #ifdef __cplusplus
 }
 #endif
