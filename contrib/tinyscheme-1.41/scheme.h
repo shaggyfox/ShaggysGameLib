@@ -16,7 +16,7 @@ extern "C" {
 # define STANDALONE 1
 #endif
 
-#ifdef __EMSCRIPTEN__
+#if defined(__EMSCRIPTEN__) || defined(_WIN32)
 #   define USE_STRLWR 0
 #endif
 
