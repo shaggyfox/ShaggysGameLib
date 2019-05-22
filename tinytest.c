@@ -120,23 +120,26 @@ static pointer scheme_test_obj(scheme *sc, pointer args)
   return mk_user_type(sc, obj);
 }
 
-/* -------- GAME CTX ------------- */
 
+
+/* -------- GAME CTX ------------- */
+#define FUNCTION(name, function) \
+        sc->vptr->scheme_define(sc, sc->global_env, \
+          sc->vptr->mk_symbol(sc, name), \
+          sc->vptr->mk_foreign_func(sc, &function))
 
 static void tinytest_init(void **data_p)
 {
   scheme *sc = scheme_init_new();
 
-
-  sc->vptr->scheme_define(sc, sc->global_env, sc->vptr->mk_symbol(sc, "clear-screen"), sc->vptr->mk_foreign_func(sc, &scheme_clear_screen));
-  sc->vptr->scheme_define(sc, sc->global_env, sc->vptr->mk_symbol(sc, "draw-text"), sc->vptr->mk_foreign_func(sc, &scheme_draw_text));
-  sc->vptr->scheme_define(sc, sc->global_env, sc->vptr->mk_symbol(sc, "obj-test"), sc->vptr->mk_foreign_func(sc, &scheme_test_obj));
-
-
+  FUNCTION("clear-screen", scheme_clear_screen);
+  FUNCTION("draw-text", scheme_draw_text);
+  FUNCTION("obj-test", scheme_test_obj);
+  //FUNCTION("*error-hook*", s_my_test);
   scheme_set_output_port_file(sc, stdout);
   *data_p = sc;
   FILE *f = fopen("game.scm", "r");
-  scheme_load_file(sc, f);
+  scheme_load_named_file(sc, f, "game.scm");
   fclose(f);
 }
 
