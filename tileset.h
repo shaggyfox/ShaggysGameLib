@@ -55,10 +55,6 @@ struct tileset *tileset_load(char *json_data, size_t json_data_len, char* image_
 /* find animation by name in tileset */
 struct animation *tileset_get_animation(struct tileset* tileset, char *name);
 
-/* check collision */
-/* XXX: PLZ REMOVE ME */
-int animation_ctx_check_collision(int a_x, int a_y, struct animation_ctx *a_ctx,
-                                  int b_x, int b_y, struct animation_ctx *b_ctx);
 int frame_check_collision(int a_x, int a_y, struct frame *frame_a,
                           int b_x, int b_y, struct frame *frame_b);
 
@@ -75,19 +71,10 @@ void animation_ctx_set_next_animation(
     void *cb_data);
 /* call this to update animation context, delta is in seconds */
 void animation_ctx_update(struct animation_ctx *ctx, float delta);
-/* get animation source SDL_Rect for current frame */
-/* XXX: make this private? */
-//SDL_Rect *animation_ctx_get_SDL_Rect(struct animation_ctx *ctx);
-/* draw animation at x, y */
-/* XXX PLZ REMOVE ME */
-void animation_ctx_draw(struct animation_ctx *ctx, int x, int y);
-void animation_ctx_draw_ex(struct animation_ctx *ctx, int x, int y, double rotation, int flags);
 
 struct frame *animation_ctx_get_frame(struct animation_ctx *ctx);
 struct frame *tileset_get_frame(struct tileset *tileset, char *name);
 struct frame *tileset_get_frame_by_id(struct tileset *tileset, int id);
-void frame_draw(struct frame *frame, int x, int y);
-void frame_draw_ex(struct frame *frame, int x, int y, double rotation, int flags);
 void tileset_color_mod(struct tileset *tileset, int r, int g, int b, int a);
 
 SDL_Texture* load_texture(char *data, size_t len, int *w, int *h, struct collision_map **);

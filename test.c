@@ -24,7 +24,7 @@ static void motion(int x, int y, void *data)
 
 static void draw(void *data)
 {
-  screen_clear();
+  clear_screen();
   text_use_font(FONT_TINY);
   text_printf(0,0, "%03i,%03i", mouse_x, mouse_y);
   text_use_font(FONT_DEFAULT);

@@ -61,7 +61,7 @@ static void on_key_up(int key, void* data)
 void maptest_draw(void *data)
 {
   draw_color(0, 0, 0, 255);
-  screen_clear();
+  clear_screen();
   draw_color(0, 0, 255, 255);
   draw_map();
 }

@@ -103,7 +103,7 @@ void text_print(int in_x, int y, char *data)
       y += font_y_spacing;
       continue;
     }
-    frame_draw(current_map[c&127], x, y);
+    draw_frame(current_map[c&127], x, y);
     x += font_x_spacing;
   }
 }
