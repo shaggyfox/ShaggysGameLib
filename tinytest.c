@@ -104,6 +104,22 @@ static pointer scheme_draw_text(scheme *sc, pointer args)
   return sc->NIL;
 }
 
+static void my_free(void *data)
+{
+  printf("cleanup %s\n",data);
+  free(data);
+}
+
+static pointer scheme_test_obj(scheme *sc, pointer args)
+{
+  user_type obj = {
+    .free = my_free,
+    .data = strdup("testtest"),
+    .type = 1,
+  };
+  return mk_user_type(sc, obj);
+}
+
 /* -------- GAME CTX ------------- */
 
 
@@ -114,6 +130,7 @@ static void tinytest_init(void **data_p)
 
   sc->vptr->scheme_define(sc, sc->global_env, sc->vptr->mk_symbol(sc, "clear-screen"), sc->vptr->mk_foreign_func(sc, &scheme_clear_screen));
   sc->vptr->scheme_define(sc, sc->global_env, sc->vptr->mk_symbol(sc, "draw-text"), sc->vptr->mk_foreign_func(sc, &scheme_draw_text));
+  sc->vptr->scheme_define(sc, sc->global_env, sc->vptr->mk_symbol(sc, "obj-test"), sc->vptr->mk_foreign_func(sc, &scheme_test_obj));
 
 
   scheme_set_output_port_file(sc, stdout);
@@ -126,14 +143,14 @@ static void tinytest_init(void **data_p)
 static void tinytest_update(void* data, float delta)
 {
   scheme *sc = data;
-  scheme_easy_call(sc, "game_update", mk_real(sc, delta), NULL);
+  scheme_easy_call(sc, "game-update", mk_real(sc, delta), NULL);
   scheme_flush_sink(sc);
 }
 
 static void tinytest_draw(void *data)
 {
   scheme *sc = data;
-  scheme_easy_call(sc, "game_draw", NULL);
+  scheme_easy_call(sc, "game-draw", NULL);
 }
 
 
