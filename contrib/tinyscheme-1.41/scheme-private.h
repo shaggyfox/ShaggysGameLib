@@ -44,6 +44,7 @@ typedef struct port {
 struct cell {
   unsigned int _flag;
   union {
+    user_type user;
     struct {
       char   *_svalue;
       int   _length;
@@ -226,7 +227,8 @@ enum scheme_types {
   T_MACRO=12,
   T_PROMISE=13,
   T_ENVIRONMENT=14,
-  T_LAST_SYSTEM_TYPE=14
+  T_USER=15,
+  T_LAST_SYSTEM_TYPE=15
 };
 /* macros for cell operations */
 #define typeflag(p)      ((p)->_flag)

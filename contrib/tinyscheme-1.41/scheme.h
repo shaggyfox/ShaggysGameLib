@@ -131,6 +131,12 @@ typedef struct num {
      } value;
 } num;
 
+typedef struct user_type_s {
+  int type;
+  void *data;
+  void (*free)(void *);
+} user_type;
+
 SCHEME_EXPORT scheme *scheme_init_new();
 SCHEME_EXPORT scheme *scheme_init_new_custom_alloc(func_alloc malloc, func_dealloc free);
 SCHEME_EXPORT int scheme_init(scheme *sc);
@@ -161,6 +167,7 @@ pointer mk_counted_string(scheme *sc, const char *str, int len);
 pointer mk_empty_string(scheme *sc, int len, char fill);
 pointer mk_character(scheme *sc, int c);
 pointer mk_foreign_func(scheme *sc, foreign_func f);
+pointer mk_user_type(scheme *sc, user_type user);
 void putstr(scheme *sc, const char *s);
 int list_length(scheme *sc, pointer a);
 int eqv(pointer a, pointer b);

@@ -228,6 +228,8 @@ INTERFACE INLINE void setimmutable(pointer p) { typeflag(p) |= T_IMMUTABLE; }
 #define cadddr(p)        car(cdr(cdr(cdr(p))))
 #define cddddr(p)        cdr(cdr(cdr(cdr(p))))
 
+INTERFACE INLINE int is_user(pointer p) { return (type(p)==T_USER); }
+
 #if USE_CHAR_CLASSIFIERS
 static INLINE int Cisalpha(int c) { return isascii(c) && isalpha(c); }
 static INLINE int Cisdigit(int c) { return isascii(c) && isdigit(c); }
@@ -878,6 +880,13 @@ static pointer oblist_all_symbols(scheme *sc)
 
 #endif
 
+pointer mk_user_type(scheme *sc, user_type user) {
+  pointer x = get_cell(sc, sc->NIL, sc->NIL);
+  x->_object.user = user;
+  x->_flag = T_USER | T_ATOM;
+  return x;
+}
+
 static pointer mk_port(scheme *sc, port *p) {
   pointer x = get_cell(sc, sc->NIL, sc->NIL);
 
@@ -1290,6 +1299,8 @@ static void finalize_cell(scheme *sc, pointer a) {
       port_close(sc,a,port_input|port_output);
     }
     sc->free(a->_object._port);
+  } else if(is_user(a)) {
+    a->_object.user.free(a->_object.user.data);
   }
 }
 
@@ -1986,6 +1997,9 @@ static void atom2str(scheme *sc, pointer l, int f, char **pp, int *plen) {
           snprintf(p,STRBUFFSIZE,"#<FOREIGN PROCEDURE %ld>", procnum(l));
      } else if (is_continuation(l)) {
           p = "#<CONTINUATION>";
+     } else if (is_user(l)) {
+          p = sc->strbuff;
+          snprintf(p, STRBUFFSIZE, "#<USER_TYPE:%d>", l->_object.user.type);
      } else {
           p = "#<ERROR>";
      }
