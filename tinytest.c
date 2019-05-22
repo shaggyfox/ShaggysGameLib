@@ -66,41 +66,47 @@ pointer c_function(scheme *sc, pointer args)
 char *scheme_get_string(scheme *sc, pointer *value)
 {
   char * ret = NULL;
-  pointer v = sc->vptr->pair_car(*value);
-  if (sc->vptr->is_string(v)) {
-    ret = sc->vptr->string_value(v);
+  if (*value != sc->NIL) {
+    pointer v = sc->vptr->pair_car(*value);
+    if (sc->vptr->is_string(v)) {
+      ret = sc->vptr->string_value(v);
+    }
+    /* move to next element */
+    *value = sc->vptr->pair_cdr(*value);
   }
-  /* move to next element */
-  *value = sc->vptr->pair_cdr(*value);
   return ret;
 }
 
 long int scheme_get_integer(scheme *sc, pointer *value)
 {
   int ret = 0;
-  pointer v = sc->vptr->pair_car(*value);
-  if (sc->vptr->is_integer(v)) {
-    printf("is integer\n");
-    ret = sc->vptr->ivalue(v);
-  } else if(sc->vptr->is_real(v)) {
-    ret = sc->vptr->rvalue(v);
+  if (*value != sc->NIL) {
+    pointer v = sc->vptr->pair_car(*value);
+    if (sc->vptr->is_integer(v)) {
+      printf("is integer\n");
+      ret = sc->vptr->ivalue(v);
+    } else if(sc->vptr->is_real(v)) {
+      ret = sc->vptr->rvalue(v);
+    }
+    /* move to next element */
+    *value = sc->vptr->pair_cdr(*value);
   }
-  /* move to next element */
-  *value = sc->vptr->pair_cdr(*value);
   return ret;
 }
 
 float scheme_get_float(scheme *sc, pointer *value)
 {
   float ret = 0;
-  pointer v = sc->vptr->pair_car(*value);
-  if (sc->vptr->is_real(v)) {
-    ret = sc->vptr->rvalue(v);
-  } else if(sc->vptr->is_integer) {
-    ret = sc->vptr->ivalue(v);
+  if (*value != sc->NIL) {
+    pointer v = sc->vptr->pair_car(*value);
+    if (sc->vptr->is_real(v)) {
+      ret = sc->vptr->rvalue(v);
+    } else if(sc->vptr->is_integer) {
+      ret = sc->vptr->ivalue(v);
+    }
+    /* move to next element */
+    *value = sc->vptr->pair_cdr(*value);
   }
-  /* move to next element */
-  *value = sc->vptr->pair_cdr(*value);
   return ret;
 }
 
@@ -111,6 +117,10 @@ void my_test(int num, char *str) {
 pointer s_my_test(scheme *sc, pointer args)
 {
   printf("jojo\n");
+  if (sc->vptr->list_length(sc, args) != 2) {
+    printf("parameter!\n");
+    return sc->NIL;
+  }
   int par1 = scheme_get_integer(sc, &args);
   char *par2 = scheme_get_string(sc, &args);
   my_test(par1, par2);
