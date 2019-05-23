@@ -22,22 +22,26 @@ pointer scheme_easy_call(scheme *sc, char *cmd, ...)
   return scheme_eval(sc, eval_cons);
 }
 
-char *scheme_get_string(scheme *sc, pointer *value)
+char *scheme_get_string(scheme *sc, pointer *value, char **err)
 {
   char * ret = NULL;
   if (*value != sc->NIL) {
     pointer v = sc->vptr->pair_car(*value);
     if (sc->vptr->is_string(v)) {
       ret = sc->vptr->string_value(v);
+    } else {
+      *err = "wrong argument: string expected";
     }
     /* move to next element */
     *value = sc->vptr->pair_cdr(*value);
+  } else if(err){
+    *err = "missing argument: string expected";
   }
   return ret;
 }
 
 
-long int scheme_get_integer(scheme *sc, pointer *value)
+long int scheme_get_integer(scheme *sc, pointer *value, char **err)
 {
   int ret = 0;
   if (*value != sc->NIL) {
@@ -46,14 +50,18 @@ long int scheme_get_integer(scheme *sc, pointer *value)
       ret = sc->vptr->ivalue(v);
     } else if(sc->vptr->is_real(v)) {
       ret = sc->vptr->rvalue(v);
+    } else if (*err){
+      *err = "wrong argument: number expected";
     }
     /* move to next element */
     *value = sc->vptr->pair_cdr(*value);
+  } else if(*err){
+    *err = "missing argument: number expected";
   }
   return ret;
 }
 
-float scheme_get_float(scheme *sc, pointer *value)
+float scheme_get_float(scheme *sc, pointer *value, char **err)
 {
   float ret = 0;
   if (*value != sc->NIL) {
@@ -62,9 +70,13 @@ float scheme_get_float(scheme *sc, pointer *value)
       ret = sc->vptr->rvalue(v);
     } else if(sc->vptr->is_integer) {
       ret = sc->vptr->ivalue(v);
+    } else if (*err) {
+      *err = "wrong argument: number expected";
     }
     /* move to next element */
     *value = sc->vptr->pair_cdr(*value);
+  } else if (*err) {
+    *err = "missing argument: number expected";
   }
   return ret;
 }

@@ -30,12 +30,16 @@ for(@ARGV) {
       #define C function
       print $out "static pointer scheme_$name(scheme *sc, pointer args) {\n";
       $i = 0;
+      if (scalar @var > 0 ){
+        print $out "  char *err = NULL;\n";
+      }
       for (@var) {
         if ($_ eq "INT") {
-          print $out "  int arg$i = scheme_get_integer(sc, &args);\n";
+          print $out "  int arg$i = scheme_get_integer(sc, &args, &err);\n";
         } elsif ($_ eq "STR") {
-          print $out "  char *arg$i = scheme_get_string(sc, &args);\n";
+          print $out "  char *arg$i = scheme_get_string(sc, &args, &err);\n";
         }
+        print $out "  if (err) {printf(\"%s: %s\\n\", \"$name\", err);return sc->NIL;}\n";
         ++$i;
       }
       $i = 0;
