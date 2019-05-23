@@ -14,7 +14,7 @@ for(@ARGV) {
 
   while(<$in>) {
     $_ =~ s/\n//;
-    if (m/API_CALL [^ ]*( INT| STR)*/) {
+    if (m/API_CALL [^ ]*( INT| STR| RECT)*/) {
       print $out $_ . "\n";
       @words = split(/ /, substr($_, $-[0], $+[0] - $-[0]));
       $i = 0;
@@ -38,6 +38,8 @@ for(@ARGV) {
           print $out "  int arg$i = scheme_get_integer(sc, &args, &err);\n";
         } elsif ($_ eq "STR") {
           print $out "  char *arg$i = scheme_get_string(sc, &args, &err);\n";
+        } elsif ($_ eq "RECT") {
+          print $out "  SDL_Rect *arg$i = scheme_get_SDL_Rect(sc, &args, &err);\n";
         }
         print $out "  if (err) {printf(\"%s: %s\\n\", \"$name\", err);return sc->NIL;}\n";
         ++$i;

@@ -1,3 +1,4 @@
+#include "engine.h"
 #include "scheme_helper.h"
 
 pointer scheme_easy_call(scheme *sc, char *cmd, ...)
@@ -80,3 +81,31 @@ float scheme_get_float(scheme *sc, pointer *value, char **err)
   }
   return ret;
 }
+static SDL_Rect rect_cache[10];
+static int rect_cache_pos = 0;
+SDL_Rect *scheme_get_SDL_Rect(scheme *sc, pointer *value, char **err)
+{
+  SDL_Rect *ret = NULL;
+  if (*value != sc->NIL) {
+    pointer v = sc->vptr->pair_car(*value);
+    if (sc->vptr->is_vector(v)) {
+      if ( 4 == sc->vptr->vector_length(v)) {
+        /* vector content is not checked or 'number' */
+        rect_cache[rect_cache_pos].x = sc->vptr->ivalue(sc->vptr->vector_elem(v, 0));
+        rect_cache[rect_cache_pos].y = sc->vptr->ivalue(sc->vptr->vector_elem(v, 1));
+        rect_cache[rect_cache_pos].w = sc->vptr->ivalue(sc->vptr->vector_elem(v, 2));
+        rect_cache[rect_cache_pos].h = sc->vptr->ivalue(sc->vptr->vector_elem(v, 3));
+        ret = &rect_cache[rect_cache_pos];
+        rect_cache_pos = (rect_cache_pos + 1) % 10;
+      } else if (*err) {
+        *err = "wrong argumend: vector length == 4 expected";
+      }
+    } else {
+      *err = "wrong argument: vector expected\n";
+    }
+  } else if (*err) {
+    *err = "missing argument: rect or vector expected";
+  }
+  return ret;
+}
+
