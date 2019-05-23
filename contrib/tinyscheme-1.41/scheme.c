@@ -2250,6 +2250,11 @@ static pointer find_slot_in_env(scheme *sc, pointer env, pointer hdl, int all)
 
 #endif /* USE_ALIST_ENV else */
 
+int scheme_symbol_is_global_defined(scheme *sc, pointer sym)
+{
+  return sc->NIL != find_slot_in_env(sc, sc->global_env, sym, 0);
+}
+
 static INLINE void new_slot_in_env(scheme *sc, pointer variable, pointer value)
 {
   new_slot_spec_in_env(sc, sc->envir, variable, value);
