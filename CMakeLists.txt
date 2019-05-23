@@ -65,6 +65,7 @@ generate_data(${CMAKE_CURRENT_SOURCE_DIR}/kongfont.png kongfont_png.h default_fo
 generate_data(${CMAKE_CURRENT_SOURCE_DIR}/tinyfont.json tinyfont_json.h tiny_font_json)
 generate_data(${CMAKE_CURRENT_SOURCE_DIR}/tinyfont.png tinyfont_png.h tiny_font_data)
 
+
 set(engine_src
   engine.c engine.h
   vector.c vector.h
@@ -84,6 +85,12 @@ set(engine_src
   ${CMAKE_CURRENT_BINARY_DIR}/tinyfont_png.h
   )
 
+#scheme syms
+add_custom_command(
+  OUTPUT ${CMAKE_BINARY_DIR}/scheme_syms.c
+  COMMAND perl ${CMAKE_CURRENT_SOURCE_DIR}/mk_scheme_sym.pl ${engine_src} ${CMAKE_BINARY_DIR}/scheme_syms.c
+  DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/mk_scheme_sym.pl ${engine_src}
+  WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR})
 
 add_library(engine STATIC ${engine_src})
 
@@ -101,5 +108,5 @@ target_link_libraries(engine_example engine)
 add_executable(maptest maptest.c)
 target_link_libraries(maptest engine)
 
-add_executable(tinytest tinytest.c)
-target_link_libraries(tinytest engine)
+add_executable(shaggy_scheme shaggy_scheme.c scheme_helper.c ${CMAKE_BINARY_DIR}/scheme_syms.c)
+target_link_libraries(shaggy_scheme engine)
