@@ -156,6 +156,7 @@ INTERFACE INLINE int is_real(pointer p) {
 
 INTERFACE INLINE int is_character(pointer p) { return (type(p)==T_CHARACTER); }
 INTERFACE INLINE char *string_value(pointer p) { return strvalue(p); }
+INTERFACE INLINE void *uvalue(pointer p) { return p->_object.user.data; }
 INLINE num nvalue(pointer p)       { return ((p)->_object._number); }
 INTERFACE long ivalue(pointer p)      { return (num_is_integer(p)?(p)->_object._number.value.ivalue:(long)(p)->_object._number.value.rvalue); }
 INTERFACE double rvalue(pointer p)    { return (!num_is_integer(p)?(p)->_object._number.value.rvalue:(double)(p)->_object._number.value.ivalue); }
@@ -4550,9 +4551,11 @@ static struct scheme_interface vtbl ={
   is_string,
   string_value,
   is_number,
+  is_user,
   nvalue,
   ivalue,
   rvalue,
+  uvalue,
   is_integer,
   is_real,
   is_character,

@@ -52,6 +52,8 @@ struct tileset {
  * */
 struct tileset *tileset_load(char *json_data, size_t json_data_len, char* image_data, size_t image_data_len);
 
+struct tileset *tileset_load_from_file(char *json_file_name);
+
 /* find animation by name in tileset */
 struct animation *tileset_get_animation(struct tileset* tileset, char *name);
 

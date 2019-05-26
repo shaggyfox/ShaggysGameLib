@@ -103,9 +103,43 @@ SDL_Rect *scheme_get_SDL_Rect(scheme *sc, pointer *value, char **err)
     } else {
       *err = "wrong argument: vector expected\n";
     }
+    /* move to next element */
+    *value = sc->vptr->pair_cdr(*value);
   } else if (*err) {
     *err = "missing argument: rect or vector expected";
   }
   return ret;
 }
+enum {
+  USER_TYPE_TILESET
+};
 
+pointer scheme_tileset_to_pointer(scheme *sc, struct tileset *ts)
+{
+  user_type my_user_type = {
+    .data = ts,
+    .type = USER_TYPE_TILESET,
+    .free = free
+  };
+  my_user_type.data = ts;
+  my_user_type.type = USER_TYPE_TILESET;
+  my_user_type.free = free; /* XXX tileset needs a proper free function */
+  return mk_user_type(sc, my_user_type);
+}
+
+struct tileset *scheme_get_tileset(scheme *sc, pointer *value, char **err)
+{
+  struct tileset *ret = NULL;
+  if (*value == sc->NIL) {
+    *err = "missing value: expected user_type\n";
+  } else {
+    if (!sc->vptr->is_user) {
+      *err = "value with wrong type: expected user_type\n";
+    } else {
+      ret = sc->vptr->uvalue(*value);
+    }
+    /* move to next element */
+    *value = sc->vptr->pair_cdr(*value);
+  }
+  return ret;
+}

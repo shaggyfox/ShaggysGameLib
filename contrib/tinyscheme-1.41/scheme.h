@@ -196,9 +196,11 @@ struct scheme_interface {
   int (*is_string)(pointer p);
   char *(*string_value)(pointer p);
   int (*is_number)(pointer p);
+  int (*is_user)(pointer p);
   num (*nvalue)(pointer p);
   long (*ivalue)(pointer p);
   double (*rvalue)(pointer p);
+  void* (*uvalue)(pointer p);
   int (*is_integer)(pointer p);
   int (*is_real)(pointer p);
   int (*is_character)(pointer p);

@@ -154,6 +154,76 @@ static void json_to_SDL_Rect(json_value *jv, SDL_Rect *rect)
     }
   }
 }
+#include <fcntl.h>
+#include <unistd.h>
+#include <sys/stat.h>
+char *load_file(char *name, size_t *out_len)
+{
+  int fd = open(name, O_RDONLY);
+  if (-1 == fd) {
+    return NULL;
+  }
+  size_t len = 0;
+  struct stat st;
+  fstat(fd, &st);
+  char *ret = malloc(st.st_size);
+  while (len < st.st_size) {
+    int c = read(fd, ret + len, st.st_size - len);
+    if (c < 0) {
+      free(ret);
+      return NULL;
+    } else {
+      len += c;
+    }
+  }
+  if (out_len) {
+    *out_len = len;
+  }
+  return ret;
+}
+
+// API_CALL tileset_load_from_file STR RETURNS_TILESET
+struct tileset *tileset_load_from_file(char *json_file_name)
+{
+  struct tileset *ret = NULL;
+  char *json_data = NULL;
+  char *image_data = NULL;
+  do {
+    char *image_filename = NULL;
+    size_t json_data_len = 0;
+    size_t image_data_len = 0;
+    char error[128];
+    static json_settings jst;
+    /* load json file into memory */
+    json_data = load_file(json_file_name, &json_data_len);
+    json_value *jv = json_parse_ex(&jst, json_data, json_data_len, error);
+    if (!jv) {
+      printf("%s: %s\n",json_file_name, error);
+      break;
+    }
+    json_value *meta = json_find(jv, "meta");
+    /* get image file-name from json file */
+    image_filename = json_find_string(meta, "image");
+    if (!image_filename) {
+      printf("%s: %s\n", "json_file_name", "meta/image missing");
+      break;
+    }
+    /* we no longer need jv here */
+    json_value_free(jv);
+    /* load image file data */
+    image_data = load_file(image_filename, &image_data_len);
+    if (!image_data) {
+      printf("%s: %s\n", "image_filename", "can not open");
+      break;
+    }
+    ret = tileset_load(json_data, json_data_len, image_data, image_data_len);
+  } while(0);
+  /* cleanup */
+  free(image_data);
+  free(json_data);
+  return ret;
+}
+
 struct tileset *tileset_load(char *json_data, size_t json_data_len, char *image_data, size_t image_data_len)
 {
   static json_settings jst;
@@ -161,7 +231,7 @@ struct tileset *tileset_load(char *json_data, size_t json_data_len, char *image_
   char error[128];
   json_value *jv = json_parse_ex(&jst, json_data, json_data_len, error);
   if (!jv) {
-    printf("->%s->%s\n",error, json_data);
+    printf("%s: %s\n","<strdata>", error);
     exit(1);
   }
   json_value *frames = json_find(jv, "frames");

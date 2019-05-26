@@ -14,7 +14,8 @@ for(@ARGV) {
 
   while(<$in>) {
     $_ =~ s/\n//;
-    if (m/API_CALL [^ ]*( INT| STR| RECT)*/) {
+    if (m/API_CALL [^ ]*( [A-Z_0-9]+)*/) {
+      $return_type = "NIL";
       print $out $_ . "\n";
       @words = split(/ /, substr($_, $-[0], $+[0] - $-[0]));
       $i = 0;
@@ -34,17 +35,33 @@ for(@ARGV) {
         print $out "  char *err = NULL;\n";
       }
       for (@var) {
+        $no_error_check = 0;
         if ($_ eq "INT") {
           print $out "  int arg$i = scheme_get_integer(sc, &args, &err);\n";
         } elsif ($_ eq "STR") {
           print $out "  char *arg$i = scheme_get_string(sc, &args, &err);\n";
         } elsif ($_ eq "RECT") {
           print $out "  SDL_Rect *arg$i = scheme_get_SDL_Rect(sc, &args, &err);\n";
+        } elsif ($_ eq "TILESET") {
+          print $out "  struct tileset *arg$i = scheme_get_tileset(sc, &args, &err);\n";
+        } elsif ($_ eq "RETURNS_TILESET") {
+          pop @var;
+          $return_type = "TILESET";
+          $no_error_check = 1;
+        } elsif ($_ eq "RETURNS_NIL") {
+          pop @var;
+          $return_type = "NIL";
+          $no_error_check = 1;
         }
-        print $out "  if (err) {printf(\"%s: %s\\n\", \"$name\", err);return sc->NIL;}\n";
+        if ($no_error_check eq 0) {
+          print $out "  if (err) {printf(\"%s: %s\\n\", \"$name\", err);return sc->NIL;}\n";
+        }
         ++$i;
       }
       $i = 0;
+      if ($return_type eq "TILESET") {
+        print $out "  return scheme_tileset_to_pointer(sc, ";
+      }
       print $out "  $name(";
       for (@var) {
         if ($i != 0) {
@@ -53,8 +70,12 @@ for(@ARGV) {
         print $out "arg$i";
         ++$i;
       }
-      print $out ");\n";
-      print $out "  return sc->NIL;\n}\n";
+      print $out ")";
+      if ($return_type eq "NIL") {
+        print $out " ;\n return sc->NIL;\n}\n";
+      } else {
+        print $out ");\n}\n";
+      }
       #register
       $s_name = $name;
       $s_name =~ s/_/-/g;
