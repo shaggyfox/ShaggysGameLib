@@ -81,6 +81,7 @@ float scheme_get_float(scheme *sc, pointer *value, char **err)
   }
   return ret;
 }
+
 static SDL_Rect rect_cache[10];
 static int rect_cache_pos = 0;
 SDL_Rect *scheme_get_SDL_Rect(scheme *sc, pointer *value, char **err)
@@ -110,8 +111,12 @@ SDL_Rect *scheme_get_SDL_Rect(scheme *sc, pointer *value, char **err)
   }
   return ret;
 }
+
 enum {
-  USER_TYPE_TILESET
+  USER_TYPE_TILESET,
+  USER_TYPE_FRAME,
+  USER_TYPE_ANIMATION,
+  USER_TYPE_ANIMATION_CTX,
 };
 
 pointer scheme_tileset_to_pointer(scheme *sc, struct tileset *ts)
@@ -119,11 +124,8 @@ pointer scheme_tileset_to_pointer(scheme *sc, struct tileset *ts)
   user_type my_user_type = {
     .data = ts,
     .type = USER_TYPE_TILESET,
-    .free = free
+    .free = free /* XXX tileset needs a proper free function */
   };
-  my_user_type.data = ts;
-  my_user_type.type = USER_TYPE_TILESET;
-  my_user_type.free = free; /* XXX tileset needs a proper free function */
   return mk_user_type(sc, my_user_type);
 }
 
@@ -133,12 +135,98 @@ struct tileset *scheme_get_tileset(scheme *sc, pointer *value, char **err)
   if (*value == sc->NIL) {
     *err = "missing value: expected user_type\n";
   } else {
-    if (!sc->vptr->is_user) {
+    pointer v = sc->vptr->pair_car(*value);
+    if (!sc->vptr->is_user(v)) {
       *err = "value with wrong type: expected user_type\n";
     } else {
-      ret = sc->vptr->uvalue(*value);
+      ret = sc->vptr->uvalue(v);
     }
     /* move to next element */
+    *value = sc->vptr->pair_cdr(*value);
+  }
+  return ret;
+}
+
+pointer scheme_frame_to_pointer(scheme *sc, struct frame *fr)
+{
+  user_type my_user_type = {
+    .data = fr,
+    .type = USER_TYPE_FRAME,
+    .free = NULL,
+  };
+  return mk_user_type(sc, my_user_type);
+}
+
+
+struct frame *scheme_get_frame(scheme *sc, pointer *value, char **err)
+{
+  struct frame *ret = NULL;
+  if (*value == sc->NIL) {
+    *err = "missing argument: expected user_type(frame)";
+  } else {
+    pointer v = sc->vptr->pair_car(*value);
+    if (!sc->vptr->is_user(v)) {
+      *err = "value with wrong type: expected user_type(frame)";
+    } else {
+      ret = sc->vptr->uvalue(v);
+    }
+    *value = sc->vptr->pair_cdr(*value);
+  }
+  return ret;
+}
+
+
+pointer scheme_animation_to_pointer(scheme *sc, struct animation *anim)
+{
+  user_type my_user_type = {
+    .data = anim,
+    .type = USER_TYPE_ANIMATION,
+    .free = NULL,
+  };
+  return mk_user_type(sc, my_user_type);
+}
+
+
+struct animation *scheme_get_animation(scheme *sc, pointer *value, char **err)
+{
+  struct animation *ret = NULL;
+  if (*value == sc->NIL) {
+    *err = "missing argument: expected user_type(animation)";
+  } else {
+    pointer v = sc->vptr->pair_car(*value);
+    if (!sc->vptr->is_user(v)) {
+      *err = "value with wrong type: expected user_type(animation)";
+    } else {
+      ret = sc->vptr->uvalue(v);
+    }
+    *value = sc->vptr->pair_cdr(*value);
+  }
+  return ret;
+}
+
+pointer scheme_animation_ctx_to_pointer(scheme *sc, struct animation_ctx *anim_ctx)
+{
+  user_type my_user_type = {
+    .data = anim_ctx,
+    .type = USER_TYPE_ANIMATION_CTX,
+    .free = NULL,
+  };
+  return mk_user_type(sc, my_user_type);
+}
+
+
+struct animation_ctx *scheme_get_animation_ctx(scheme *sc, pointer *value, char **err)
+{
+  struct animation_ctx *ret = NULL;
+  if (*value == sc->NIL) {
+    *err = "missing argument: expected user_type(animation_ctx)";
+  } else {
+    pointer v = sc->vptr->pair_car(*value);
+    if (!sc->vptr->is_user(v)) {
+      *err = "value with wrong type: expected user_type(animation_ctx)";
+    } else {
+      ret = sc->vptr->uvalue(v);
+    }
     *value = sc->vptr->pair_cdr(*value);
   }
   return ret;

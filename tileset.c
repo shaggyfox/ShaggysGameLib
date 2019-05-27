@@ -52,6 +52,13 @@ void animation_ctx_init(struct animation_ctx *ctx, struct animation *animation)
   ctx->animation_ctx_pos = 0;
 }
 
+struct animation_ctx *animation_ctx_new(struct animation *animation)
+{
+  struct animation_ctx *ret = malloc(sizeof(*ret));
+  animation_ctx_init(ret, animation);
+  return ret;
+}
+
 void animation_ctx_set_animation(struct animation_ctx *ctx, struct animation *animation)
 {
   animation_ctx_init(ctx, animation);
@@ -182,7 +189,6 @@ char *load_file(char *name, size_t *out_len)
   return ret;
 }
 
-// API_CALL tileset_load_from_file STR RETURNS_TILESET
 struct tileset *tileset_load_from_file(char *json_file_name)
 {
   struct tileset *ret = NULL;

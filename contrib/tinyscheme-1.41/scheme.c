@@ -1301,7 +1301,9 @@ static void finalize_cell(scheme *sc, pointer a) {
     }
     sc->free(a->_object._port);
   } else if(is_user(a)) {
-    a->_object.user.free(a->_object.user.data);
+    if (a->_object.user.free) {
+      a->_object.user.free(a->_object.user.data);
+    }
   }
 }
 

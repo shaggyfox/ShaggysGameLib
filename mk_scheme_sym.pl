@@ -38,12 +38,20 @@ for(@ARGV) {
         $no_error_check = 0;
         if ($_ eq "INT") {
           print $out "  int arg$i = scheme_get_integer(sc, &args, &err);\n";
+        } elsif ($_ eq "FLOAT") {
+          print $out "  float arg$i = scheme_get_float(sc, &args, &err);\n";
         } elsif ($_ eq "STR") {
           print $out "  char *arg$i = scheme_get_string(sc, &args, &err);\n";
         } elsif ($_ eq "RECT") {
           print $out "  SDL_Rect *arg$i = scheme_get_SDL_Rect(sc, &args, &err);\n";
         } elsif ($_ eq "TILESET") {
           print $out "  struct tileset *arg$i = scheme_get_tileset(sc, &args, &err);\n";
+        } elsif ($_ eq "FRAME") {
+          print $out "  struct frame *arg$i = scheme_get_frame(sc, &args, &err);\n";
+        } elsif ($_ eq "ANIMATION") {
+          print $out "  struct animation *arg$i = scheme_get_animation(sc, &args, &err);\n"
+        } elsif ($_ eq "ANIMATION_CTX") {
+          print $out "  struct animation_ctx *arg$i = scheme_get_animation_ctx(sc, &args, &err);\n";
         } elsif ($_ eq "RETURNS_TILESET") {
           pop @var;
           $return_type = "TILESET";
@@ -51,6 +59,18 @@ for(@ARGV) {
         } elsif ($_ eq "RETURNS_NIL") {
           pop @var;
           $return_type = "NIL";
+          $no_error_check = 1;
+        } elsif ($_ eq "RETURNS_FRAME") {
+          pop @var;
+          $return_type = "FRAME";
+          $no_error_check = 1;
+        } elsif ($_ eq "RETURNS_ANIMATION") {
+          pop @var;
+          $return_type = "ANIMATION";
+          $no_error_check = 1;
+        } elsif ($_ eq "RETURNS_ANIMATION_CTX") {
+          pop @var;
+          $return_type = "ANIMATION_CTX";
           $no_error_check = 1;
         }
         if ($no_error_check eq 0) {
@@ -61,6 +81,12 @@ for(@ARGV) {
       $i = 0;
       if ($return_type eq "TILESET") {
         print $out "  return scheme_tileset_to_pointer(sc, ";
+      } elsif ($return_type eq "FRAME"){
+        print $out "  return scheme_frame_to_pointer(sc, ";
+      } elsif ($return_type eq "ANIMATION") {
+        print $out "  return scheme_animation_to_pointer(sc, ";
+      } elsif ($return_type eq "ANIMATION_CTX") {
+        print $out "  return scheme_animation_ctx_to_pointer(sc, ";
       }
       print $out "  $name(";
       for (@var) {

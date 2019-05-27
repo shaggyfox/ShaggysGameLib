@@ -52,17 +52,24 @@ struct tileset {
  * */
 struct tileset *tileset_load(char *json_data, size_t json_data_len, char* image_data, size_t image_data_len);
 
+// API_CALL tileset_load_from_file STR RETURNS_TILESET
 struct tileset *tileset_load_from_file(char *json_file_name);
 
 /* find animation by name in tileset */
+// API_CALL tileset_get_animation TILESET STR RETURNS_ANIMATION
 struct animation *tileset_get_animation(struct tileset* tileset, char *name);
 
+// API_CALL frame_check_collision INT INT FRAME INT INT FRAME
 int frame_check_collision(int a_x, int a_y, struct frame *frame_a,
                           int b_x, int b_y, struct frame *frame_b);
 
 /* initialize animation context with animation */
 void animation_ctx_init(struct animation_ctx *ctx, struct animation *animation);
+/* create a new animation_ctx initialized with animation */
+// API_CALL animation_ctx_new ANIMATION RETURNS_ANIMATION_CTX
+struct animation_ctx *animation_ctx_new(struct animation *animation);
 /* use new animation from now */
+// API_CALL animation_ctx_set_animation ANIMATION_CTX ANIMATION
 void animation_ctx_set_animation(struct animation_ctx *ctx, struct animation *animation);
 /* use new animation when current animation is over, call callback when new
  * animation starts */
@@ -72,11 +79,15 @@ void animation_ctx_set_next_animation(
     void (*next_animation_cb)(struct animation_ctx *, void *),
     void *cb_data);
 /* call this to update animation context, delta is in seconds */
+// API_CALL animation_ctx_update ANIMATION_CTX FLOAT
 void animation_ctx_update(struct animation_ctx *ctx, float delta);
-
+// API_CALL animation_ctx_get_frame ANIMATION_CTX RETURNS_FRAME
 struct frame *animation_ctx_get_frame(struct animation_ctx *ctx);
+// API_CALL tileset_get_frame TILESET STR RETURNS_FRAME
 struct frame *tileset_get_frame(struct tileset *tileset, char *name);
+// API_CALL tileset_get_frame_by_id TILESET INT RETURNS_FRAME
 struct frame *tileset_get_frame_by_id(struct tileset *tileset, int id);
+// API_CALL tileset_color_mod TILESET INT INT INT INT
 void tileset_color_mod(struct tileset *tileset, int r, int g, int b, int a);
 
 SDL_Texture* load_texture(char *data, size_t len, int *w, int *h, struct collision_map **);

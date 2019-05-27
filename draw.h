@@ -21,6 +21,7 @@
 // API_CALL draw_fill_rect4 INT INT INT INT
 #define draw_fill_rect4(x,y,w,h) SDL_RenderFillRect(glob_renderer, &(SDL_Rect){x, y, w ,h})
 void draw_frame_ex(struct frame *frame, int x, int y, double rotation, int flags);
+// API_CALL draw_frame FRAME INT INT
 void draw_frame(struct frame *frame, int x, int y);
 
 #endif
