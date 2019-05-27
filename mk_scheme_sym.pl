@@ -31,7 +31,13 @@ for(@ARGV) {
       #define C function
       print $out "static pointer scheme_$name(scheme *sc, pointer args) {\n";
       $i = 0;
-      if (scalar @var > 0 ){
+      $rval = 0;
+      for (@var) {
+        if (m/RETURNS_/) {
+          ++$rval;
+        }
+      }
+      if (scalar @var - $rval > 0 ){
         print $out "  char *err = NULL;\n";
       }
       for (@var) {
@@ -52,6 +58,10 @@ for(@ARGV) {
           print $out "  struct animation *arg$i = scheme_get_animation(sc, &args, &err);\n"
         } elsif ($_ eq "ANIMATION_CTX") {
           print $out "  struct animation_ctx *arg$i = scheme_get_animation_ctx(sc, &args, &err);\n";
+        } elsif ($_ eq "RETURNS_BOOL") {
+          pop @var;
+          $return_type = "BOOL";
+          $no_error_check = 1;
         } elsif ($_ eq "RETURNS_INT") {
           pop @var;
           $return_type = "INT";
@@ -93,6 +103,8 @@ for(@ARGV) {
         print $out "  return scheme_animation_ctx_to_pointer(sc, ";
       } elsif ($return_type eq "INT") {
         print $out "  return scheme_int_to_pointer(sc, ";
+      } elsif ($return_type eq "BOOL") {
+        print $out "  return scheme_bool_to_pointer(sc, ";
       }
       print $out "  $name(";
       for (@var) {
@@ -109,7 +121,7 @@ for(@ARGV) {
         print $out ");\n}\n";
       }
       #register
-      $s_name = $name;
+      $s_name = lc $name;
       $s_name =~ s/_/-/g;
       push @mylist, "  FUNCTION(\"$s_name\", scheme_$name);\n";
     }

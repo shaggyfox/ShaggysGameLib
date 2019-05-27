@@ -25,3 +25,4 @@ struct animation_ctx *scheme_get_animation_ctx(scheme *sc, pointer *value, char 
 pointer scheme_animation_ctx_to_pointer(scheme *sc, struct animation_ctx *anim_ctx);
 
 pointer scheme_int_to_pointer(scheme *sc, int i);
+pointer scheme_bool_to_pointer(scheme *sc, int i);

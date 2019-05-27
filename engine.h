@@ -28,6 +28,23 @@ extern struct game_ctx* game_load(void);
 
 #define KEY_IS_PRESSED(key) ((key) & glob_keys)
 
+// API_CALL UP_KEY_PRESSED RETURNS_BOOL
+#define UP_KEY_PRESSED() KEY_IS_PRESSED(CTRL_KEY_UP)
+// API_CALL DOWN_KEY_PRESSED RETURNS_BOOL
+#define DOWN_KEY_PRESSED() KEY_IS_PRESSED(CTRL_KEY_DOWN)
+// API_CALL LEFT_KEY_PRESSED RETURNS_BOOL
+#define LEFT_KEY_PRESSED() KEY_IS_PRESSED(CTRL_KEY_LEFT)
+// API_CALL RIGHT_KEY_PRESSED RETURNS_BOOL
+#define RIGHT_KEY_PRESSED() KEY_IS_PRESSED(CTRL_KEY_RIGHT)
+// API_CALL A_KEY_PRESSED RETURNS_BOOL
+#define A_KEY_PRESSED() KEY_IS_PRESSED(CTRL_KEY_A)
+// API_CALL B_KEY_PRESSED RETURNS_BOOL
+#define B_KEY_PRESSED() KEY_IS_PRESSED(CTRL_KEY_B)
+// API_CALL X_KEY_PRESSED RETURNS_BOOL
+#define X_KEY_PRESSED() KEY_IS_PRESSED(CTRL_KEY_X)
+// API_CALL Y_KEY_PRESSED RETURNS_BOOL
+#define Y_KEY_PRESSED() KEY_IS_PRESSED(CTRL_KEY_Y)
+
 extern int SCREEN_WIDTH;
 extern int SCREEN_HEIGHT;
 extern SDL_Renderer *glob_renderer;
@@ -53,6 +70,7 @@ extern struct game_ctx *glob_game_ctx;
 
 int engine_main(int argc, char **argv);
 
+// API_CALL engine_quit
 void engine_quit(void);
 #ifdef _WIN32
 #include <windows.h>

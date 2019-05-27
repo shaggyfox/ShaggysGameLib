@@ -124,6 +124,11 @@ pointer scheme_int_to_pointer(scheme *sc, int i)
   return sc->vptr->mk_integer(sc, i);
 }
 
+pointer scheme_bool_to_pointer(scheme *sc, int i)
+{
+ return (i ? sc->T : sc->F);
+}
+
 pointer scheme_tileset_to_pointer(scheme *sc, struct tileset *ts)
 {
   user_type my_user_type = {
