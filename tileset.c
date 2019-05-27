@@ -174,7 +174,10 @@ struct tileset *tileset_load_from_file(char *json_file_name)
     char error[128];
     static json_settings jst;
     /* load json file into memory */
-    json_data = load_file(json_file_name, &json_data_len);
+    if (!(json_data = load_file(json_file_name, &json_data_len))) {
+      printf("%s: %s\n", json_file_name, "can not open");
+      break;
+    }
     json_value *jv = json_parse_ex(&jst, json_data, json_data_len, error);
     if (!jv) {
       printf("%s: %s\n",json_file_name, error);
