@@ -124,12 +124,18 @@ void run_loop(void* data)
 
 int engine_main(int argc, char *argv[])
 {
+  void *data = NULL;
   int use_acceleration = 1;
   for (int i = 1; i < argc; ++i) {
     if (!strcmp(argv[i], "noaccel")) {
       use_acceleration = 0;
     }
   }
+
+  if(glob_game_ctx->game_load) {
+    glob_game_ctx->game_load(&data);
+  }
+
   if (!glob_game_ctx->screen_width || !glob_game_ctx->screen_height) {
     glob_game_ctx->screen_width = SCREEN_WIDTH;
     glob_game_ctx->screen_height = SCREEN_HEIGHT;
@@ -160,7 +166,6 @@ int engine_main(int argc, char *argv[])
   }
   SDL_RenderSetLogicalSize(glob_renderer, SCREEN_WIDTH, SCREEN_HEIGHT);
 
-  void *data = NULL;
   glob_game_ctx->game_init(&data);
 
 #ifdef __EMSCRIPTEN__

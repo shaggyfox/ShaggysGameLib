@@ -6,6 +6,7 @@
 
 #undef cons
 
+pointer scheme_easy_eval(scheme *sc, char *symbol);
 pointer scheme_easy_call(scheme *sc, char *cmd, ...);
 char *scheme_get_string(scheme *sc, pointer *value, char **err);
 long int scheme_get_integer(scheme *sc, pointer *value, char **err);

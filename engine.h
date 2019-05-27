@@ -54,6 +54,7 @@ struct game_ctx {
   int screen_height;
   int screen_scale;
   char *game_name;
+  void (*game_load)(void **data);
   void (*game_init)(void **data);
   void (*game_update)(void *data, float delta);
   void (*game_draw)(void *data);

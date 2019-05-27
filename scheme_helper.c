@@ -1,6 +1,16 @@
 #include "engine.h"
 #include "scheme_helper.h"
 
+pointer scheme_easy_eval(scheme *sc, char *symbol)
+{
+  pointer sym = sc->vptr->mk_symbol(sc, symbol);
+  if (!scheme_symbol_is_global_defined(sc, sym)) {
+    /* silently ignore undefined functions */
+    return sc->NIL;
+  }
+  return scheme_eval(sc, sym);
+}
+
 pointer scheme_easy_call(scheme *sc, char *cmd, ...)
 {
   pointer arg;

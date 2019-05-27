@@ -24,9 +24,24 @@ static pointer scheme_test_obj(scheme *sc, pointer args)
 
 
 /* -------- GAME CTX ------------- */
+static void tinytest_load(void **data_p);
+static void tinytest_init(void **data_p);
+static void tinytest_update(void* data, float delta);
+static void tinytest_draw(void *data);
+static void tiny_mouse_motion(int x, int y, void *data);
+
+static struct game_ctx ctx = {
+  .game_load = tinytest_load,
+  .game_init = tinytest_init,
+  .game_update = tinytest_update,
+  .game_draw = tinytest_draw,
+  .game_on_mouse_motion = tiny_mouse_motion,
+};
+
+ENGINE_MAIN(&ctx);
 void scheme_init_api(scheme *sc);
 
-static void tinytest_init(void **data_p)
+static void tinytest_load(void **data_p)
 {
   scheme *sc = scheme_init_new();
   scheme_init_api(sc);
@@ -35,6 +50,24 @@ static void tinytest_init(void **data_p)
   FILE *f = fopen("game.scm", "r");
   scheme_load_named_file(sc, f, "game.scm");
   fclose(f);
+  pointer width=scheme_easy_eval(sc, "game-width");
+  pointer height=scheme_easy_eval(sc, "game-height");
+  pointer scale=scheme_easy_eval(sc, "game-scale");
+  if (sc->vptr->is_number(width) &&
+      sc->vptr->is_number(height)) {
+    ctx.screen_width = sc->vptr->ivalue(width);
+    ctx.screen_height = sc->vptr->ivalue(height);
+  }
+  if (sc->vptr->is_number(scale)) {
+    ctx.screen_scale = sc->vptr->ivalue(scale);
+  }
+}
+
+static void tinytest_init(void **data_p)
+{
+  scheme *sc = *data_p;
+  scheme_easy_call(sc, "game-init", NULL);
+  scheme_flush_sink(sc);
 }
 
 static void tinytest_update(void* data, float delta)
@@ -58,14 +91,6 @@ static void tiny_mouse_motion(int x, int y, void *data)
   scheme_flush_sink(sc);
 }
 
-static struct game_ctx ctx = {
-  .game_init = tinytest_init,
-  .game_update = tinytest_update,
-  .game_draw = tinytest_draw,
-  .game_on_mouse_motion = tiny_mouse_motion,
-};
-
-ENGINE_MAIN(&ctx);
 
 #if 0
 int main()
