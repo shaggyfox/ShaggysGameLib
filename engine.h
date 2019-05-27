@@ -6,6 +6,9 @@
 #include <math.h>
 #include <SDL.h>
 #include <SDL_image.h>
+
+#include "helper.h"
+
 #include "vector.h"
 #include "tileset.h"
 #include "text.h"

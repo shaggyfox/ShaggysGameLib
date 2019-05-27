@@ -161,33 +161,6 @@ static void json_to_SDL_Rect(json_value *jv, SDL_Rect *rect)
     }
   }
 }
-#include <fcntl.h>
-#include <unistd.h>
-#include <sys/stat.h>
-char *load_file(char *name, size_t *out_len)
-{
-  int fd = open(name, O_RDONLY);
-  if (-1 == fd) {
-    return NULL;
-  }
-  size_t len = 0;
-  struct stat st;
-  fstat(fd, &st);
-  char *ret = malloc(st.st_size);
-  while (len < st.st_size) {
-    int c = read(fd, ret + len, st.st_size - len);
-    if (c < 0) {
-      free(ret);
-      return NULL;
-    } else {
-      len += c;
-    }
-  }
-  if (out_len) {
-    *out_len = len;
-  }
-  return ret;
-}
 
 struct tileset *tileset_load_from_file(char *json_file_name)
 {

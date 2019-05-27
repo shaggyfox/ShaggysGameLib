@@ -142,6 +142,22 @@ int audio_load_sfx(char *data, size_t in_len)
   sfx->buffer = realloc(cvt.buf, cvt.len_cvt);
   return glob_sfx_list_len++;
 }
+
+int audio_load_sfx_from_file(char *file_name)
+{
+  char *data = NULL;
+  size_t data_len = 0;
+  int ret = -1;
+
+  if (NULL == (data = load_file(file_name, &data_len))) {
+    printf("audio_load_sfx_from_file: error opening: %s", file_name);
+  } else {
+    ret = audio_load_sfx(data, data_len);
+    free(data);
+  }
+  return ret;
+}
+
 void audio_play_sfx(int id)
 {
   glob_sfx_channels[glob_sfx_channel_pos].on = 1;
@@ -150,11 +166,13 @@ void audio_play_sfx(int id)
   glob_sfx_channel_pos++;
   glob_sfx_channel_pos %= MAX_AUDIO_CHANNELS;
 }
+
 void audio_stop_sfx(void) {
   for (int i = 0; i < MAX_AUDIO_CHANNELS; ++i) {
     glob_sfx_channels[i].on = 0;
   }
 }
+
 int audio_load_xm(char *data, size_t len)
 {
   char music_load_error_msg[64] = "";
@@ -163,6 +181,23 @@ int audio_load_xm(char *data, size_t len)
   glob_xm_list[glob_xm_list_length] = module_load(&mod_data, (char*)&music_load_error_msg);
   return glob_xm_list_length ++;
 }
+
+
+int audio_load_xm_from_file(char *file_name)
+{
+  char *data = NULL;
+  size_t data_len = 0;
+  int ret = -1;
+
+  if (NULL == (data = load_file(file_name, &data_len))) {
+    printf("audio_load_sfx_from_file: error opening: %s", file_name);
+  } else {
+    ret = audio_load_xm(data, data_len);
+    free(data);
+  }
+  return ret;
+}
+
 void audio_play_xm(int id) {
   if (glob_xm_replay_id == id) {
     return;

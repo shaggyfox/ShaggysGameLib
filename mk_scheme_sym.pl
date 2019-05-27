@@ -52,6 +52,10 @@ for(@ARGV) {
           print $out "  struct animation *arg$i = scheme_get_animation(sc, &args, &err);\n"
         } elsif ($_ eq "ANIMATION_CTX") {
           print $out "  struct animation_ctx *arg$i = scheme_get_animation_ctx(sc, &args, &err);\n";
+        } elsif ($_ eq "RETURNS_INT") {
+          pop @var;
+          $return_type = "INT";
+          $no_error_check = 1;
         } elsif ($_ eq "RETURNS_TILESET") {
           pop @var;
           $return_type = "TILESET";
@@ -87,6 +91,8 @@ for(@ARGV) {
         print $out "  return scheme_animation_to_pointer(sc, ";
       } elsif ($return_type eq "ANIMATION_CTX") {
         print $out "  return scheme_animation_ctx_to_pointer(sc, ";
+      } elsif ($return_type eq "INT") {
+        print $out "  return scheme_int_to_pointer(sc, ";
       }
       print $out "  $name(";
       for (@var) {

@@ -79,6 +79,7 @@ set(engine_src
   text.c text.h
   draw.c draw.h
   heatmap.c heatmap.h
+  helper.c helper.h
   ${CMAKE_CURRENT_BINARY_DIR}/kongfont_json.h
   ${CMAKE_CURRENT_BINARY_DIR}/kongfont_png.h
   ${CMAKE_CURRENT_BINARY_DIR}/tinyfont_json.h
