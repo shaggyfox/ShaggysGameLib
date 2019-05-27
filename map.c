@@ -55,3 +55,9 @@ struct map *map_new(int width, int height)
   ret->chunks = calloc(1, sizeof(*ret->chunks) * ret->width * ret->height);
   return ret;
 }
+
+void map_free(struct map *map)
+{
+  free(map->chunks);
+  free(map);
+}

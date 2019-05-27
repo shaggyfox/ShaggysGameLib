@@ -54,6 +54,8 @@ for(@ARGV) {
           print $out "  struct tileset *arg$i = scheme_get_tileset(sc, &args, &err);\n";
         } elsif ($_ eq "FRAME") {
           print $out "  struct frame *arg$i = scheme_get_frame(sc, &args, &err);\n";
+        } elsif ($_ eq "MAP") {
+          print $out "  struct map *arg$i = scheme_get_map(sc, &args, &err);\n";
         } elsif ($_ eq "ANIMATION") {
           print $out "  struct animation *arg$i = scheme_get_animation(sc, &args, &err);\n"
         } elsif ($_ eq "ANIMATION_CTX") {
@@ -86,6 +88,10 @@ for(@ARGV) {
           pop @var;
           $return_type = "ANIMATION_CTX";
           $no_error_check = 1;
+        } elsif ($_ eq "RETURNS_MAP") {
+          pop @var;
+          $return_type = "MAP";
+          $no_error_check = 1;
         }
         if ($no_error_check eq 0) {
           print $out "  if (err) {printf(\"%s: %s\\n\", \"$name\", err);return sc->NIL;}\n";
@@ -105,6 +111,8 @@ for(@ARGV) {
         print $out "  return scheme_int_to_pointer(sc, ";
       } elsif ($return_type eq "BOOL") {
         print $out "  return scheme_bool_to_pointer(sc, ";
+      } elsif ($return_type eq "MAP") {
+        print $out "  return scheme_map_to_pointer(sc, ";
       }
       print $out "  $name(";
       for (@var) {

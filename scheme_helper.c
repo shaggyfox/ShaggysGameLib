@@ -127,6 +127,7 @@ enum {
   USER_TYPE_FRAME,
   USER_TYPE_ANIMATION,
   USER_TYPE_ANIMATION_CTX,
+  USER_TYPE_MAP,
 };
 
 pointer scheme_int_to_pointer(scheme *sc, int i)
@@ -169,6 +170,9 @@ struct tileset *scheme_get_tileset(scheme *sc, pointer *value, char **err)
 
 pointer scheme_frame_to_pointer(scheme *sc, struct frame *fr)
 {
+  if (fr == NULL) {
+    return sc->NIL;
+  }
   user_type my_user_type = {
     .data = fr,
     .type = USER_TYPE_FRAME,
@@ -176,7 +180,6 @@ pointer scheme_frame_to_pointer(scheme *sc, struct frame *fr)
   };
   return mk_user_type(sc, my_user_type);
 }
-
 
 struct frame *scheme_get_frame(scheme *sc, pointer *value, char **err)
 {
@@ -186,7 +189,11 @@ struct frame *scheme_get_frame(scheme *sc, pointer *value, char **err)
   } else {
     pointer v = sc->vptr->pair_car(*value);
     if (!sc->vptr->is_user(v)) {
-      *err = "value with wrong type: expected user_type(frame)";
+      if (v == sc->NIL) {
+        ret = NULL;
+      } else {
+        *err = "value with wrong type: expected user_type(frame)";
+      }
     } else {
       ret = sc->vptr->uvalue(v);
     }
@@ -194,7 +201,6 @@ struct frame *scheme_get_frame(scheme *sc, pointer *value, char **err)
   }
   return ret;
 }
-
 
 pointer scheme_animation_to_pointer(scheme *sc, struct animation *anim)
 {
@@ -244,6 +250,36 @@ struct animation_ctx *scheme_get_animation_ctx(scheme *sc, pointer *value, char 
     pointer v = sc->vptr->pair_car(*value);
     if (!sc->vptr->is_user(v)) {
       *err = "value with wrong type: expected user_type(animation_ctx)";
+    } else {
+      ret = sc->vptr->uvalue(v);
+    }
+    *value = sc->vptr->pair_cdr(*value);
+  }
+  return ret;
+}
+
+pointer scheme_map_to_pointer(scheme *sc, struct map *map)
+{
+  if (map == NULL) {
+    return sc->NIL;
+  }
+  user_type my_user_type = {
+    .data = map,
+    .type = USER_TYPE_MAP,
+    .free = (void (*)(void*))map_free,
+  };
+  return mk_user_type(sc, my_user_type);
+}
+
+struct map *scheme_get_map(scheme *sc, pointer *value, char **err)
+{
+  struct map *ret = NULL;
+  if (*value == sc->NIL) {
+    *err = "missing argument: expected user_type(map)";
+  } else {
+    pointer v = sc->vptr->pair_car(*value);
+    if (!sc->vptr->is_user(v)) {
+      *err = "value with wrong type: expected user_type(map)";
     } else {
       ret = sc->vptr->uvalue(v);
     }

@@ -27,3 +27,6 @@ pointer scheme_animation_ctx_to_pointer(scheme *sc, struct animation_ctx *anim_c
 
 pointer scheme_int_to_pointer(scheme *sc, int i);
 pointer scheme_bool_to_pointer(scheme *sc, int i);
+
+pointer scheme_map_to_pointer(scheme *sc, struct map *map);
+struct map *scheme_get_map(scheme *sc, pointer *value, char **err);
