@@ -2,7 +2,9 @@
 #define text_h
 #define FONT_DEFAULT 0
 #define FONT_TINY 1
+
 void text_use_font(int font);
+// API_CALL text_color INT INT INT INT
 void text_color(int r, int g, int b, int a);
 // API_CALL draw_text INT INT STR
 #define draw_text(x, y, data) text_print(x, y, data)
