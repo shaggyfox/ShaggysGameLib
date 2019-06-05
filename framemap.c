@@ -25,7 +25,15 @@ struct framemap_chunk_data {
 #if 0
 static void update_chunk(struct map_chunk *chunk)
 {
+  /* wenn keine textur existiert -> fastmode */
+  /* im fast mode gehen wir davon aus das sich alle frames geändert haben */
+  /* dafür erstellen wir sowas wie raw_blit(sdl_rect dst, dst_pitch, sdl_rect src, src_pitch);
+   * das kann übrigens auch für das update per frame benutzt werden */
   SDL_CreateTexture(glob_renderer, SDL_PIXELFORMAT_RGBA32, SDL_TEXTUREACCESS_STREAMING, MAP_CHUNK_SIZE, MAP_CHUNK_SIZE);
+  /* wenn Textur bereits besteht SDL_UpdateTexture() für jedes frame das sich
+   * geändert hat */
+   * wenn eine  bestimmte Anzahl an updates überschritten wurde kann auch
+   * einfach ein volles update gemacht werden */
 }
 #endif
 
