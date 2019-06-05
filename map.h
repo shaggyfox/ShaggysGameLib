@@ -27,12 +27,12 @@ void map_set(struct map* map, int x, int y, void* map_data);
 
 struct map *map_load(char *data, size_t length);
 
-struct map *map_new(int width, int height);
+struct map *map_new(int width, int height, int type);
 
 void map_free(struct map*);
 
 void map_foreach_chunk(struct map* map, int in_x, int in_y, int in_w, int in_h,
-    void (*cb)(int, int, void*, void*), void *cb_data);
+    void (*cb)(int, int, struct map_chunk*, void*), void *cb_data);
 
 void map_chunk_foreach(struct map_chunk *chunk, int x, int y, int w, int in_h,
     void (*cb)(int, int, void*, void*), void *cb_data);

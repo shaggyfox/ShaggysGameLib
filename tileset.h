@@ -39,7 +39,8 @@ struct animation_ctx {
 
 struct tileset {
   char *tileset_name; /* the name of the tileset */
-  SDL_Texture *tileset_texture; /* the (one and only) texture of the tileset */
+  SDL_Texture *tileset_texture; /* the texture of the tileset */
+  SDL_Surface *tileset_surface; /* the surface */
   struct animation *tileset_animations; /* all animations in the tileset */
   struct frame *tileset_frames; /* all frames (tiles) in the tileset */
   int tileset_frame_count;

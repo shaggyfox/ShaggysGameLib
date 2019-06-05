@@ -2,11 +2,12 @@
 #include "json_tk.h"
 #include "tileset.h"
 
-SDL_Texture* load_texture(char *data, size_t len, int *w, int *h, struct collision_map **c_map)
+SDL_Surface *load_surface(char *data, size_t len, int *w, int *h, struct collision_map **c_map)
 {
   SDL_RWops *data_rw = SDL_RWFromConstMem(data, len);
-  SDL_Surface *surface = IMG_Load_RW(data_rw, 1);
-  SDL_Texture *texture = SDL_CreateTextureFromSurface(glob_renderer, surface);
+  SDL_Surface *tmp_surface = IMG_Load_RW(data_rw, 1);
+  SDL_Surface *surface = SDL_ConvertSurfaceFormat(tmp_surface, SDL_PIXELFORMAT_RGBA32, 0);
+  SDL_FreeSurface(tmp_surface);
   if (w && h) {
     *w = surface->w;
     *h = surface->h;
@@ -14,9 +15,9 @@ SDL_Texture* load_texture(char *data, size_t len, int *w, int *h, struct collisi
   if (c_map) {
     *c_map = collision_map_from_surface(surface);
   }
-  SDL_FreeSurface(surface);
-  return texture;
+  return surface;
 }
+
 
 struct animation *tileset_get_animation(struct tileset* tileset, char *name)
 {
@@ -227,7 +228,8 @@ struct tileset *tileset_load(char *json_data, size_t json_data_len, char *image_
     my_frames[i].frame_tileset = ret;
   }
   /* texture */
-  ret->tileset_texture = load_texture(image_data, image_data_len, NULL, NULL, &ret->tileset_collision_map);
+  ret->tileset_surface = load_surface(image_data, image_data_len, NULL, NULL, &ret->tileset_collision_map);
+  ret->tileset_texture = SDL_CreateTextureFromSurface(glob_renderer, ret->tileset_surface);
   /* animations */
   json_value *meta = json_find(jv, "meta");
   json_value *frame_tags = json_find(meta, "frameTags");

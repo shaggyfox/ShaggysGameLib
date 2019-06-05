@@ -75,6 +75,7 @@ set(engine_src
   contrib/ibxm.c contrib/ibxm.h
   collision.c collision.h
   map.c map.h
+  framemap.c framemap.h
   audio.c audio.h
   text.c text.h
   draw.c draw.h
