@@ -2,7 +2,7 @@
 //#include "tileset.h"
 //#include "map.h"
 
-#define TILE_SIZE 32
+#define TILE_SIZE 8
 #define MAP_TYPE_FRAMEMAP 1
 struct map *framemap_new(int w, int h)
 {
@@ -120,14 +120,6 @@ void draw_chunk_callback(int x, int y, struct map_chunk* chunk, void *data)
   struct framemap_draw_chunk_callback_data *draw_data = data;
   update_chunk(chunk);
   struct framemap_chunk_data *chunk_meta = chunk->chunk_data;
-  int draw_w = MAP_CHUNK_SIZE * TILE_SIZE;
-  int draw_h = MAP_CHUNK_SIZE * TILE_SIZE;
-  if (draw_w > draw_data->w * TILE_SIZE) {
-    draw_w = draw_data->w * TILE_SIZE;
-  }
-  if (draw_h > draw_data->h * TILE_SIZE) {
-    draw_h = draw_data->h * TILE_SIZE;
-  }
 
   SDL_Rect chunk_rect = {x * MAP_CHUNK_SIZE, y * MAP_CHUNK_SIZE, MAP_CHUNK_SIZE, MAP_CHUNK_SIZE};
   SDL_Rect show_rect = {draw_data->map_x, draw_data->map_y, draw_data->w, draw_data->h};

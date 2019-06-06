@@ -3,8 +3,7 @@
 #include <sys/types.h>
 
 
-//#define MAP_CHUNK_SIZE 64
-#define MAP_CHUNK_SIZE 2
+#define MAP_CHUNK_SIZE 32
 struct map_chunk {
   void *chunk_data;
   void *data[MAP_CHUNK_SIZE * MAP_CHUNK_SIZE];

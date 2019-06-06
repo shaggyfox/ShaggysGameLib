@@ -33,7 +33,7 @@ void map_foreach_chunk(struct map* map, int in_x, int in_y, int in_w, int in_h,
 
   for (int y = y_start; y < y_end; ++y) {
     for (int x = x_start; x < x_end; ++x) {
-      cb(x - x_start, y - y_start, &map->chunks[y * map->w_chunks + x], cb_data);
+      cb(x, y, &map->chunks[y * map->w_chunks + x], cb_data);
     }
   }
 }

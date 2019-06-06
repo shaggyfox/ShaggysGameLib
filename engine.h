@@ -15,6 +15,7 @@
 #include "audio.h"
 #include "draw.h"
 #include "map.h"
+#include "framemap.h"
 
 #define CTRL_KEY_UP 1
 #define CTRL_KEY_DOWN 2
