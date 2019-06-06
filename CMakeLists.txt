@@ -81,6 +81,7 @@ set(engine_src
   draw.c draw.h
   heatmap.c heatmap.h
   helper.c helper.h
+  sdl_helper.c sdl_helper.h
   base64.c base64.h
   ${CMAKE_CURRENT_BINARY_DIR}/kongfont_json.h
   ${CMAKE_CURRENT_BINARY_DIR}/kongfont_png.h

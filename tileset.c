@@ -1,6 +1,7 @@
 #include "engine.h"
 #include "json_tk.h"
 #include "tileset.h"
+#include "sdl_helper.h"
 
 SDL_Surface *load_surface(char *data, size_t len, int *w, int *h, struct collision_map **c_map)
 {
