@@ -2,6 +2,11 @@
 //#include "tileset.h"
 //#include "map.h"
 
+/*
+ * TODO dynamic tile-size
+ *      dynamic texture-free when unused
+ *      make tile-update list for small chunk-updates
+ */
 #define TILE_SIZE 8
 #define MAP_TYPE_FRAMEMAP 1
 struct map *framemap_new(int w, int h)
@@ -93,7 +98,6 @@ void update_chunk(struct map_chunk *chunk)
   }
 }
 
-/* XXX replace with SDL_Rect? */
 struct framemap_draw_chunk_callback_data {
   int x;
   int y;
