@@ -3,10 +3,9 @@
 #include <sys/types.h>
 
 
-#define MAP_CHUNK_SIZE 32
 struct map_chunk {
   void *chunk_data;
-  void *data[MAP_CHUNK_SIZE * MAP_CHUNK_SIZE];
+  void **data;
 };
 
 struct map {
@@ -17,7 +16,14 @@ struct map {
   int h_chunks; /* height in chunks */
   int chunk_size;
   struct map_chunk *chunks;
+  void *meta_data;
 };
+
+#define map_get_chunk_size(map) (map->chunk_size)
+
+void map_set_meta(struct map *map, void *data);
+
+void *map_get_meta(struct map *map);
 
 int map_type(struct map* map);
 
@@ -27,7 +33,7 @@ void map_set(struct map* map, int x, int y, void* map_data);
 
 struct map *map_load(char *data, size_t length);
 
-struct map *map_new(int width, int height, int type);
+struct map *map_new(int width, int height, int chunk_size, int type);
 
 void map_free(struct map*);
 

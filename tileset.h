@@ -100,6 +100,9 @@ struct frame *tileset_get_frame(struct tileset *tileset, char *name);
 // API_CALL tileset_get_frame_by_id TILESET INT RETURNS_FRAME
 struct frame *tileset_get_frame_by_id(struct tileset *tileset, int id);
 
+// API_CALL frame_get_width FRAME RETURNS_INT
+int frame_get_width(struct frame *frame);
+
 // API_CALL tileset_color_mod TILESET INT INT INT INT
 void tileset_color_mod(struct tileset *tileset, int r, int g, int b, int a);
 

@@ -94,7 +94,7 @@ for(@ARGV) {
           $no_error_check = 1;
         }
         if ($no_error_check eq 0) {
-          print $out "  if (err) {printf(\"%s: %s\\n\", \"$name\", err);return sc->NIL;}\n";
+          print $out "  if (err) {printf(\"%s: %s\\n\", \"$name\", err);exit(1); /*return sc->NIL */;}\n";
         }
         ++$i;
       }

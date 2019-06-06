@@ -61,12 +61,12 @@ long int scheme_get_integer(scheme *sc, pointer *value, char **err)
       ret = sc->vptr->ivalue(v);
     } else if(sc->vptr->is_real(v)) {
       ret = sc->vptr->rvalue(v);
-    } else if (*err){
+    } else if (err){
       *err = "wrong argument: number expected";
     }
     /* move to next element */
     *value = sc->vptr->pair_cdr(*value);
-  } else if(*err){
+  } else if (err){
     *err = "missing argument: number expected";
   }
   return ret;
@@ -81,12 +81,12 @@ float scheme_get_float(scheme *sc, pointer *value, char **err)
       ret = sc->vptr->rvalue(v);
     } else if(sc->vptr->is_integer) {
       ret = sc->vptr->ivalue(v);
-    } else if (*err) {
+    } else if (err) {
       *err = "wrong argument: number expected";
     }
     /* move to next element */
     *value = sc->vptr->pair_cdr(*value);
-  } else if (*err) {
+  } else if (err) {
     *err = "missing argument: number expected";
   }
   return ret;
@@ -108,7 +108,7 @@ SDL_Rect *scheme_get_SDL_Rect(scheme *sc, pointer *value, char **err)
         rect_cache[rect_cache_pos].h = sc->vptr->ivalue(sc->vptr->vector_elem(v, 3));
         ret = &rect_cache[rect_cache_pos];
         rect_cache_pos = (rect_cache_pos + 1) % 10;
-      } else if (*err) {
+      } else if (err) {
         *err = "wrong argumend: vector length == 4 expected";
       }
     } else {
@@ -116,7 +116,7 @@ SDL_Rect *scheme_get_SDL_Rect(scheme *sc, pointer *value, char **err)
     }
     /* move to next element */
     *value = sc->vptr->pair_cdr(*value);
-  } else if (*err) {
+  } else if (err) {
     *err = "missing argument: rect or vector expected";
   }
   return ret;

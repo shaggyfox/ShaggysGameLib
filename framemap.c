@@ -3,16 +3,26 @@
 //#include "map.h"
 
 /*
- * TODO dynamic tile-size
- *      dynamic texture-free when unused
+ * TODO dynamic texture-free when unused
  *      make tile-update list for small chunk-updates
  */
-#define TILE_SIZE 8
 #define MAP_TYPE_FRAMEMAP 1
-struct map *framemap_new(int w, int h)
+struct framemap_meta {
+  int tile_size;
+};
+struct map *framemap_new(int w, int h, int tile_size, int chunk_size)
 {
-  struct map *ret = map_new(w, h, MAP_TYPE_FRAMEMAP);
+  struct map *ret = map_new(w, h, chunk_size, MAP_TYPE_FRAMEMAP);
+  struct framemap_meta *meta = calloc(1, sizeof(*meta));
+  meta->tile_size = tile_size;
+  map_set_meta(ret, meta);
   return ret;
+}
+
+int framemap_get_tile_size(struct map *map)
+{
+  struct framemap_meta *meta = map_get_meta(map);
+  return meta->tile_size;
 }
 
 struct frame *framemap_get(struct map *map, int x, int y) {
@@ -49,7 +59,7 @@ void raw_blit(char *in_dst_data, SDL_Rect *dst, int dst_pitch, char *in_src_data
   }
 }
 
-void update_chunk(struct map_chunk *chunk)
+void update_chunk(struct map_chunk *chunk, int chunk_size, int tile_size)
 {
   /* wenn keine textur existiert -> fastmode */
   /* im fast mode gehen wir davon aus das sich alle frames geändert haben */
@@ -63,8 +73,8 @@ void update_chunk(struct map_chunk *chunk)
     chunk_meta->texture = SDL_CreateTexture(glob_renderer,
                                             SDL_PIXELFORMAT_RGBA32,
                                             SDL_TEXTUREACCESS_STREAMING,
-                                            MAP_CHUNK_SIZE * TILE_SIZE,
-                                            MAP_CHUNK_SIZE * TILE_SIZE);
+                                            chunk_size * tile_size,
+                                            chunk_size * tile_size);
     SDL_SetTextureBlendMode(chunk_meta->texture, SDL_BLENDMODE_BLEND);
     /* force initial build */
     chunk_meta->rebuild = 1;
@@ -82,11 +92,11 @@ void update_chunk(struct map_chunk *chunk)
     void *ptr;
     int pitch;
     SDL_LockTexture(chunk_meta->texture, NULL, &ptr, &pitch);
-    for (int i = 0; i < MAP_CHUNK_SIZE * MAP_CHUNK_SIZE; ++i) {
-      SDL_Rect dst = {.x = (i % MAP_CHUNK_SIZE) * TILE_SIZE,
-                      .y = (i / MAP_CHUNK_SIZE) * TILE_SIZE,
-                      .w = TILE_SIZE,
-                      .h =TILE_SIZE};
+    for (int i = 0; i < chunk_size * chunk_size; ++i) {
+      SDL_Rect dst = {.x = (i % chunk_size) * tile_size,
+                      .y = (i / chunk_size) * tile_size,
+                      .w = tile_size,
+                      .h = tile_size};
       struct frame *frame = chunk->data[i];
       if (frame) {
         void *src_pixels = frame->frame_tileset->tileset_surface->pixels;
@@ -105,6 +115,8 @@ struct framemap_draw_chunk_callback_data {
   int h;
   int map_x;
   int map_y;
+  int tile_size;
+  int chunk_size;
 };
 
 /* XXX only draw that parts of each chunk that is 'in range' */
@@ -122,28 +134,32 @@ struct framemap_draw_chunk_callback_data {
 void draw_chunk_callback(int x, int y, struct map_chunk* chunk, void *data)
 {
   struct framemap_draw_chunk_callback_data *draw_data = data;
-  update_chunk(chunk);
+  int tile_size = draw_data->tile_size;
+  int chunk_size = draw_data->chunk_size;
+  update_chunk(chunk, draw_data->chunk_size, tile_size);
   struct framemap_chunk_data *chunk_meta = chunk->chunk_data;
 
-  SDL_Rect chunk_rect = {x * MAP_CHUNK_SIZE, y * MAP_CHUNK_SIZE, MAP_CHUNK_SIZE, MAP_CHUNK_SIZE};
+  SDL_Rect chunk_rect = {x * chunk_size, y * chunk_size, chunk_size, chunk_size};
   SDL_Rect show_rect = {draw_data->map_x, draw_data->map_y, draw_data->w, draw_data->h};
   SDL_Rect result_rect;
 
   SDL_Rect_and(&chunk_rect, &show_rect, &result_rect);
-  result_rect.x -= x * MAP_CHUNK_SIZE;
-  result_rect.y -= y * MAP_CHUNK_SIZE;
-  result_rect.x *= TILE_SIZE;
-  result_rect.y *= TILE_SIZE;
-  result_rect.w *= TILE_SIZE;
-  result_rect.h *= TILE_SIZE;
+  result_rect.x -= x * chunk_size;
+  result_rect.y -= y * chunk_size;
+  result_rect.x *= tile_size;
+  result_rect.y *= tile_size;
+  result_rect.w *= tile_size;
+  result_rect.h *= tile_size;
   SDL_Rect dst_rect = result_rect;
-  dst_rect.x += x * MAP_CHUNK_SIZE * TILE_SIZE + draw_data->x - TILE_SIZE * draw_data->map_x;
-  dst_rect.y += y * MAP_CHUNK_SIZE * TILE_SIZE + draw_data->y - TILE_SIZE * draw_data->map_y;
+  dst_rect.x += x * chunk_size * tile_size + draw_data->x - tile_size * draw_data->map_x;
+  dst_rect.y += y * chunk_size * tile_size + draw_data->y - tile_size * draw_data->map_y;
   SDL_RenderCopy(glob_renderer, chunk_meta->texture, &result_rect, &dst_rect);
 }
 
 void framemap_draw(struct map* map, int pos_x, int pos_y, int map_x, int map_y, int w, int h)
 {
-  struct framemap_draw_chunk_callback_data cb_data = {pos_x, pos_y, w, h, map_x, map_y};
+  int tile_size = framemap_get_tile_size(map);
+  int chunk_size = map_get_chunk_size(map);
+  struct framemap_draw_chunk_callback_data cb_data = {pos_x, pos_y, w, h, map_x, map_y, tile_size, chunk_size};
   map_foreach_chunk(map, map_x, map_y, w, h, &draw_chunk_callback, &cb_data);
 }

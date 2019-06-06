@@ -2,16 +2,27 @@
 #include "json_tk.h"
 #include "map.h"
 
+void map_set_meta(struct map *map, void *data) {
+  map->meta_data = data;
+}
+
+void *map_get_meta(struct map *map) {
+  return map->meta_data;
+}
+
 void *map_get(struct map* map, int x, int y)
 {
   int chunk_id = (x / map->chunk_size) + (y / map->chunk_size) * map->w_chunks;
   struct map_chunk *chunk = &map->chunks[chunk_id];
+  if (!chunk->chunk_data) {
+    return NULL;
+  }
   return chunk->data[(x % map->chunk_size) + (y % map->chunk_size) * map->chunk_size];
 }
 
 #define map_xy(map, x, y) \
   map->chunks[(x / map->chunk_size) + (y / map->chunk_size) * map->w_chunks].data[x % map->chunk_size + (y % map->chunk_size) * map->chunk_size]
-
+#include <stdio.h>
 void map_set(struct map* map, int x, int y, void* map_data)
 {
   if (x < 0 || y < 0 || x >= map->width || y >= map->width) {
@@ -20,6 +31,9 @@ void map_set(struct map* map, int x, int y, void* map_data)
 
   int chunk_id = (x / map->chunk_size) + (y / map->chunk_size) * map->w_chunks;
   struct map_chunk *chunk = &map->chunks[chunk_id];
+  if (!chunk->data) {
+    chunk->data = calloc(1, map->chunk_size * map->chunk_size * sizeof(void*));
+  }
   chunk->data[(x % map->chunk_size) + (y % map->chunk_size) * map->chunk_size] = map_data;
 }
 
@@ -74,13 +88,14 @@ struct map *map_load(char *data, size_t length)
   return ret;
 }
 
-struct map *map_new(int width, int height, int type)
+struct map *map_new(int width, int height, int chunk_size, int type)
 {
-  struct map *ret = malloc(sizeof(*ret));
+  struct map *ret = calloc(1, sizeof(*ret));
   ret->width = width;
   ret->height = height;
-  ret->chunk_size = MAP_CHUNK_SIZE;
+  ret->chunk_size = chunk_size;
   ret->w_chunks = (width + (ret->chunk_size - 1)) / ret->chunk_size;
+  ret->h_chunks = (height + (ret->chunk_size - 1)) / ret->chunk_size;
   ret->chunks = calloc(1, sizeof(*ret->chunks) * ret->w_chunks * ret->h_chunks);
   ret->type = type;
   return ret;

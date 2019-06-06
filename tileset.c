@@ -47,6 +47,11 @@ struct frame *tileset_get_frame_by_id(struct tileset *tileset, int id)
   return NULL;
 }
 
+int frame_get_width(struct frame *frame)
+{
+  return frame->frame_src.w;
+}
+
 void animation_ctx_init(struct animation_ctx *ctx, struct animation *animation)
 {
   ctx->animation_ctx_animation = animation;
