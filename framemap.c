@@ -99,6 +99,8 @@ struct framemap_draw_chunk_callback_data {
   int y;
   int w;
   int h;
+  int map_x;
+  int map_y;
 };
 
 /* XXX only draw that parts of each chunk that is 'in range' */
@@ -126,13 +128,26 @@ void draw_chunk_callback(int x, int y, struct map_chunk* chunk, void *data)
   if (draw_h > draw_data->h * TILE_SIZE) {
     draw_h = draw_data->h * TILE_SIZE;
   }
-  SDL_Rect dst = {draw_data->x ,draw_data->y, draw_w, draw_h};
-  SDL_Rect src = {0,0, draw_w, draw_h};
-  SDL_RenderCopy(glob_renderer, chunk_meta->texture, &src, &dst);
+
+  SDL_Rect chunk_rect = {x * MAP_CHUNK_SIZE, y * MAP_CHUNK_SIZE, MAP_CHUNK_SIZE, MAP_CHUNK_SIZE};
+  SDL_Rect show_rect = {draw_data->map_x, draw_data->map_y, draw_data->w, draw_data->h};
+  SDL_Rect result_rect;
+
+  SDL_Rect_and(&chunk_rect, &show_rect, &result_rect);
+  result_rect.x -= x * MAP_CHUNK_SIZE;
+  result_rect.y -= y * MAP_CHUNK_SIZE;
+  result_rect.x *= TILE_SIZE;
+  result_rect.y *= TILE_SIZE;
+  result_rect.w *= TILE_SIZE;
+  result_rect.h *= TILE_SIZE;
+  SDL_Rect dst_rect = result_rect;
+  dst_rect.x += x * MAP_CHUNK_SIZE * TILE_SIZE + draw_data->x - TILE_SIZE * draw_data->map_x;
+  dst_rect.y += y * MAP_CHUNK_SIZE * TILE_SIZE + draw_data->y - TILE_SIZE * draw_data->map_y;
+  SDL_RenderCopy(glob_renderer, chunk_meta->texture, &result_rect, &dst_rect);
 }
 
 void framemap_draw(struct map* map, int pos_x, int pos_y, int map_x, int map_y, int w, int h)
 {
-  struct framemap_draw_chunk_callback_data cb_data = {pos_x, pos_y, w, h};
+  struct framemap_draw_chunk_callback_data cb_data = {pos_x, pos_y, w, h, map_x, map_y};
   map_foreach_chunk(map, map_x, map_y, w, h, &draw_chunk_callback, &cb_data);
 }
