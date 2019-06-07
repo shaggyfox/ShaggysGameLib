@@ -213,6 +213,7 @@ struct tileset *tileset_load_from_file(char *json_file_name)
   return ret;
 }
 
+#include <assert.h>
 struct tileset *tileset_load(char *json_data, size_t json_data_len, char *image_data, size_t image_data_len)
 {
   static json_settings jst;
@@ -235,6 +236,7 @@ struct tileset *tileset_load(char *json_data, size_t json_data_len, char *image_
   }
   /* texture */
   ret->tileset_surface = load_surface(image_data, image_data_len, NULL, NULL, &ret->tileset_collision_map);
+  assert(glob_renderer);
   ret->tileset_texture = SDL_CreateTextureFromSurface(glob_renderer, ret->tileset_surface);
   /* animations */
   json_value *meta = json_find(jv, "meta");
