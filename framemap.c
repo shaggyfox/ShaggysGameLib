@@ -59,12 +59,15 @@ void raw_blit(char *in_dst_data, SDL_Rect *dst, int dst_pitch, char *in_src_data
   }
 }
 
-void update_chunk(struct map_chunk *chunk, int chunk_size, int tile_size)
+int update_chunk(struct map_chunk *chunk, int chunk_size, int tile_size)
 {
   /* wenn keine textur existiert -> fastmode */
   /* im fast mode gehen wir davon aus das sich alle frames geändert haben */
   /* dafür erstellen wir sowas wie raw_blit(sdl_rect dst, dst_pitch, sdl_rect src, src_pitch);
    * das kann übrigens auch für das update per frame benutzt werden */
+  if (!chunk->data) {
+    return -1;
+  }
   if (!chunk->chunk_data) {
     chunk->chunk_data = calloc(1, sizeof(struct framemap_chunk_data));
   }
@@ -106,6 +109,7 @@ void update_chunk(struct map_chunk *chunk, int chunk_size, int tile_size)
     }
     SDL_UnlockTexture(chunk_meta->texture);
   }
+  return 0;
 }
 
 struct framemap_draw_chunk_callback_data {
@@ -136,7 +140,9 @@ void draw_chunk_callback(int x, int y, struct map_chunk* chunk, void *data)
   struct framemap_draw_chunk_callback_data *draw_data = data;
   int tile_size = draw_data->tile_size;
   int chunk_size = draw_data->chunk_size;
-  update_chunk(chunk, draw_data->chunk_size, tile_size);
+  if (update_chunk(chunk, draw_data->chunk_size, tile_size)) {
+    return;
+  }
   struct framemap_chunk_data *chunk_meta = chunk->chunk_data;
 
   SDL_Rect chunk_rect = {x * chunk_size, y * chunk_size, chunk_size, chunk_size};
