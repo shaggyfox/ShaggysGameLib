@@ -1,3 +1,4 @@
+#include <assert.h>
 #include "engine.h"
 #include "json_tk.h"
 #include "tileset.h"
@@ -7,6 +8,7 @@ SDL_Surface *load_surface(char *data, size_t len, int *w, int *h, struct collisi
 {
   SDL_RWops *data_rw = SDL_RWFromConstMem(data, len);
   SDL_Surface *tmp_surface = IMG_Load_RW(data_rw, 1);
+  assert(tmp_surface);
   SDL_Surface *surface = SDL_ConvertSurfaceFormat(tmp_surface, SDL_PIXELFORMAT_RGBA32, 0);
   SDL_FreeSurface(tmp_surface);
   if (w && h) {
@@ -213,7 +215,42 @@ struct tileset *tileset_load_from_file(char *json_file_name)
   return ret;
 }
 
-#include <assert.h>
+struct tileset *tileset_load_raw_from_file(char *image_file, int w, int h)
+{
+  char *image_data;
+  size_t image_data_len;
+  image_data = load_file(image_file, &image_data_len);
+  assert(image_data);
+  struct tileset *ret = tileset_load_raw(image_data, image_data_len, w, h);
+  assert(ret);
+  free(image_data);
+  return ret;
+}
+
+struct tileset *tileset_load_raw(char *image_data, size_t image_data_len, int w, int h)
+{
+  struct tileset *ret = calloc(1, sizeof(*ret));
+  ret->tileset_surface = load_surface(image_data, image_data_len, NULL, NULL, &ret->tileset_collision_map);
+  assert(ret->tileset_surface);
+  assert(glob_renderer);
+  ret->tileset_texture = SDL_CreateTextureFromSurface(glob_renderer, ret->tileset_surface);
+  int useable_w = (ret->tileset_surface->w / w);
+  int useable_h =(ret->tileset_surface->h / h);
+  int frames_length = useable_w * useable_h;
+  struct frame *my_frames = calloc(frames_length, sizeof(struct frame));
+  for (int i = 0; i < frames_length; ++i) {
+    my_frames[i].frame_src.x = (i % useable_w) * w;
+    my_frames[i].frame_src.y = (i / useable_w) * h;
+    my_frames[i].frame_src.w = w;
+    my_frames[i].frame_src.h = h;
+    my_frames[i].frame_duration = 0.5; /* XXX */
+    my_frames[i].frame_tileset = ret;
+  }
+  ret->tileset_frame_count = frames_length;
+  ret->tileset_frames = my_frames;
+  return ret;
+}
+
 struct tileset *tileset_load(char *json_data, size_t json_data_len, char *image_data, size_t image_data_len)
 {
   static json_settings jst;

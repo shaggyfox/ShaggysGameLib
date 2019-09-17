@@ -48,6 +48,11 @@ struct tileset {
   struct collision_map *tileset_collision_map;
 };
 
+
+// API_CALL tileset_load_raw_from_file STR INT INT RETURNS_TILESET
+struct tileset *tileset_load_raw_from_file(char *image_file, int w, int h);
+struct tileset *tileset_load_raw(char *image_data, size_t image_data_len, int w, int h);
+
 /* load tileset from data */
 /* FIXME: need to load texture
  * */
