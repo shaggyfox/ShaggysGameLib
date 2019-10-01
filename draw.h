@@ -20,6 +20,9 @@
 #define draw_fill_rect(rect) SDL_RenderFillRect(glob_renderer, rect)
 // API_CALL draw_fill_rect4 INT INT INT INT
 #define draw_fill_rect4(x,y,w,h) SDL_RenderFillRect(glob_renderer, &(SDL_Rect){x, y, w ,h})
+#define draw_clip_rect(rect) SDL_RenderSetClipRect(glob_renderer, rect)
+#define draw_clip_null() SDL_RenderSetClipRect(glob_renderer, NULL)
+#define draw_clip_rect4(x,y,w,h) SDL_RenderSetClipRect(glob_renderer, &(SDL_Rect){x, y, w,h})
 void draw_frame_ex(int x, int y, struct frame *frame, double rotation, int flags);
 // API_CALL draw_frame INT INT FRAME
 void draw_frame(int x, int y, struct frame *frame);
